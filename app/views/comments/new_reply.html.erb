@@ -1,0 +1,14 @@
+<h1>Respond to a comment</h1>
+
+<h2>By <%= @original_comment.user.full_name %></h2>
+<p><%= @original_comment.body %></p>
+
+<%= turbo_frame_tag 'comment-reply-form' do %>
+    <%= link_to 'Close', post_path(@original_comment.root_post) %>
+    <%= form_with model: @new_comment, url: post_comments_path(@original_comment.commentable), data: { controller: 'comment' } do |f| %>
+        <%= f.hidden_field :comment_id, value: @original_comment.id, name: 'comment_id' %>
+        <%= f.text_area :body, data: { comment_target: 'input' } %><br>
+        <%= f.hidden_field :body_copy, name: 'comment[body]', data: { comment_target: 'inputHidden' } %>
+        <%= f.submit 'Respond', data: { action: 'comment#submit' } %>
+    <% end %>
+<% end %>

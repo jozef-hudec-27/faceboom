@@ -1,0 +1,2 @@
+<%= turbo_stream.append("comment-#{@original_comment_id}-replies-container", @comment) %>
+<%= turbo_stream.update("comment-#{@original_comment_id}-replies-link", "#{@comment.commentable.comments.count} replies") %>

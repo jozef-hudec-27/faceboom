@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     unlocks: 'users/unlocks'
   }
   
-  get '/comments/:comment_id/reply', to: 'comments#reply', as: 'comment_reply'
+  get '/comments/:comment_id/new_reply', to: 'comments#new_reply', as: 'comment_reply'
+  get '/comments/:comment_id/replies', to: 'comments#index_reply', as: 'comment_replies'
 
   resources :posts do
     resources :comments, shallow: true, only: [:create, :edit, :destroy]

@@ -6,5 +6,12 @@
         <%= link_to 'Reply', comment_reply_path(comment.id) %>
     <% end %>
 
-    <p><%= comment.comments.count %> replies</p>
+    <% if comment.comments.any? %>
+        <%= turbo_frame_tag "comment-#{comment.id}-replies" do %>
+            <br><%= link_to "#{comment.comments.count} replies", comment_replies_path(comment), id: "comment-#{comment.id}-replies-link" %>
+        <% end %>
+    <% else %>
+        <div id="comment-<%=comment.id%>-replies-container" class="comment-replies">
+        </div>
+    <% end %>
 </div>
