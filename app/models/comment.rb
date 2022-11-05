@@ -4,6 +4,8 @@ class Comment < ApplicationRecord
   has_many :likes, as: :likeable
   has_many :comments, as: :commentable
 
+  validates :body, presence: true
+
   def root_post
     if commentable_type == 'Post'
       return commentable

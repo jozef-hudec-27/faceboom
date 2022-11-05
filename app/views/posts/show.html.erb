@@ -6,21 +6,17 @@
 <p><%= @post.likes.count %> likes</p>
 
 <h5>Comments</h5>
-<% @post.comments.each do |comment| %>
-    <div class="comment">
-        <h6><%= comment.user.full_name %></h6>
-        <p><%= comment.body %></p>
-
-        <%= turbo_frame_tag 'comment-reply-form' do %>
-            <%= link_to 'Reply', comment_reply_path(comment.id) %>
-        <% end %>
-
-        <p><%= comment.comments.count %> replies</p>
-    </div>
-<% end %>
+<div id="post-comments">
+    <% @post.comments.includes(:user).each do |comment| %>
+        <%= render 'comments/comment', comment: comment %>
+    <% end %>
+</div>
 
 <h5>Add comment</h5>
-<%= form_with model: @comment, url: post_comments_path(@post) do |f| %>
-    <%= f.text_area :body %>
-    <%= f.submit%>
-<% end %>
+<div class="comment-form-wrapper" data-controller="comment">
+    <%= form_with model: @comment, url: post_comments_path(@post) do |f| %>
+        <%= f.text_area :body, data: { comment_target: 'input' } %>
+        <%= f.hidden_field :body_copy, name: 'comment[body]', data: { comment_target: 'inputHidden' } %>
+        <%= f.submit data: { action: 'comment#submit' } %>
+    <% end %>
+</div>
