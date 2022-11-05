@@ -4,5 +4,6 @@
     <div class="post">
         <h4><%= link_to post.user.full_name, post %></h4>
         <p><%= post.body %></p>
+        <%= link_to "#{post.likes.count} likes", like_post_path(post), id: "post-#{post.id}-like-link", data: { turbo_method: :post } %>
     </div><br>
 <% end %>

@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   get '/comments/:comment_id/replies', to: 'comments#index_reply', as: 'comment_replies'
 
   resources :posts do
-    resources :comments, shallow: true, only: [:create, :edit, :destroy]
+    post 'like', on: :member
+
+    resources :comments, shallow: true, only: [:create, :edit, :destroy] do
+      post 'like', on: :member
+    end
   end
   
   root "posts#index"

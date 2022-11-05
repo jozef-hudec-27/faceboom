@@ -2,6 +2,9 @@
     <h6><%= comment.user.full_name %></h6>
     <p><%= comment.body %></p>
 
+    <%= link_to "#{comment.likes.count} likes", like_comment_path(comment), id: "comment-#{comment.id}-like-link", data: { turbo_method: :post } %>
+    <br>
+    
     <%= turbo_frame_tag 'comment-reply-form' do %>
         <%= link_to 'Reply', comment_reply_path(comment.id) %>
     <% end %>
