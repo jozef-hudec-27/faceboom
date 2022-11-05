@@ -17,23 +17,29 @@ class CommentsController < ApplicationController
           format.turbo_stream
         end
       else
-        @post = @comment.root_post
-        format.html { render 'posts/show', status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.before(@original_comment_id ? "comment-#{@original_comment_id}-reply-input" : 'new-post-comment-input', '<p>Invalid comment!</p>') }
       end
     end
   end
 
   def new_reply
     @original_comment = Comment.find_by id: params[:comment_id]
+
+    return redirect_to_root_with_flash('Comment not found.') if @original_comment.nil?
+
     @new_comment = Comment.new
   end
 
   def index_reply
     @comment = Comment.find_by id: params[:comment_id]
+    return redirect_to_root_with_flash('Comment not found.') if @comment.nil?
   end
 
   def like
     comment = Comment.find_by id: params[:id]
+
+    return if comment.nil?
+
     like = Like.where(likeable: comment, user: current_user).first
 
     if like

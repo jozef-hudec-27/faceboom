@@ -7,7 +7,7 @@
 
 <h5>Comments</h5>
 <div id="post-comments">
-    <% @post.comments.includes(:user).each do |comment| %>
+    <% @comments.each do |comment| %>
         <%= render 'comments/comment', comment: comment %>
     <% end %>
 </div>
@@ -15,7 +15,7 @@
 <h5>Add comment</h5>
 <div class="comment-form-wrapper" data-controller="comment">
     <%= form_with model: @comment, url: post_comments_path(@post) do |f| %>
-        <%= f.text_area :body, data: { comment_target: 'input' } %>
+        <%= f.text_area :body, id: 'new-post-comment-input', data: { comment_target: 'input' } %>
         <%= f.hidden_field :body_copy, name: 'comment[body]', data: { comment_target: 'inputHidden' } %>
         <%= f.submit data: { action: 'comment#submit' } %>
     <% end %>

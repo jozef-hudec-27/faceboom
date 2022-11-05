@@ -2,17 +2,15 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @posts = Post.all
+    @posts = Post.all.includes(:user)
   end
 
   def show
     @post = Post.find_by id: params[:id]
 
-    if @post.nil?
-      flash[:alert] = 'Post not found.'
-      redirect_to root_path
-    end
+    return redirect_to_root_with_flash('Post not found.') if @post.nil?
 
+    @comments = @post.comments.includes(:user, :likes, :comments)
     @comment = Comment.new
   end
 
@@ -32,6 +30,9 @@ class PostsController < ApplicationController
 
   def like
     post = Post.find_by id: params[:id]
+
+    return if post.nil?
+    
     like = Like.where(likeable: post, user: current_user).first
 
     if like
