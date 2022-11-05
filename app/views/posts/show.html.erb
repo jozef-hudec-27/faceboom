@@ -10,5 +10,17 @@
     <div class="comment">
         <h6><%= comment.user.full_name %></h6>
         <p><%= comment.body %></p>
+
+        <%= turbo_frame_tag 'comment-reply-form' do %>
+            <%= link_to 'Reply', comment_reply_path(comment.id) %>
+        <% end %>
+
+        <p><%= comment.comments.count %> replies</p>
     </div>
+<% end %>
+
+<h5>Add comment</h5>
+<%= form_with model: @comment, url: post_comments_path(@post) do |f| %>
+    <%= f.text_area :body %>
+    <%= f.submit%>
 <% end %>
