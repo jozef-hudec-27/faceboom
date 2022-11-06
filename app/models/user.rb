@@ -13,8 +13,21 @@ class User < ApplicationRecord
                                     join_table: :friendships,
                                     foreign_key: :user_id,
                                     association_foreign_key: :friend_user_id 
+                            
+  has_one_attached :avatar
+
+  before_create :attach_default_avatar
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def attach_default_avatar
+    self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default-avatar.svg')),
+                       filename: 'default-avatar.svg',
+                       content_type: 'image/svg+xml'
+                      )
   end
 end

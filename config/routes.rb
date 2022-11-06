@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     unlocks: 'users/unlocks'
   }
+
+  root "posts#index"
   
   get '/comments/:comment_id/new_reply', to: 'comments#new_reply', as: 'comment_reply'
   get '/comments/:comment_id/replies', to: 'comments#index_reply', as: 'comment_replies'
@@ -18,5 +20,5 @@ Rails.application.routes.draw do
     end
   end
   
-  root "posts#index"
+  resources :users, except: [:new, :create, :destroy]
 end
