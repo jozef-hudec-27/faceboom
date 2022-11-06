@@ -22,6 +22,31 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def friends_with?(user)
+    !friends.find_by(id: user.id).nil?
+  end
+
+  def send_friend_request_to(user)
+    FriendRequest.create sender: self, receiver: user
+  end
+
+  def pending_friend_request_with(user)
+    FriendRequest.find_by(sender: self, receiver: user) || FriendRequest.find_by(sender: user, receiver: self)
+  end
+
+  def friend_request_status_with(user)
+    # 0 - no requests sent
+    # 1 - we sent them
+    # 2 - they sent us
+
+    FriendRequest.find_by(sender: self, receiver: user) ? 1 : FriendRequest.find_by(sender: user, receiver: self) ? 2 : 0
+  end
+
+  def unfriend(user)
+    friends.delete user
+    user.friends.delete self
+  end
+
   private
 
   def attach_default_avatar

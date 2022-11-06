@@ -2,6 +2,6 @@
 
 <%= image_tag @user.avatar, style: 'border-radius: 50%; width: 64px;' %>
 
-<h2><%= @user.full_name %> <% if @user.username %><span style="font-size: 0.8em;">(<%= @user.username %>)</span><% end %></h2>
+<h2><%= @user.full_name %> <% if @user.username != '' %><span style="font-size: 0.8em;">(<%= @user.username %>)</span><% end %></h2>
 <p><%= @user.bio %></p>
 
