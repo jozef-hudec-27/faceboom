@@ -5,5 +5,20 @@
 <h2><%= @user.full_name %> <% if @user.username != '' %><span style="font-size: 0.8em;">(<%= @user.username %>)</span><% end %></h2>
 <p><%= @user.bio %></p> 
 
-<%= link_to @profile_action_link[:value], @profile_action_link[:url], data: { turbo_method: @profile_action_link[:method] } %>
-<% if @friend_request_status == 2 %><%= link_to 'Reject request', '' %><% end %> 
+<% if @is_self %>
+    <%= link_to 'Edit profile', edit_user_registration_path %>
+<% else %>
+    <form id="profile-action-form" action="<%=@profile_action_data[:url]%>" method="post" hidden>
+        <input type="hidden" name="id" value="<%=@profile_action_data[:obj_id]%>" />
+    </form>
+
+    <input type="submit" form="profile-action-form" value="<%=@profile_action_data[:submit_text]%>">
+
+    <% if @friend_request_status == 2 %>
+        <form id="profile-action-form-reject-request" action="reject friend request url" method="post" hidden>
+            <input type="hidden" name="id" value="<%=@profile_action_data[:obj_id]%>" />
+        </form>
+
+        <input type="submit" form="profile-action-form-reject-request" value="Reject request">
+    <% end %>
+<% end %>
