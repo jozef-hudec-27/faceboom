@@ -23,4 +23,11 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     post 'unfriend', on: :collection
   end
+
+  scope '/friend_requests', as: :friend_request do
+    post '/create', to: 'friend_requests#create'
+    post '/cancel', to: 'friend_requests#cancel'
+    post '/accept', to: 'friend_requests#accept'
+    post '/reject', to: 'friend_requests#reject'
+  end
 end

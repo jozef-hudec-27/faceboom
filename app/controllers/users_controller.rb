@@ -13,8 +13,8 @@ class UsersController < ApplicationController
       is_friend = current_user.friends_with? @user
       @friend_request_status = current_user.friend_request_status_with @user
 
-      url = is_friend ? unfriend_users_path : ['send request url', 'cancel request url', 'accept request url'][@friend_request_status]
-      obj_id = is_friend ? @user.id : current_user.pending_friend_request_with(@user)&.id
+      url = is_friend ? unfriend_users_path : [friend_request_create_path, friend_request_cancel_path, friend_request_accept_path][@friend_request_status]
+      obj_id = @friend_request_status.zero? ? @user.id : current_user.pending_friend_request_with(@user)&.id
       submit_text = is_friend ? 'Remove Friend' : ['Send request', 'Cancel request', 'Accept request'][@friend_request_status]
       
       @profile_action_data = { url: url, obj_id: obj_id, submit_text: submit_text }
