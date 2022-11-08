@@ -14,6 +14,35 @@
  *= require_self
  */
 
+ body {
+    margin: 0;
+ }
+
  .comment-replies {
     margin-left: 50px;
  }
+
+ .navbar {
+    display: flex;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    font-size: 1.15em;
+    position: sticky;
+    top: 0;
+    align-items: center;
+    background-color: white;
+}
+
+.navbar a {
+    color: rgb(111, 114, 135);
+    padding: 20px 22px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
+.navbar a.main {
+    color: rgb(59,89,153);
+    font-weight: 600;
+}

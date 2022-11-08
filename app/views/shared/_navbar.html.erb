@@ -1,0 +1,12 @@
+<div class="navbar">
+    <a class="main" href="<%= root_path %>">Faceboom</a>
+
+    <% if user_signed_in? %>
+        <a href="<%= new_post_path %>">New post</a>
+        <a href="<%= user_path(current_user) %>">Account</a>
+        <a href="<%= destroy_user_session_path %>" style="margin-left: auto;" data-turbo-method="delete">Sign out</a>
+    <% else %>
+        <a href="<%= new_user_session_path %>" style="margin-left: auto;">Login</a>
+        <a href="<%= new_user_registration_path %>">Register</a>
+    <% end %>
+</div>
