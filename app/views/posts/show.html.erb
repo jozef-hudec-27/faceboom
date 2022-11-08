@@ -1,9 +1,11 @@
 <h1>Post details</h1>
 
+<h4>By <%= link_to @post.user.full_name, @post.user %></a></h4>
 
-<h4>By <%= @post.user.full_name %></h4>
+<%= image_tag @post.image&.attached? ? @post.image : '', style: 'width: 600px;' %>
+
 <p><%= @post.body %></p>
-<p><%= @post.likes.count %> likes</p>
+<%= link_to "#{@post.likes.count} likes", like_post_path(@post), id: "post-#{@post.id}-like-link", data: { turbo_method: :post } %>
 
 <h5>Comments</h5>
 <div id="post-comments">

@@ -4,6 +4,7 @@
     <div class="post">
         <h4><%= link_to post.user.full_name, post %></h4>
         <p><%= post.body %></p>
-        <%= link_to "#{post.likes.count} likes", like_post_path(post), id: "post-#{post.id}-like-link", data: { turbo_method: :post } %>
+    <%= link_to "#{post.likes.count} likes", like_post_path(post), id: "post-#{post.id}-like-link", data: { turbo_method: :post } %>
+        <%= image_tag post.image&.attached? ? post.image : '', style: 'width: 500px;' %>
     </div><br>
 <% end %>
