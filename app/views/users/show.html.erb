@@ -24,3 +24,13 @@
         <input type="submit" name="commit" form="profile-action-form-reject-request" value="Reject request">
     <% end %>
 <% end %>
+
+<h3><%= @user.full_name %>'s posts </h3>
+<% @user.posts.each do |post| %>
+    <a href="<%= post_path(post) %>">
+        <div class="post">
+            <p><%= post.body %></p>
+            <% if post.image&.attached? %><%= image_tag post.image, style: 'width: 300px;' %><% end %>
+        </div>
+    </a>
+<% end %>

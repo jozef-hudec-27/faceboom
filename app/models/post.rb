@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
-  validates :body, :image, presence: true
+  validates :body, presence: { message: "or image must be given." }, unless: ->(post) { post.image.present? }
+  validates :image, presence: { message: "or body must be given." }, unless: ->(post) { post.body.present? }
 
   belongs_to :user
   has_many :likes, as: :likeable, dependent: :destroy
