@@ -8,8 +8,15 @@ class FriendRequestsController < ApplicationController
     return redirect_to_root_with_flash('Friend request already sent.') if current_user.pending_friend_request_with receiver
 
     current_user.send_friend_request_to receiver
-    flash[:notice] = "Successfully sent friend request to #{receiver.full_name}."
-    redirect_back(fallback_location: user_path(receiver))
+    
+    respond_to do |format|
+      if params[:respond_format] == 'turbo-stream'
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("user-#{receiver.id}") }
+      else
+        flash[:notice] = "Successfully sent friend request to #{receiver.full_name}."
+        format.html { redirect_back(fallback_location: user_path(receiver)) }
+      end
+    end
   end
 
   def cancel

@@ -1,0 +1,18 @@
+<h1>Explore users page</h1>
+
+<% @users.each do |user| %>
+    <div id="user-<%= user.id %>">
+        <%= image_tag user.avatar, style: 'width: 64px; height: 64px; border-radius: 50%;' %>
+        <a href="<%= user_path(user) %>">
+            <h5><%= user.full_name %> <span style="display: <% if user.username == '' %>none<% end %>">(@<%= user.username  %>)</span></h5>
+        </a>
+
+        <form id="<%= user.id %>-send-request-form" action="<%= friend_request_create_path %>" method="post">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <input type="hidden" name="respond_format" value="turbo-stream" />
+            <input type="hidden" name="id" value="<%= user.id %>" />
+            <input type="submit" name="commit" value="Send friend request">
+        </form>
+    </div>
+<% end %>
+

@@ -1,8 +1,8 @@
-.comment, .post {
+.comment, .post, .user {
     border: 2px solid black;
     margin-bottom: 8px;
 }
 
-.post {
+.post, .user {
     width: 50%;
 }

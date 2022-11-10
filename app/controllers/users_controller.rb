@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @users = User.where.not(id: current_user.friend_ids + [current_user.id]).filter { |user| current_user.pending_friend_request_with(user).nil? }
   end
 
   def show
