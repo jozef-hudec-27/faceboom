@@ -1,12 +1,51 @@
-<div class="navbar">
-    <a class="main" href="<%= root_path %>">Faceboom</a>
+<% if user_signed_in? %>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="<%= root_path %>">
+      <h1>Faceboom</h1>
+    </a>
 
-    <% if user_signed_in? %>
-        <a href="<%= new_post_path %>">New post</a>
-        <a href="<%= user_path(current_user) %>">Account</a>
-        <a href="<%= destroy_user_session_path %>" style="margin-left: auto;" data-turbo-method="delete">Sign out</a>
-    <% else %>
-        <a href="<%= new_user_session_path %>" style="margin-left: auto;">Login</a>
-        <a href="<%= new_user_registration_path %>">Register</a>
-    <% end %>
-</div>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a href="<%= new_post_path %>" class="navbar-item">
+        New Post
+      </a>
+
+      <a href="<%= user_path(current_user) %>" class="navbar-item">
+        Account
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Notifications
+        </a>
+
+        <div class="navbar-dropdown">
+            <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+            <a href="<%= destroy_user_session_path %>" class="button is-light" data-turbo-method="delete">
+                Sign out
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<% end %>

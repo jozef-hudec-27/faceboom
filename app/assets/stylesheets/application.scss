@@ -14,6 +14,8 @@
  *= require_self
  */
 
+ @import "bulma";
+
  :root {
     font-family: sans-serif;
  }
@@ -27,26 +29,19 @@
  }
 
  .navbar {
-    display: flex;
+    // display: flex;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     font-size: 1.15em;
     position: sticky;
     top: 0;
-    align-items: center;
-    background-color: white;
 }
 
 .navbar a {
     color: rgb(111, 114, 135);
     padding: 20px 22px;
-    text-decoration: none;
 }
 
-.navbar a:hover {
-    color: black;
-}
-
-.navbar a.main {
+.navbar h1 {
     color: rgb(59,89,153);
     font-weight: 600;
 }

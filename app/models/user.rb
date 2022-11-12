@@ -49,6 +49,14 @@ class User < ApplicationRecord
     user.friends.delete self
   end
 
+  def unread_notifications
+    Notification.where receiver: self, read: false
+  end
+
+  def latest_notifications
+    Notification.latest.where receiver: self
+  end
+
   private
 
   def attach_default_avatar
