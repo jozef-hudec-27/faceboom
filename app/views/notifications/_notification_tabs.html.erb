@@ -1,0 +1,26 @@
+<div data-controller="tabs">
+    <h3>Notifications</h3>
+
+    <div class="tabs">
+        <ul>
+            <li class="is-active"><a data-tabs-target="tabButton" data-action="tabs#changeTab"
+                data-container-id="new-notifications-container">New</a></li>
+            <li><a data-tabs-target="tabButton" data-action="tabs#changeTab"
+                data-container-id="unread-notifications-container">Unread</a></li>
+        </ul>
+    </div>
+
+    <div id="new-notifications-container" data-tabs-target="tabContainer">
+        NEW NOTIFICATIONS
+        <% latest_notifications.each do |notification| %>
+            <%= render 'notifications/notification', notification: notification %>
+        <% end %>
+    </div>
+
+    <div id="unread-notifications-container" data-tabs-target="tabContainer" hidden>
+        UNREAD NOTIFICATIONS
+        <% unread_notifications.each do |notification| %>
+            <%= render 'notifications/notification', notification: notification %>
+        <% end %>
+    </div>
+</div>

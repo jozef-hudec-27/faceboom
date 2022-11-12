@@ -1,8 +1,12 @@
-.comment, .post, .user {
+.comment, .post, .user, .noti {
     border: 2px solid black;
     margin-bottom: 8px;
 }
 
 .post, .user {
     width: 50%;
+}
+
+.noti {
+    width: 300px;
 }

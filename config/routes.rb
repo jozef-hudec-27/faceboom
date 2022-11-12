@@ -30,4 +30,6 @@ Rails.application.routes.draw do
     post '/accept', to: 'friend_requests#accept'
     post '/reject', to: 'friend_requests#reject'
   end
+
+  get '/notifications', to: 'notifications#index', as: :notifications
 end

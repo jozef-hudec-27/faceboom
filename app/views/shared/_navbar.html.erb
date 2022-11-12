@@ -30,28 +30,11 @@
         <div class="navbar-dropdown">
             <div class="dropdown-content">
                 <div class="dropdown-item" data-controller="tabs">
-                    <div class="tabs">
-                        <ul>
-                            <li class="is-active"><a data-tabs-target="tabButton" data-action="tabs#changeTab"
-                                data-container-id="new-notifications-container">New</a></li>
-                            <li><a data-tabs-target="tabButton" data-action="tabs#changeTab"
-                                data-container-id="unread-notifications-container">Unread</a></li>
-                        </ul>
-                    </div>
+                    <%= render 'notifications/notification_tabs', latest_notifications: get_latest_notifications.first(3),
+                                                                  unread_notifications: get_unread_notifications.first(3) 
+                    %>
 
-                    <div id="new-notifications-container" data-tabs-target="tabContainer">
-                        NEW NOTIFICATIONS
-                        <% get_latest_notifications.each do |notification| %>
-                            <div class="noti">new notification</div>
-                        <% end %>
-                    </div>
-
-                    <div id="unread-notifications-container" data-tabs-target="tabContainer" hidden>
-                        UNREAD NOTIFICATIONS
-                        <% get_unread_notifications.each do |notification| %>
-                            <div class="noti">unread notification</div>
-                        <% end %>
-                    </div>
+                    <a href="<%= notifications_path %>">See all</a>
                 </div>
             </div>
         </div>
