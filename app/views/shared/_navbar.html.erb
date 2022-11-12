@@ -12,7 +12,7 @@
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div class="navbar-menu">
     <div class="navbar-start">
       <a href="<%= new_post_path %>" class="navbar-item">
         New Post
@@ -22,15 +22,36 @@
         Account
       </a>
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
+      <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
+        <a class="navbar-link" data-action="dropdown#showDropdown">
           Notifications
         </a>
 
         <div class="navbar-dropdown">
             <div class="dropdown-content">
-                <div class="dropdown-item">
-                    <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+                <div class="dropdown-item" data-controller="tabs">
+                    <div class="tabs">
+                        <ul>
+                            <li class="is-active"><a data-tabs-target="tabButton" data-action="tabs#changeTab"
+                                data-container-id="new-notifications-container">New</a></li>
+                            <li><a data-tabs-target="tabButton" data-action="tabs#changeTab"
+                                data-container-id="unread-notifications-container">Unread</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="new-notifications-container" data-tabs-target="tabContainer">
+                        NEW NOTIFICATIONS
+                        <% get_latest_notifications.each do |notification| %>
+                            <div class="noti">new notification</div>
+                        <% end %>
+                    </div>
+
+                    <div id="unread-notifications-container" data-tabs-target="tabContainer" hidden>
+                        UNREAD NOTIFICATIONS
+                        <% get_unread_notifications.each do |notification| %>
+                            <div class="noti">unread notification</div>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
