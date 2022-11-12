@@ -50,11 +50,11 @@ class User < ApplicationRecord
   end
 
   def unread_notifications
-    Notification.where receiver: self, read: false
+    received_notifications.where read: false
   end
 
   def latest_notifications
-    Notification.latest.where receiver: self
+    received_notifications.latest
   end
 
   private

@@ -23,7 +23,7 @@
       </a>
 
       <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
-        <a class="navbar-link" data-action="dropdown#showDropdown">
+        <a id="notifications-btn" class="navbar-link <% if get_unread_notifications.any? %>has-text-danger<%end %>" data-action="dropdown#showDropdown">
           Notifications
         </a>
 

@@ -7,9 +7,10 @@ class NotificationsController < ApplicationController
   end
 
   def read
-    notification = current_user.unread_notifications.find_by id: params[:id]
+    notification = current_user.unread_notifications.find_by(id: params[:id]) ||
+                   current_user.received_notifications.find_by(id: params[:id])
 
-    return redirect_to_root_with_flash('Notification does not exist.') if notification.nil? || notification.read
+    return redirect_to_root_with_flash('Notification does not exist.') if notification.nil?
 
     notification.update read: true
     redirect_to notification.url
@@ -23,7 +24,7 @@ class NotificationsController < ApplicationController
     end
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.update('unread-notifications-container', "You've seen all notifications") }
+      format.turbo_stream
     end
   end
 end
