@@ -1,4 +1,6 @@
 class FriendRequest < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
 

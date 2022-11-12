@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   belongs_to :user
   belongs_to :commentable, polymorphic: true
   has_many :likes, as: :likeable, dependent: :destroy
@@ -19,8 +21,11 @@ class Comment < ApplicationRecord
   private
 
   def create_comment_notification
+    notification_receiver = commentable.user
+    return if user == notification_receiver
+
     Notification.create(sender: user,
-                        receiver: commentable.user,
+                        receiver: notification_receiver,
                         text: "#{user.full_name} " + (commentable_type == 'Post' ? 'commented on your post.' : 'replied to your comment.'),
                         url: post_path(commentable_type == 'Post' ? commentable : commentable.root_post)
                       )
