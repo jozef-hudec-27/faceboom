@@ -31,5 +31,9 @@ Rails.application.routes.draw do
     post '/reject', to: 'friend_requests#reject'
   end
 
-  get '/notifications', to: 'notifications#index', as: :notifications
+  scope '/notifications', as: :notifications do
+    get '', to: 'notifications#index'
+    post '/:id/read', to: 'notifications#read', as: :read
+    post '/read_all', to: 'notifications#read_all', as: :read_all
+  end
 end

@@ -1,3 +1,9 @@
 <div class="noti">
-    <a href="<%= notification.url %>"><%= notification.text %></a>
+    <a data-turbo-method="<% if notification.read %>get<% else %>post<% end %>" href="
+        <% if notification.read %>
+            <%= notification.url %>
+        <% else %>
+            <%= notifications_read_path(notification) %>
+        <% end %>"
+    ><%= notification.text %></a>
 </div>

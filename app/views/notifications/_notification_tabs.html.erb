@@ -11,16 +11,20 @@
     </div>
 
     <div id="new-notifications-container" data-tabs-target="tabContainer">
-        NEW NOTIFICATIONS
         <% latest_notifications.each do |notification| %>
             <%= render 'notifications/notification', notification: notification %>
         <% end %>
     </div>
 
     <div id="unread-notifications-container" data-tabs-target="tabContainer" hidden>
-        UNREAD NOTIFICATIONS
-        <% unread_notifications.each do |notification| %>
-            <%= render 'notifications/notification', notification: notification %>
+        <% if unread_notifications.any? %>
+            <a href="<%= notifications_read_all_path %>" data-turbo-method="post">Mark all as read</a>
+
+            <% unread_notifications.each do |notification| %>
+                <%= render 'notifications/notification', notification: notification %>
+            <% end %>
+        <% else %>
+            <p>You've seen all notifications</p>
         <% end %>
     </div>
 </div>
