@@ -12,8 +12,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if successfully_sent?(resource)
       respond_with({}, location: after_resending_confirmation_instructions_path_for(resource))
     else
-      flash[:alert] = 'Could not send confirmation email.'
-      redirect_back fallback_location: new_user_session_path
+      respond_with resource
     end
   end
 

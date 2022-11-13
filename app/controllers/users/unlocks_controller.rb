@@ -12,8 +12,7 @@ class Users::UnlocksController < Devise::UnlocksController
     if successfully_sent?(resource)
       respond_with({}, location: after_sending_unlock_instructions_path_for(resource))
     else
-      flash[:alert] = 'Could not send unlock account email.'
-      redirect_back fallback_location: new_user_session_path
+      respond_with resource
     end
   end
 

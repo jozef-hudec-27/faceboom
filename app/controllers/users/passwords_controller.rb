@@ -12,8 +12,7 @@ class Users::PasswordsController < Devise::PasswordsController
     if successfully_sent?(resource)
       respond_with({}, location: after_sending_reset_password_instructions_path_for(resource))
     else
-      flash[:alert] = 'Could not send password reset email.'
-      redirect_back fallback_location: new_user_session_path
+      respond_with resource
     end
   end
 
