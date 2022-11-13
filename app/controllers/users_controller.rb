@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:confirm_mail_sent]
+  before_action :unauthenicate_user!, only: [:confirm_mail_sent]
 
   def index
     @users = User.where.not(id: current_user.friend_ids + [current_user.id]).filter { |user| current_user.pending_friend_request_with(user).nil? }
@@ -30,5 +31,21 @@ class UsersController < ApplicationController
 
     current_user.unfriend user
     redirect_to user
+  end
+
+  def confirm_mail_sent
+    @user = User.find_by id: params[:id]
+    confirmation_string = @user&.confirmation_sent_at.to_s.split(' ').join('')
+
+    return redirect_to_sign_in_with_flash('Invalid action.') if params[:confirmation_string] != confirmation_string || @user.confirmed?
+  end
+
+  private
+
+  def unauthenicate_user!
+    if user_signed_in?
+      flash[:alert] = 'You are already signed in.'
+      redirect_to root_path
+    end
   end
 end

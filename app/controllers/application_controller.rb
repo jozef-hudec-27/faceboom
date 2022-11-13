@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
+  def redirect_to_sign_in_with_flash(message)
+    flash[:alert] = message
+    redirect_to new_user_session_path
+  end
+
   def get_unread_notifications
     current_user&.unread_notifications
   end

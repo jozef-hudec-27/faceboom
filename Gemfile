@@ -74,3 +74,5 @@ end
 gem 'devise'
 
 gem 'bulma-rails'
+
+gem "letter_opener", group: :development

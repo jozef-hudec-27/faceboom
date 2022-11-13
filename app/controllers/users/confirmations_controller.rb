@@ -1,30 +1,35 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
-  # GET /resource/confirmation/new
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
-  # POST /resource/confirmation
-  # def create
-  #   super
-  # end
+  def create
+    return redirect_to_sign_in_with_flash('User does not exist.') unless User.find_by email: params.dig(:user).dig(:email)
 
-  # GET /resource/confirmation?confirmation_token=abcdef
-  # def show
-  #   super
-  # end
+    self.resource = resource_class.send_confirmation_instructions(resource_params)
+    yield resource if block_given?
 
-  # protected
+    if successfully_sent?(resource)
+      respond_with({}, location: after_resending_confirmation_instructions_path_for(resource))
+    else
+      respond_with(resource)
+    end
+  end
 
-  # The path used after resending confirmation instructions.
-  # def after_resending_confirmation_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
+  def show
+    super
+  end
 
-  # The path used after confirmation.
-  # def after_confirmation_path_for(resource_name, resource)
-  #   super(resource_name, resource)
-  # end
+  protected
+
+  def after_resending_confirmation_instructions_path_for(resource)
+    confirmation_string = resource.confirmation_sent_at.to_s.split(' ').join('')
+    "#{confirm_mail_sent_user_path(resource)}?confirmation_string=#{confirmation_string}"
+  end
+
+  def after_confirmation_path_for(resource_name, resource)
+    super(resource_name, resource)
+  end
 end

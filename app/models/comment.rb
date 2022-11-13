@@ -10,6 +10,8 @@ class Comment < ApplicationRecord
 
   after_create :create_comment_notification
 
+  default_scope { order('created_at desc') }
+
   def root_post
     if commentable_type == 'Post'
       return commentable

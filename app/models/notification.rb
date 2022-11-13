@@ -4,4 +4,6 @@ class Notification < ApplicationRecord
   # belongs_to :notifiable, polymorphic: true
 
   scope :latest, -> { where('created_at > ?', Time.now - 7.days) }
+
+  default_scope { order('created_at desc') }
 end
