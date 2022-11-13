@@ -6,8 +6,6 @@ class Users::UnlocksController < Devise::UnlocksController
   end
 
   def create
-    return redirect_to_sign_in_with_flash('User does not exist.') unless User.find_by email: params.dig(:user).dig(:email)
-
     self.resource = resource_class.send_unlock_instructions(resource_params)
     yield resource if block_given?
 
@@ -15,7 +13,7 @@ class Users::UnlocksController < Devise::UnlocksController
       respond_with({}, location: after_sending_unlock_instructions_path_for(resource))
     else
       flash[:alert] = 'Could not send unlock account email.'
-      redirect_to new_user_session_path
+      redirect_back fallback_location: new_user_session_path
     end
   end
 

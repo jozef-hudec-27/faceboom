@@ -8,4 +8,9 @@
         We've sent an email to <strong><%= @user.email %></strong> with instructions to unlock your account.
         Please, follow them to proceed.
     </p>
+<% elsif @mail_type == 'password_reset' %>
+    <p>
+        We've sent an email to <strong><%= @user.email %></strong> with instructions to reset password.
+        Please, follow them to proceed.
+    </p>
 <% end %>

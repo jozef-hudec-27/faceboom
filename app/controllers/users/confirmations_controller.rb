@@ -6,8 +6,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def create
-    return redirect_to_sign_in_with_flash('User does not exist.') unless User.find_by email: params.dig(:user).dig(:email)
-
     self.resource = resource_class.send_confirmation_instructions(resource_params)
     yield resource if block_given?
 
@@ -15,7 +13,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       respond_with({}, location: after_resending_confirmation_instructions_path_for(resource))
     else
       flash[:alert] = 'Could not send confirmation email.'
-      redirect_to new_user_session_path
+      redirect_back fallback_location: new_user_session_path
     end
   end
 

@@ -27,7 +27,7 @@ class FriendRequestsController < ApplicationController
     
     request.destroy
     flash[:notice] = "Successfully canceled friend request to #{receiver.full_name}."
-    redirect_back(fallback_location: user_path(receiver))
+    redirect_back fallback_location: user_path(receiver)
   end
 
   def accept
@@ -38,7 +38,7 @@ class FriendRequestsController < ApplicationController
 
     request.accept
     flash[:notice] = "You are now friends with #{sender.full_name}."
-    redirect_back(fallback_location: user_path(sender))
+    redirect_back fallback_location: user_path(sender)
   end
 
   def reject
@@ -49,6 +49,6 @@ class FriendRequestsController < ApplicationController
 
     request.reject
     flash[:notice] = "Rejected #{sender.full_name}'s friend request."
-    redirect_back(fallback_location: user_path(sender))
+    redirect_back fallback_location: user_path(sender)
   end
 end

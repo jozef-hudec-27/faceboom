@@ -1,34 +1,38 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
-  # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
-  # POST /resource/password
-  # def create
-  #   super
-  # end
+  def create
+    self.resource = resource_class.send_reset_password_instructions(resource_params)
+    yield resource if block_given?
 
-  # GET /resource/password/edit?reset_password_token=abcdef
-  # def edit
-  #   super
-  # end
+    if successfully_sent?(resource)
+      respond_with({}, location: after_sending_reset_password_instructions_path_for(resource))
+    else
+      flash[:alert] = 'Could not send password reset email.'
+      redirect_back fallback_location: new_user_session_path
+    end
+  end
 
-  # PUT /resource/password
-  # def update
-  #   super
-  # end
+  def edit
+    super
+  end
 
-  # protected
+  def update
+    super
+  end
 
-  # def after_resetting_password_path_for(resource)
-  #   super(resource)
-  # end
+  protected
 
-  # The path used after sending reset password instructions
-  # def after_sending_reset_password_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
+  def after_resetting_password_path_for(resource)
+    super(resource)
+  end
+
+  def after_sending_reset_password_instructions_path_for(resource)
+    confirmation_string = resource.reset_password_sent_at.to_s.split(' ').join('')
+    "#{mail_sent_user_path(resource)}?confirmation_string=#{confirmation_string}&mail_type=password_reset"
+  end
 end

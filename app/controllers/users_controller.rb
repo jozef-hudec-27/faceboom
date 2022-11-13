@@ -36,9 +36,9 @@ class UsersController < ApplicationController
   def mail_sent
     @mail_type = params[:mail_type]
 
-    unless ['confirmation', 'unlock'].include? @mail_type
+    unless ['confirmation', 'unlock', 'password_reset'].include? @mail_type
       flash[:alert] = 'Invalid action.'
-      return redirect_back(fallback_location: new_user_session_path)
+      return redirect_back fallback_location: new_user_session_path
     end
 
     @user = User.find_by id: params[:id]
@@ -47,12 +47,15 @@ class UsersController < ApplicationController
       confirmation_string = @user&.confirmation_sent_at.to_s.split(' ').join('')
     elsif @mail_type == 'unlock'
       confirmation_string = @user&.locked_at.to_s.split(' ').join('')
+    elsif @mail_type == 'password_reset'
+      confirmation_string = @user&.reset_password_sent_at.to_s.split(' ').join('')
     end
 
     if @user.nil? ||
        params[:confirmation_string] != confirmation_string ||
        (@mail_type == 'confirmation' && @user.confirmed?) ||
-       (@mail_type == 'unlock' && !@user.access_locked?)
+       (@mail_type == 'unlock' && !@user.access_locked?) ||
+       (@mail_type == 'password_reset' && !@user.reset_password_period_valid?)
       return redirect_to_sign_in_with_flash('Invalid action.')
     end
   end
