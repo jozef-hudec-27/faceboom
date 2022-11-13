@@ -48,7 +48,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_inactive_sign_up_path_for(resource)
     confirmation_string = resource.confirmation_sent_at.to_s.split(' ').join('')
-    "#{confirm_mail_sent_user_path(resource)}?confirmation_string=#{confirmation_string}"
+    "#{mail_sent_user_path(resource)}?confirmation_string=#{confirmation_string}&mail_type=confirmation"
   end
 
   def after_update_path_for(resource)

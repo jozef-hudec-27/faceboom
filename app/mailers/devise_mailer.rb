@@ -3,4 +3,9 @@ class DeviseMailer < Devise::Mailer
     @user = record
     super
   end
+
+  def unlock_instructions(record, token, opts={})
+    @user = record
+    super
+  end
 end

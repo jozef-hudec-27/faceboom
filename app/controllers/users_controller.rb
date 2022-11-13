@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:confirm_mail_sent]
-  before_action :unauthenicate_user!, only: [:confirm_mail_sent]
+  before_action :authenticate_user!, except: [:mail_sent]
+  before_action :unauthenicate_user!, only: [:mail_sent]
 
   def index
     @users = User.where.not(id: current_user.friend_ids + [current_user.id]).filter { |user| current_user.pending_friend_request_with(user).nil? }
@@ -33,11 +33,28 @@ class UsersController < ApplicationController
     redirect_to user
   end
 
-  def confirm_mail_sent
-    @user = User.find_by id: params[:id]
-    confirmation_string = @user&.confirmation_sent_at.to_s.split(' ').join('')
+  def mail_sent
+    @mail_type = params[:mail_type]
 
-    return redirect_to_sign_in_with_flash('Invalid action.') if params[:confirmation_string] != confirmation_string || @user.confirmed?
+    unless ['confirmation', 'unlock'].include? @mail_type
+      flash[:alert] = 'Invalid action.'
+      return redirect_back(fallback_location: new_user_session_path)
+    end
+
+    @user = User.find_by id: params[:id]
+
+    if @mail_type == 'confirmation'
+      confirmation_string = @user&.confirmation_sent_at.to_s.split(' ').join('')
+    elsif @mail_type == 'unlock'
+      confirmation_string = @user&.locked_at.to_s.split(' ').join('')
+    end
+
+    if @user.nil? ||
+       params[:confirmation_string] != confirmation_string ||
+       (@mail_type == 'confirmation' && @user.confirmed?) ||
+       (@mail_type == 'unlock' && !@user.access_locked?)
+      return redirect_to_sign_in_with_flash('Invalid action.')
+    end
   end
 
   private

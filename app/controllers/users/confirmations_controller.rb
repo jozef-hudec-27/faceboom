@@ -14,7 +14,8 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if successfully_sent?(resource)
       respond_with({}, location: after_resending_confirmation_instructions_path_for(resource))
     else
-      respond_with(resource)
+      flash[:alert] = 'Could not send confirmation email.'
+      redirect_to new_user_session_path
     end
   end
 
@@ -26,7 +27,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   def after_resending_confirmation_instructions_path_for(resource)
     confirmation_string = resource.confirmation_sent_at.to_s.split(' ').join('')
-    "#{confirm_mail_sent_user_path(resource)}?confirmation_string=#{confirmation_string}"
+    "#{mail_sent_user_path(resource)}?confirmation_string=#{confirmation_string}&mail_type=confirmation"
   end
 
   def after_confirmation_path_for(resource_name, resource)

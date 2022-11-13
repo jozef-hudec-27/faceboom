@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show] do
     post 'unfriend', on: :collection
-    get 'confirm_mail_sent', on: :member # , constraints: ->(request) { p(request).nil? }
+    get 'mail_sent', on: :member
   end
 
   scope '/friend_requests', as: :friend_request do
