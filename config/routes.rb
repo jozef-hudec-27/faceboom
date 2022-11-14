@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'errors/not_found'
+  get 'errors/internal_server_error'
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
     passwords: 'users/passwords',
@@ -8,6 +10,9 @@ Rails.application.routes.draw do
   }
 
   root "posts#index"
+
+  match "/404", to: 'errors#not_found', via: :all
+  match "/500", to: 'errors#internal_server_error', via: :all
   
   get '/comments/:comment_id/new_reply', to: 'comments#new_reply', as: 'comment_reply'
   get '/comments/:comment_id/replies', to: 'comments#index_reply', as: 'comment_replies'
