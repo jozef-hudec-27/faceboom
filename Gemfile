@@ -71,8 +71,11 @@ group :test do
   gem "webdrivers"
 end
 
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'main'
 
 gem 'bulma-rails'
 
 gem "letter_opener", group: :development
+
+gem 'omniauth-facebook'
+gem 'omniauth-rails_csrf_protection'
