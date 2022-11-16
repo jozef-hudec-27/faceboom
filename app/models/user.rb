@@ -5,13 +5,13 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: %i[facebook]
   validates :first_name, :last_name, presence: true
 
-  has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: 'sender_id'
-  has_many :received_friend_requests, class_name: 'FriendRequest', foreign_key: 'receiver_id'
-  has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id'
-  has_many :received_notifications, class_name: 'Notification', foreign_key: 'receiver_id'
-  has_many :posts
-  has_many :likes
-  has_many :comments
+  has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_friend_requests, class_name: 'FriendRequest', foreign_key: 'receiver_id', dependent: :destroy
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_notifications, class_name: 'Notification', foreign_key: 'receiver_id', dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_and_belongs_to_many :friends, class_name: 'User',
                                     join_table: :friendships,
                                     foreign_key: :user_id,

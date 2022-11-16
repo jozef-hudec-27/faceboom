@@ -72,6 +72,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     user_path current_user
   end
 
+  def after_sign_out_path_for(resource_name)
+    new_user_session_path
+  end
+
   def update_resource(resource, params)
     if resource.provider == 'facebook'
       params.delete('current_password')
