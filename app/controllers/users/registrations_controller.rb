@@ -20,13 +20,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
+    email_updated = !account_update_params[:email].nil? && resource.email != account_update_params[:email]
+
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
 
     if resource_updated
       set_flash_message_for_update(resource, prev_unconfirmed_email)
       bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
-      flash[:notice] = "An email has been sent to #{resource.unconfirmed_email} to confirm your new email address."
+      flash[:notice] = "An email has been sent to #{resource.unconfirmed_email} to confirm your new email address." if email_updated
       respond_with resource, location: after_update_path_for(resource)
     else
       clean_up_passwords resource
@@ -68,5 +70,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     user_path current_user
+  end
+
+  def update_resource(resource, params)
+    if resource.provider == 'facebook'
+      params.delete('current_password')
+      resource.update_without_password(params)
+    else
+      resource.update_with_password(params)
+    end
   end
 end
