@@ -31,6 +31,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
       user.save!
+      DeviseMailer.with(user: user, provider: auth.provider).welcome.deliver_later
     end
   end
 
@@ -69,6 +70,39 @@ class User < ApplicationRecord
 
   def latest_notifications
     received_notifications.latest
+  end
+
+  def confirm(args = {})
+    pending_any_confirmation do
+      if confirmation_period_expired?
+        self.errors.add(:email, :confirmation_period_expired,
+          period: Devise::TimeInflector.time_ago_in_words(self.class.confirm_within.ago))
+        return false
+      end
+
+      unconfirmed_email_address = unconfirmed_email
+
+      self.confirmed_at = Time.now.utc
+
+      saved = if pending_reconfirmation?
+        skip_reconfirmation!
+        self.email = unconfirmed_email
+        self.unconfirmed_email = nil
+
+        save(validate: true)
+      else
+        save(validate: args[:ensure_valid] == true)
+      end
+
+      after_confirmation(unconfirmed_email_address) if saved
+      saved
+    end
+  end
+
+  protected
+
+  def after_confirmation(prev_unconfirmed_email)
+    DeviseMailer.with(user: self).welcome.deliver_later unless prev_unconfirmed_email
   end
 
   private

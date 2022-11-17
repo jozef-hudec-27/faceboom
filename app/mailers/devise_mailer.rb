@@ -14,8 +14,14 @@ class DeviseMailer < Devise::Mailer
     super
   end
 
+  def email_changed(record, opts={})
+    @user = record
+    super
+  end
+
   def welcome
     @user = params[:user]
+    @provider = params[:provider]
     mail to: @user.email, subject: 'Welcome to Faceboom!', template_path: 'devise/mailer', template_name: 'welcome'
   end
 end
