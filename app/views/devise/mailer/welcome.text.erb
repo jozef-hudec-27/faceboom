@@ -1,0 +1,6 @@
+Hello, <%= @user.full_name %>!
+
+============================================================
+
+You have successfully<% if @provider.nil? %> confirmed your email address <% else %> used <%= @provider.capitalize %> to sign up <% end %>and can now fully enjoy Faceboom and it's features.
+We hope you like it, have fun!
