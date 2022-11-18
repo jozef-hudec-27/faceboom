@@ -1,7 +1,7 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="<%= root_path %>">
-      <h1>Faceboom</h1>
+      <h1 class="title is-4">faceboom</h1>
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -13,41 +13,49 @@
 
   <div class="navbar-menu">
     <div class="navbar-start">
-      <a href="<%= new_post_path %>" class="navbar-item">
-        New Post
-      </a>
-
-      <a href="<%= user_path(current_user) %>" class="navbar-item">
-        Account
-      </a>
-
-      <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
-        <a id="notifications-btn" class="navbar-link <% if get_unread_notifications.any? %>has-text-danger<%end %>" data-action="dropdown#showDropdown">
-          Notifications
-        </a>
-
-        <div class="navbar-dropdown">
-            <div class="dropdown-content">
-                <div class="dropdown-item" data-controller="tabs">
-                    <%= render 'notifications/notification_tabs', latest_notifications: get_latest_notifications.first(3),
-                                                                  unread_notifications: get_unread_notifications.first(3) 
-                    %>
-
-                    <a href="<%= notifications_path %>">See all</a>
-                </div>
-            </div>
+      <div class="navbar-item">
+        <div class="control has-icons-left">
+            <input class="input is-rounded" type="text" placeholder="Search Faceboom">
+            <span class="icon is-small is-left">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
         </div>
       </div>
     </div>
 
     <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-            <a href="<%= destroy_user_session_path %>" class="button is-light" data-turbo-method="delete">
-                Sign out
+        <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
+            <a id="notifications-btn" class="navbar-link is-arrowless <% if get_unread_notifications.any? %>has-text-danger<%end %>" data-action="dropdown#showDropdown">
+                <i class="fa-solid fa-bell"></i>
             </a>
+
+            <div class="navbar-dropdown is-right">
+                <div class="dropdown-content">
+                    <div class="dropdown-item" data-controller="tabs">
+                        <%= render 'notifications/notification_tabs', latest_notifications: get_latest_notifications.first(3),
+                                                                    unread_notifications: get_unread_notifications.first(3)
+                        %>
+
+                        <a href="<%= notifications_path %>">See all</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
+            <a id="notifications-btn" class="navbar-link is-arrowless" data-action="dropdown#showDropdown">
+                ACCOUNT
+            </a>
+
+            <div class="navbar-dropdown is-right">
+                <div class="dropdown-content">
+                    <a href="<%= user_path(current_user) %>" class="dropdown-item">
+                        <i class="fa-solid fa-user"></i> Account</a>
+                    <a href="<%= destroy_user_session_path %>" class="dropdown-item" data-turbo-method="delete">
+                        <i class="fa-solid fa-right-from-bracket"></i> <span>Log Out</span></a>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
 </nav>

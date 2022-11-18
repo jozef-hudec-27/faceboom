@@ -79,3 +79,6 @@ gem "letter_opener", group: :development
 
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
+
+gem 'font-awesome-sass'
+

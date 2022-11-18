@@ -15,10 +15,7 @@
  */
 
  @import "bulma";
-
- :root {
-    font-family: sans-serif;
- }
+ @import "font-awesome";
 
  body {
     margin: 0;
@@ -29,19 +26,77 @@
  }
 
  .navbar {
-    // display: flex;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-    font-size: 1.15em;
     position: sticky;
     top: 0;
+
+    h1 {
+        color: rgb(24, 119, 242);
+        font-weight: 600; 
+    }
+
+    .dropdown-content { width: 256px }
 }
 
-a.navbar-item, a.navbar-link {
-    color: rgb(111, 114, 135);
-    padding: 20px 22px;
+.navbar-item {
+    .input {
+        width: 544px;
+        background-color: rgb(240, 242, 245);
+        border: none;
+        outline: none;
+
+        &:hover { background-color: rgb(228, 230, 232) }
+
+        &:focus {
+            box-shadow: none;
+            background-color: rgb(240, 242, 245);
+        }
+
+        &:target { border: 2px solid red }
+
+        + .icon { color: rgb(50, 50, 50) }
+
+        &::placeholder {
+            font-weight: 300;
+            color: rgb(50, 50, 50);
+        }
+    }
 }
 
-.navbar h1 {
-    color: rgb(59,89,153);
+.navbar-start, .navbar-end {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.navbar-start {
+    justify-content: center;
+}
+
+.navbar-dropdown {
+    a.dropdown-item {
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 1.1em;
+
+        i {
+            color: black;
+            background-color: rgb(216, 218, 223);
+            padding: 8px;
+            border-radius: 20px;
+        }
+    }
+}
+
+.notifications .tabs li.is-active a {
+    color: rgb(24, 119, 242);
+    background-color: rgb(231, 243, 255);
+
+    &:hover {
+        background-color: rgb(221, 233, 245);
+    }
+}
+
+.notifications .tabs li a {
     font-weight: 600;
 }
