@@ -120,12 +120,12 @@
         gap: 12px;
 
         &:hover {
-            background-color: rgb(242,242,242);
+            background-color: rgb(242, 242, 242);
         }
 
         img {
-            max-width: 42px;
-            max-height: 42px;
+            max-width: 48px;
+            max-height: 48px;
             border: 1px solid grey;
             border-radius: 50%;
         }
@@ -136,7 +136,7 @@
         }
 
         p {
-            color:  $dark-color;
+            color: rgb(96, 98, 102);
         }
     }
 
