@@ -12,7 +12,7 @@
 
     <div style="display: flex; justify-content: space-between;">
         <h6 class="title is-6">Earlier</h6>
-        <a href="<%= notifications_path %>">See all</a>
+        <% unless is_all %><a href="<%= notifications_path %>">See all</a><% end %>
     </div>
 
     <div id="new-notifications-container" data-tabs-target="tabContainer">

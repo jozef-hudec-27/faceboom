@@ -16,11 +16,16 @@
 
  @import "bulma";
  @import "font-awesome";
+ @import "utilities";
+ @import "config";     
 
- $dark-color: rgb(50, 50, 50);
+ html {
+    background-color: $bg-color;
+ }
 
  body {
     margin: 0;
+    height: 100vh;
  }
 
  .comment-replies {
@@ -30,11 +35,12 @@
  .navbar {
     position: sticky;
     top: 0;
+    box-shadow: 0 3px 8px darken($bg-color, 15%);
     
     &-item {
         .input {
             width: 544px;
-            background-color: rgb(240, 242, 245);
+            background-color: $bg-color;
             border: none;
             outline: none;
     
@@ -42,7 +48,7 @@
     
             &:focus {
                 box-shadow: none;
-                background-color: rgb(240, 242, 245);
+                background-color: $bg-color;
             }
     
             &:target { border: 2px solid red; }
@@ -91,76 +97,89 @@
 
     .dropdown-content { min-width: 256px; }
 
-    .notifications {
-        min-width: 350px;
+}
 
-        .title {
-            margin: 0;
-            margin-left: 12px;
+.notifications {
+    min-width: 350px;
+
+    .title {
+        margin: 0;
+        margin-left: 12px;
+    }
+
+    h4.is-4 {
+        margin-bottom: 8px;
+    }
+
+    .noti {
+        width: 100%;
+        display: flex;
+        padding: 20px 12px;
+        align-items: center;
+        border-radius: 16px;
+        gap: 12px;
+
+        &:hover {
+            background-color: rgb(242,242,242);
         }
 
-        h4.is-4 {
-            margin-bottom: 8px;
+        img {
+            max-width: 42px;
+            max-height: 42px;
+            border: 1px solid grey;
+            border-radius: 50%;
         }
 
-        .noti {
-            width: 350px;
-            display: flex;
-            padding: 20px 12px;
-            align-items: center;
-            border-radius: 16px;
-            gap: 12px;
+        i {
+            margin-left: auto;
+            color: rgb(24, 118, 242);
+        }
 
+        p {
+            color:  $dark-color;
+        }
+    }
+
+    .tabs {
+        li.is-active a {
+            color: rgb(24, 119, 242);
+            background-color: rgb(231, 243, 255);
+        
             &:hover {
-                background-color: rgb(242,242,242);
-            }
-
-            img {
-                max-width: 42px;
-                max-height: 42px;
-                border: 1px solid grey;
-                border-radius: 50%;
-            }
-
-            i {
-                margin-left: auto;
-                color: rgb(24, 118, 242);
-            }
-
-            p {
-                color:  $dark-color;
+                background-color: rgb(221, 233, 245);
             }
         }
 
-        .tabs {
-            li.is-active a {
-                color: rgb(24, 119, 242);
-                background-color: rgb(231, 243, 255);
-            
-                &:hover {
-                    background-color: rgb(221, 233, 245);
-                }
-            }
-
-            li a {
-                font-weight: 600;
-                border: none;
-                border-radius: 9999px;
-            }
-
-            ul {
-                gap: 16px;
-            }
+        li a {
+            font-weight: 600;
+            border: none;
+            border-radius: 9999px;
         }
 
-        .empty-notifications-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            
-            i { font-size: 56px; }
-
-            p { font-size: 1.3em; }
+        ul {
+            gap: 16px;
         }
+    }
+
+    .empty-notifications-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        i { font-size: 56px; }
+
+        p { font-size: 1.3em; }
+    }
+}
+
+.notifications-page-wrapper {
+    @extend %flexbox-center;
+
+    .notifications-wrapper {
+        border: 1px solid darken($bg-color, 10%);
+        border-radius: 8px;
+        padding: 16px;
+        background-color: white;
+        width: 40%;
     }
 }

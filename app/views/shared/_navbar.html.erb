@@ -1,4 +1,4 @@
-<nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+<nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="<%= root_path %>">
       <h1 class="title is-4">faceboom</h1>
@@ -33,7 +33,8 @@
                 <div class="dropdown-content">
                     <div class="dropdown-item" data-controller="tabs">
                         <%= render 'notifications/notification_tabs', latest_notifications: get_latest_notifications.first(3),
-                                                                    unread_notifications: get_unread_notifications.first(3)
+                                                                      unread_notifications: get_unread_notifications.first(3),
+                                                                      is_all: false
                         %>
                     </div>
                 </div>
