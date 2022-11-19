@@ -51,8 +51,6 @@
                 background-color: $bg-color;
             }
     
-            &:target { border: 2px solid red; }
-    
             + .icon { color:  $dark-color; }
     
             &::placeholder {
@@ -173,7 +171,7 @@
 }
 
 .notifications-page-wrapper {
-    @extend %flexbox-center;
+    @extend .flexbox-center;
 
     .notifications-wrapper {
         border: 1px solid darken($bg-color, 10%);
@@ -181,5 +179,51 @@
         padding: 16px;
         background-color: white;
         width: 40%;
+    }
+}
+
+.home-page-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    .posts {
+        @extend .flexbox-column;
+        @extend .flexbox-center;
+
+        .post {
+            width: 540px;
+            background-color: white;
+            border: 1px solid darken($bg-color, 10%);
+            border-radius: 8px;
+            margin-bottom: 16px;
+
+            img {
+                width: 100%;
+            }
+
+            &-info {
+                padding: 12px;
+
+                .post-user-wrapper {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 8px;
+                    gap: 4px;
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                    }
+                    
+                    a {
+                        color: $dark-color;
+                        font-weight: 500;
+                    }
+                }
+
+
+            }
+        }
     }
 }

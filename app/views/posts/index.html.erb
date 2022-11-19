@@ -1,10 +1,28 @@
-<h1>All posts</h1>
+<div class="home-page-wrapper">
+    <div class="posts">
+        <% @posts.each do |post| %>
+            <div class="post">
+                <div class="post-info">
+                    <div class="post-user-wrapper">
+                        <a href="<%= user_path post.user %>"><%= image_tag post.user.avatar %></a>
 
-<% @posts.each do |post| %>
-    <div class="post">
-        <h4><%= link_to post.user.full_name, post %></h4>
-        <p><%= post.body %></p>
-    <%= link_to "#{post.likes.count} likes", like_post_path(post), id: "post-#{post.id}-like-link", data: { turbo_method: :post } %>
-        <%= image_tag post.image&.attached? ? post.image : '', style: 'width: 500px;' %>
-    </div><br>
-<% end %>
+                        <div class="flexbox-column">
+                            <h4><%= link_to post.user.full_name, post.user %></h4>
+                            <p style="font-size: 0.7em;"><%= post.time_since approx: true, short: true %></p>
+                        </div>
+                    </div>
+
+                    <div class="post-body-wrapper">
+                        <p><%= post.body %></p>
+                    </div>
+
+                    <%= link_to "#{post.likes.count} likes", like_post_path(post), id: "post-#{post.id}-like-link", data: { turbo_method: :post } %>
+                </div>
+                
+                <%= image_tag post.image&.attached? ? post.image : '' %>
+            </div>
+        <% end %>
+    </div>
+
+    <div></div>
+</div>

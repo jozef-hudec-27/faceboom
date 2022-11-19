@@ -1,5 +1,10 @@
-%flexbox-center {
+.flexbox-center {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.flexbox-column {
+    display: flex;
+    flex-direction: column;
 }
