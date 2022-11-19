@@ -1,6 +1,12 @@
-<%= turbo_stream.update('unread-notifications-container', "You've seen all notifications") %>
+<%= turbo_stream.update('unread-notifications-container',
+    "<div class='empty-notifications-container'>
+        <i class='fa-solid fa-check'></i>
+        <p>You've seen all notifications</p>
+    </div>") 
+%>
+
 <%= turbo_stream.replace('notifications-btn',
-    '<a id="notifications-btn" class="navbar-link" data-action="dropdown#showDropdown">
-        Notifications
+    '<a id="notifications-btn" class="navbar-link is-arrowless" data-action="dropdown#showDropdown">
+        <i class="fa-solid fa-bell"></i>
     </a>')
 %>

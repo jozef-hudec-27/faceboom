@@ -1,9 +1,15 @@
-<div class="noti">
-    <a data-turbo-method="<% if notification.read %>get<% else %>post<% end %>" href="
-        <% if notification.read %>
-            <%= notification.url %>
-        <% else %>
-            <%= notifications_read_path(notification) %>
-        <% end %>"
-    ><%= notification.text %></a>
-</div>
+<a class="noti" data-turbo-method="<% if notification.read %>get<% else %>post<% end %>" href="
+    <% if notification.read %>
+        <%= notification.url %>
+    <% else %>
+        <%= notifications_read_path(notification) %>
+    <% end %>"
+>
+        <%= image_tag notification.sender.avatar %>    
+
+        <p><%= notification.text %></p>
+
+        <% unless notification.read %>
+            <i class="fa-solid fa-circle"></i>
+        <% end %>
+</a>

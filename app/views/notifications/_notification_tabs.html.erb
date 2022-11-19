@@ -1,5 +1,5 @@
 <div class="notifications" data-controller="tabs">
-    <h3 class="title is-4">Notifications</h3>
+    <h4 class="title is-4">Notifications</h4>
 
     <div class="tabs is-centered is-toggle is-toggle-rounded is-small is-fullwidth">
         <ul>
@@ -10,6 +10,11 @@
         </ul>
     </div>
 
+    <div style="display: flex; justify-content: space-between;">
+        <h6 class="title is-6">Earlier</h6>
+        <a href="<%= notifications_path %>">See all</a>
+    </div>
+
     <div id="new-notifications-container" data-tabs-target="tabContainer">
         <% latest_notifications.each do |notification| %>
             <%= render 'notifications/notification', notification: notification %>
@@ -18,13 +23,16 @@
 
     <div id="unread-notifications-container" data-tabs-target="tabContainer" hidden>
         <% if unread_notifications.any? %>
-            <a href="<%= notifications_read_all_path %>" data-turbo-method="post">Mark all as read</a>
-
             <% unread_notifications.each do |notification| %>
                 <%= render 'notifications/notification', notification: notification %>
             <% end %>
+
+            <a href="<%= notifications_read_all_path %>" data-turbo-method="post" style="margin-left: 12px;">Mark all as read</a>
         <% else %>
-            <p>You've seen all notifications</p>
+            <div class="empty-notifications-container">
+                <i class="fa-solid fa-check"></i>
+                <p>You've seen all notifications</p>
+            </div>
         <% end %>
     </div>
 </div>

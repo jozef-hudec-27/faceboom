@@ -35,8 +35,6 @@
                         <%= render 'notifications/notification_tabs', latest_notifications: get_latest_notifications.first(3),
                                                                     unread_notifications: get_unread_notifications.first(3)
                         %>
-
-                        <a href="<%= notifications_path %>">See all</a>
                     </div>
                 </div>
             </div>
@@ -44,7 +42,7 @@
 
         <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
             <a id="notifications-btn" class="navbar-link is-arrowless" data-action="dropdown#showDropdown">
-                ACCOUNT
+                <%= image_tag current_user.avatar, style: 'border-radius: 50%; width: 28px; height: 28px;', loading: 'lazy' %>
             </a>
 
             <div class="navbar-dropdown is-right">
