@@ -25,7 +25,7 @@
 
  body {
     margin: 0;
-    height: 100vh;
+    height: 100%;
  }
 
  .comment-replies {
@@ -171,7 +171,8 @@
 }
 
 .notifications-page-wrapper {
-    @extend .flexbox-center;
+    @extend .flexbox;
+    @extend .flex-center;
 
     .notifications-wrapper {
         border: 1px solid darken($bg-color, 10%);
@@ -187,8 +188,9 @@
     grid-template-columns: 2fr 1fr;
 
     .posts {
-        @extend .flexbox-column;
-        @extend .flexbox-center;
+        @extend .flexbox;
+        @extend .flex-column;
+        @extend .flex-center;
 
         .post {
             width: 540px;
@@ -199,6 +201,14 @@
 
             img {
                 width: 100%;
+            }
+
+            p, a {
+                color: rgb(96, 98, 102);
+            }
+
+            a:hover {
+                text-decoration: underline;
             }
 
             &-info {
@@ -221,8 +231,42 @@
                         font-weight: 500;
                     }
                 }
+            }
 
+            &-actions {
+                padding: 12px;
+                display: flex;
+                justify-content: center;
 
+                &-like, &-comment {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    color: rgb(101, 103, 107);
+                }
+
+                button {
+                    appearance: none;
+                    border: none;
+                    outline: none;
+                    background-color: white;
+                    cursor: pointer;
+                    padding: 8px 32px;
+                    border-radius: 8px;
+                    font-size: 1.1em;
+
+                    &:hover {
+                        background-color: rgb(242, 242, 242);
+                    }
+
+                    &:active {
+                        background-color: rgb(232, 232, 232);
+                    }
+                }
+
+                button.post-actions-like:active {
+                    transform: scale(0.98);
+                }
             }
         }
     }

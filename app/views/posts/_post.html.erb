@@ -1,0 +1,41 @@
+<div class="post">
+    <div class="post-info">
+        <div class="post-user-wrapper">
+            <a href="<%= user_path post.user %>"><%= image_tag post.user.avatar %></a>
+
+            <div class="flexbox flex-column">
+                <h4><%= link_to post.user.full_name, post.user %></h4>
+                <p style="font-size: 0.7em;"><%= post.time_since approx: true, short: true %></p>
+            </div>
+        </div>
+
+        <div class="post-body-wrapper">
+            <p><%= post.body %></p>
+        </div>
+    </div>
+    
+    <%= image_tag post.image&.attached? ? post.image : '' %>
+
+    <div class="flexbox space-between">
+        <%# link_to "#{post.likes.count} likes", like_post_path(post), id: "post-#{post.id}-like-link", data: { turbo_method: :post } %>
+        <p style="margin-left: 12px;">
+            <i class="fa-solid fa-thumbs-up" style="font-size: 0.8em; color: white; background-color: rgb(24, 119, 242); padding: 4px; border-radius: 50%;"></i> <%= post.likes.count %>
+        </p>
+
+        <a href="" style="margin-right: 12px;"><%= post.comments.count %> comments</a>
+    </div>
+
+    <hr style="margin: auto; margin-bottom: -6px; margin-top: 6px; width: 95%;">
+
+    <div class="post-actions">
+        <button type="button" class="post-actions-like">
+            <i class="fa-regular fa-thumbs-up"></i>
+            <p>Like</p>
+        </button>
+
+        <button type="button" class="post-actions-comment">
+            <i class="fa-regular fa-message"></i>
+            <p>Comment</p>
+        </button>
+    </div>
+</div>
