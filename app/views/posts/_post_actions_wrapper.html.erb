@@ -1,0 +1,26 @@
+<div class="post-actions-wrapper">
+    <div class="flexbox space-between">
+        <p style="margin-left: 12px;">
+            <i class="fa-solid fa-heart" style="font-size: 0.8em; color: white; background-color: rgb(233,35,70); padding: 4px; border-radius: 50%;"></i>
+            <span id="post-<%= post.id %>-like-count"><%= post.likes.count %></span>
+        </p>
+
+        <a href="" style="margin-right: 12px;"><%= post.comments.count %> comments</a>
+    </div>
+
+    <hr>
+
+    <div class="post-actions">
+        <a id="post-<%= post.id %>-like-wrapper" href="<%= like_post_path post %>" data-turbo-method="post" style="text-decoration: none;">
+            <button class="post-actions-like" tabindex="-1" style="<% if post.liked_by? current_user %>color: rgb(24,119,242);<% end %>">
+                <i class="fa-<% if post.liked_by? current_user %>solid<% else %>regular<% end %> fa-heart"></i>
+                <p>Like</p>
+            </button>
+        </a>
+
+        <button class="post-actions-comment" tabindex="-1">
+            <i class="fa-regular fa-message"></i>
+            <p>Comment</p>
+        </button>
+    </div>
+</div>

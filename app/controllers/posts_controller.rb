@@ -12,6 +12,8 @@ class PostsController < ApplicationController
 
     @comments = @post.comments.includes(:user, :likes, :comments)
     @comment = Comment.new
+    
+    render layout: 'basic'
   end
 
   def new

@@ -1,0 +1,14 @@
+<div class="post-info">
+    <div class="post-user-wrapper">
+        <a href="<%= user_path post.user %>"><%= image_tag post.user.avatar %></a>
+
+        <div class="flexbox flex-column">
+            <h4><%= link_to post.user.full_name, post.user %></h4>
+            <p style="font-size: 0.7em;"><%= post.time_since approx: true, short: true %></p>
+        </div>
+    </div>
+
+    <div class="post-body-wrapper">
+        <p><%= post.body %></p>
+    </div>
+</div>
