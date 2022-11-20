@@ -11,6 +11,10 @@ class Post < ApplicationRecord
   default_scope { order('created_at desc') }
 
   def self.posts_for(user)
-    where(user: [user] + user.friends)
+    where user: [user] + user.friends
+  end
+
+  def liked_by?(user)
+    likes.where(user: user).exists?
   end
 end

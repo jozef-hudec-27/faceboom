@@ -29,20 +29,22 @@ class PostsController < ApplicationController
   end
 
   def like
-    post = Post.find_by id: params[:id]
+    @post = Post.find_by id: params[:id]
 
-    return if post.nil?
+    return if @post.nil?
     
-    like = Like.where(likeable: post, user: current_user).first
+    like = Like.where(likeable: @post, user: current_user).first
 
     if like
       like.destroy
     else
-      Like.create likeable: post, user: current_user
+      Like.create likeable: @post, user: current_user
     end
 
+    @is_liked = @post.liked_by? current_user
+
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.update("post-#{post.id}-like-link", "#{post.likes.count} likes") }
+      format.turbo_stream
     end
   end
 

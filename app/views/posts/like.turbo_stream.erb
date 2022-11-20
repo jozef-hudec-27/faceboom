@@ -1,0 +1,10 @@
+<%= turbo_stream.update("post-#{@post.id}-like-count", "#{@post.likes.count}") %>
+
+<%= turbo_stream.update("post-#{@post.id}-like-wrapper", "
+    <button class='post-actions-like' tabindex='-1' style='#{@is_liked ? 'color: rgb(24,119,242);' : ''}'>
+        <i class='fa-#{@is_liked ? 'solid' : 'regular'} fa-heart'></i>
+        <p>Like</p>
+    </button>
+    ") 
+%>
+
