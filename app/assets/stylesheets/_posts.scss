@@ -1,0 +1,106 @@
+@import "partials/config";     
+
+.post {
+    width: 540px;
+    background-color: white;
+    border: 1px solid darken($bg-color, 10%);
+    border-radius: 8px;
+    margin-bottom: 16px;
+
+    img {
+        width: 100%;
+    }
+
+    p, a {
+        color: rgb(96, 98, 102);
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }    
+}
+
+.post-info {
+    padding: 12px;
+
+    .post-user-wrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        gap: 4px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+
+            &:hover {
+                box-shadow: 0 0 5px 5px $bg-color;
+            }
+        }
+        
+        a {
+            color: $dark-color;
+            font-weight: 500;
+        }
+    }
+}
+
+.post-actions-wrapper {
+    hr {
+        margin: auto;
+        margin-bottom: -6px;
+        margin-top: 6px;
+        width: 95%;
+        background-color: darken($bg-color, 5%);
+    }
+
+    .post-actions {
+        padding: 12px;
+        display: flex;
+        justify-content: center;
+        
+        &-like, &-comment {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgb(101, 103, 107);
+        }
+    
+        button {
+            appearance: none;
+            border: none;
+            outline: none;
+            background-color: white;
+            cursor: pointer;
+            padding: 8px 32px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            
+            p {
+                color: inherit;
+            }
+    
+            &:hover {
+                background-color: rgb(242, 242, 242);
+            }
+    
+            &:active {
+                background-color: rgb(232, 232, 232);
+            }
+        }
+    
+        button.post-actions-like:active {
+            transform: scale(0.98);
+        }
+    }
+}
+
+.post-sidebar {
+    background-color: white;
+}
+
+.post-page-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 2fr;
+}

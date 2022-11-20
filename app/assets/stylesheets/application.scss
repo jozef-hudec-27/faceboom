@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,290 +14,38 @@
  *= require_tree .
  *= require_self
  */
-
+ 
  @import "bulma";
  @import "font-awesome";
- @import "utilities";
- @import "config";     
 
- html {
+ @import "partials/utilities";
+ @import "partials/config";     
+
+ @import "navbar";
+ @import "posts";
+ @import "notifications";
+
+html {
     background-color: $bg-color;
- }
+}
 
- body {
+body {
     margin: 0;
     height: 100%;
- }
+}
 
- .comment-replies {
+.comment-replies {
     margin-left: 50px;
- }
-
- .navbar {
-    position: sticky;
-    top: 0;
-    box-shadow: 0 3px 8px darken($bg-color, 15%);
-    
-    &-item {
-        .input {
-            width: 544px;
-            background-color: $bg-color;
-            border: none;
-            outline: none;
-    
-            &:hover { background-color: rgb(228, 230, 232); }
-    
-            &:focus {
-                box-shadow: none;
-                background-color: $bg-color;
-            }
-    
-            + .icon { color:  $dark-color; }
-    
-            &::placeholder {
-                font-weight: 300;
-                color:  $dark-color;
-            }
-        }
-    }
-
-    &-dropdown {
-        a.dropdown-item {
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 1.1em;
-    
-            i {
-                color: black;
-                background-color: rgb(216, 218, 223);
-                padding: 8px;
-                border-radius: 20px;
-            }
-        }
-    }
-
-    &-start {
-        margin: 0;
-        flex-grow: 1;
-        justify-content: center;
-    }
-
-    &-end {
-        margin: 0;
-        flex-grow: 1;
-    }
-
-    h1 {
-        color: rgb(24, 119, 242);
-        font-weight: 600; 
-    }
-
-    .dropdown-content { min-width: 256px; }
-
-}
-
-.notifications {
-    min-width: 350px;
-
-    .title {
-        margin: 0;
-        margin-left: 12px;
-    }
-
-    h4.is-4 {
-        margin-bottom: 8px;
-    }
-
-    .noti {
-        width: 100%;
-        display: flex;
-        padding: 20px 12px;
-        align-items: center;
-        border-radius: 16px;
-        gap: 12px;
-
-        &:hover {
-            background-color: rgb(242, 242, 242);
-        }
-
-        img {
-            max-width: 48px;
-            max-height: 48px;
-            border: 1px solid grey;
-            border-radius: 50%;
-        }
-
-        i {
-            margin-left: auto;
-            color: rgb(24, 118, 242);
-        }
-
-        p {
-            color: rgb(96, 98, 102);
-        }
-    }
-
-    .tabs {
-        li.is-active a {
-            color: rgb(24, 119, 242);
-            background-color: rgb(231, 243, 255);
-        
-            &:hover {
-                background-color: rgb(221, 233, 245);
-            }
-        }
-
-        li a {
-            font-weight: 600;
-            border: none;
-            border-radius: 9999px;
-        }
-
-        ul {
-            gap: 16px;
-        }
-    }
-
-    .empty-notifications-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-        i { font-size: 56px; }
-
-        p { font-size: 1.3em; }
-    }
-}
-
-.notifications-page-wrapper {
-    @extend .flexbox;
-    @extend .flex-center;
-
-    .notifications-wrapper {
-        border: 1px solid darken($bg-color, 10%);
-        border-radius: 8px;
-        padding: 16px;
-        background-color: white;
-        width: 40%;
-    }
 }
 
 .home-page-wrapper {
     display: grid;
     grid-template-columns: 2fr 1fr;
-
+    
     .posts {
         @extend .flexbox;
         @extend .flex-column;
         @extend .flex-center;
     
     }
-}
-
-
-.post {
-    width: 540px;
-    background-color: white;
-    border: 1px solid darken($bg-color, 10%);
-    border-radius: 8px;
-    margin-bottom: 16px;
-
-    img {
-        width: 100%;
-    }
-
-    p, a {
-        color: rgb(96, 98, 102);
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }    
-}
-
-.post-info {
-    padding: 12px;
-
-    .post-user-wrapper {
-        display: flex;
-        align-items: center;
-        margin-bottom: 8px;
-        gap: 4px;
-
-        img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-
-            &:hover {
-                box-shadow: 0 0 5px 5px $bg-color;
-            }
-        }
-        
-        a {
-            color: $dark-color;
-            font-weight: 500;
-        }
-    }
-}
-
-.post-actions-wrapper {
-    hr {
-        margin: auto;
-        margin-bottom: -6px;
-        margin-top: 6px;
-        width: 95%;
-        background-color: darken($bg-color, 5%);
-    }
-
-    .post-actions {
-        padding: 12px;
-        display: flex;
-        justify-content: center;
-        
-        &-like, &-comment {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: rgb(101, 103, 107);
-        }
-    
-        button {
-            appearance: none;
-            border: none;
-            outline: none;
-            background-color: white;
-            cursor: pointer;
-            padding: 8px 32px;
-            border-radius: 8px;
-            font-size: 1.1em;
-            
-            p {
-                color: inherit;
-            }
-    
-            &:hover {
-                background-color: rgb(242, 242, 242);
-            }
-    
-            &:active {
-                background-color: rgb(232, 232, 232);
-            }
-        }
-    
-        button.post-actions-like:active {
-            transform: scale(0.98);
-        }
-    }
-}
-
-.post-sidebar {
-    background-color: white;
-}
-
-.post-page-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr 2fr;
 }

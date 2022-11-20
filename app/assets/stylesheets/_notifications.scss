@@ -1,0 +1,88 @@
+@import "partials/config";     
+@import "partials/utilities";     
+
+.notifications {
+    min-width: 350px;
+
+    .title {
+        margin: 0;
+        margin-left: 12px;
+    }
+
+    h4.is-4 {
+        margin-bottom: 8px;
+    }
+
+    .noti {
+        width: 100%;
+        display: flex;
+        padding: 20px 12px;
+        align-items: center;
+        border-radius: 16px;
+        gap: 12px;
+
+        &:hover {
+            background-color: rgb(242, 242, 242);
+        }
+
+        img {
+            max-width: 48px;
+            max-height: 48px;
+            border: 1px solid grey;
+            border-radius: 50%;
+        }
+
+        i {
+            margin-left: auto;
+            color: rgb(24, 118, 242);
+        }
+
+        p {
+            color: rgb(96, 98, 102);
+        }
+    }
+
+    .tabs {
+        li.is-active a {
+            color: rgb(24, 119, 242);
+            background-color: rgb(231, 243, 255);
+        
+            &:hover {
+                background-color: rgb(221, 233, 245);
+            }
+        }
+
+        li a {
+            font-weight: 600;
+            border: none;
+            border-radius: 9999px;
+        }
+
+        ul {
+            gap: 16px;
+        }
+    }
+
+    .empty-notifications-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        i { font-size: 56px; }
+
+        p { font-size: 1.3em; }
+    }
+}
+
+.notifications-page-wrapper {
+    @extend .flexbox;
+    @extend .flex-center;
+
+    .notifications-wrapper {
+        border: 1px solid darken($bg-color, 10%);
+        border-radius: 8px;
+        padding: 16px;
+        background-color: white;
+        width: 40%;
+    }
+}

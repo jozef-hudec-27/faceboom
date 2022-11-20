@@ -1,0 +1,65 @@
+@import "partials/config";     
+
+.navbar {
+    position: sticky;
+    top: 0;
+    box-shadow: 0 3px 8px darken($bg-color, 15%);
+    
+    &-item {
+        .input {
+            width: 544px;
+            background-color: $bg-color;
+            border: none;
+            outline: none;
+    
+            &:hover { background-color: rgb(228, 230, 232); }
+    
+            &:focus {
+                box-shadow: none;
+                background-color: $bg-color;
+            }
+    
+            + .icon { color:  $dark-color; }
+    
+            &::placeholder {
+                font-weight: 300;
+                color:  $dark-color;
+            }
+        }
+    }
+
+    &-dropdown {
+        a.dropdown-item {
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 1.1em;
+    
+            i {
+                color: black;
+                background-color: rgb(216, 218, 223);
+                padding: 8px;
+                border-radius: 20px;
+            }
+        }
+    }
+
+    &-start {
+        margin: 0;
+        flex-grow: 1;
+        justify-content: center;
+    }
+
+    &-end {
+        margin: 0;
+        flex-grow: 1;
+    }
+
+    h1 {
+        color: rgb(24, 119, 242);
+        font-weight: 600; 
+    }
+
+    .dropdown-content { min-width: 256px; }
+}
