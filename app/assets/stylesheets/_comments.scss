@@ -1,0 +1,68 @@
+@import "partials/config";
+
+.comment {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    
+    img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+
+    &-bubble {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(240, 242, 245);
+        padding: 8px 12px;
+        border-radius: 16px;
+
+        a {
+            font-weight: 500;
+            color: $dark-color;
+        }
+
+        i.fa-heart {
+            font-size: 0.8em;
+            color: white;
+            background-color: rgb(233,35,70);
+            padding: 4px; border-radius: 50%;
+            position: absolute;
+            right: -0.5em;
+            bottom: -1em;
+        }
+    }
+
+    &-actions {
+        display: flex;
+        font-size: 0.7em;
+        gap: 12px;
+        margin-left: 12px;
+
+        a {
+            font-weight: 500;
+            color: rgb(74, 74, 74);
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.post-comment-input-wrapper {
+    margin-top: auto;
+    margin-bottom: 12px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 12px;
+
+    img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+}

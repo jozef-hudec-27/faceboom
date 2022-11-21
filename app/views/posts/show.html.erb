@@ -1,14 +1,29 @@
 <div class="post-page-wrapper">
-    <div style="background-color: black;"></div>
+    <a href="javascript:history.back()" style="position: fixed; left: 24px; top: 16px;">
+        <i class="fa-solid fa-xmark" style="color: white; font-size: 1.2em;"></i>
+    </a>
+
+    <div></div>
 
     <div>
         <%= image_tag @post.image&.attached? ? @post.image : '', style: 'width: 100%;' %>
     </div>
 
-    <div style="background-color: black;"></div>
+    <div></div>
 
     <div class="post-sidebar">
         <%= render 'post_info', post: @post %>
         <%= render 'post_actions_wrapper', post: @post %>
+
+        <div class="post-comments-wrapper">
+            <% @post.comments.each do |comment| %>
+                <%= render 'comments/comment', comment: comment %>
+            <% end %>
+        </div>
+
+        <div class="post-comment-input-wrapper">
+            <%= image_tag current_user.avatar %>
+            <input type="text" class="input is-rounded" placeholder="Write a comment...">
+        </div>
     </div>
 </div>

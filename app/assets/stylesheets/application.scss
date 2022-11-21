@@ -15,15 +15,16 @@
  *= require_self
  */
  
- @import "bulma";
- @import "font-awesome";
+@import "bulma";
+@import "font-awesome";
 
- @import "partials/utilities";
- @import "partials/config";     
+@import "partials/utilities";
+@import "partials/config";     
 
- @import "navbar";
- @import "posts";
- @import "notifications";
+@import "comments";
+@import "navbar";
+@import "notifications";
+@import "posts";
 
 html {
     background-color: $bg-color;
@@ -48,4 +49,22 @@ body {
         @extend .flex-center;
     
     }
+}
+  
+.tooltip .tooltiptext {
+    font-size: 0.8em;
+    transition-delay: 0.2s;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+}
+  
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }
