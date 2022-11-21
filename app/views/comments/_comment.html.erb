@@ -1,5 +1,7 @@
 <div class="comment">
-    <%= image_tag comment.user.avatar %>
+    <a href="<%= user_path comment.user %>">
+        <%= image_tag comment.user.avatar %>
+    </a>
 
     <div class="flexbox flex-column">
         <div class="comment-bubble" style="position: relative;">
@@ -19,5 +21,18 @@
             <a href="">Reply</a>
             <p><%= comment.time_since short: true, approx: true %></p>
         </div>
+
+        <% if comment.comments.any? %>
+            <%= turbo_frame_tag "comment-#{comment.id}-replies" do %>
+                <a id="comment-<%= comment.id %>-replies-link" href="<%= comment_replies_path comment %>"
+                   style="margin-left: 12px; font-size: 0.9em; color: rgb(74,74,74); font-weight: 500;"
+                >
+                    <%= pluralize comment.comments.count, 'Reply' %>
+                </a>
+            <% end %>
+        <% else %>
+            <div id="comment-<%=comment.id%>-replies-container" class="comment-replies">
+            </div>
+        <% end %>
     </div>
 </div>

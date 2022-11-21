@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @posts = Post.posts_for current_user
+    @posts = Post.posts_for(current_user).includes :user
   end
 
   def show
@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 
     return redirect_to_root_with_flash('Post not found.') if @post.nil?
 
-    @comments = @post.comments.includes(:user, :likes, :comments)
+    @comments = @post.comments.includes :user, :likes, :comments
     @comment = Comment.new
     
     render layout: 'basic'

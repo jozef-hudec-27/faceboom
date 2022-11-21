@@ -16,7 +16,7 @@
         <%= render 'post_actions_wrapper', post: @post %>
 
         <div class="post-comments-wrapper">
-            <% @post.comments.each do |comment| %>
+            <% @comments.each do |comment| %>
                 <%= render 'comments/comment', comment: comment %>
             <% end %>
         </div>

@@ -3,7 +3,10 @@
 .comment {
     display: flex;
     gap: 8px;
-    margin-bottom: 8px;
+
+    a:hover {
+        text-decoration: underline;
+    }
     
     img {
         width: 32px;
@@ -43,12 +46,12 @@
         a {
             font-weight: 500;
             color: rgb(74, 74, 74);
-
-            &:hover {
-                text-decoration: underline;
-            }
         }
     }
+}
+
+.comment-replies {
+    margin-top: 16px;
 }
 
 .post-comment-input-wrapper {

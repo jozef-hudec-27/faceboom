@@ -32,6 +32,7 @@ class CommentsController < ApplicationController
 
   def index_reply
     @comment = Comment.find_by id: params[:comment_id]
+    @replies = @comment.comments.includes :user, :likes, :comments
     return redirect_to_root_with_flash('Comment not found.') if @comment.nil?
   end
 

@@ -3,11 +3,11 @@
 <h2>By <%= @comment.user.full_name %></h2>
 <p><%= @comment.body %></p>
 
-<p><%= @comment.comments.count %> replies</p>
+<p><%= @replies.count %> replies</p>
 
 <%= turbo_frame_tag "comment-#{@comment.id}-replies" do  %>
     <div id="comment-<%=@comment.id%>-replies-container" class="comment-replies">
-        <% @comment.comments.each do |reply| %>
+        <% @replies.each do |reply| %>
             <div class="reply">
                 <%= render 'comment', comment: reply %>
             </div>
