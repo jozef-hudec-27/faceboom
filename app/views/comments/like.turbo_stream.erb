@@ -1,0 +1,20 @@
+<% if @comment.likes.count > 1%>
+    <%= turbo_stream.update "comment-#{@comment.id}-likes-count", @comment.likes.count %>
+<% elsif @comment.likes.count == 1 %>
+    <%= turbo_stream.update("comment-#{@comment.id}-likes-count-wrapper", "
+        <i class='fa-solid fa-heart tooltip'>
+            <span id='comment-#{@comment.id}-likes-count' class='tooltiptext'>#{@comment.likes.count}</span>
+        </i>
+        ")
+    %>
+<% else %>
+    <%= turbo_stream.update "comment-#{@comment.id}-likes-count-wrapper", "" %>
+<% end %>
+
+<%= turbo_stream.update "comment-#{@comment.id}-like-link-wrapper", "
+    <a href='#{like_comment_path @comment}' data-turbo-method='post'
+        style='#{@comment.liked_by?(current_user) ? 'color: rgb(24,119,242);' : ''}'
+    >
+        Like
+    </a>"
+%>

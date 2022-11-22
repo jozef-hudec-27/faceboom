@@ -9,15 +9,24 @@
 
             <p><%= comment.body %></p>
 
-            <% if comment.likes.any? %>
-                <i class="fa-solid fa-heart tooltip">
-                    <span class="tooltiptext"><%= comment.likes.count %></span>
-                </i>
-            <% end %>
+            <div id="comment-<%= comment.id %>-likes-count-wrapper">
+                <% if comment.likes.any? %>
+                    <i class="fa-solid fa-heart tooltip">
+                        <span id="comment-<%= comment.id %>-likes-count" class="tooltiptext"><%= comment.likes.count %></span>
+                    </i>
+                <% end %>
+            </div>
         </div>
 
         <div class="comment-actions">
-            <a href="">Like</a>
+            <div id="comment-<%= comment.id %>-like-link-wrapper">
+                <a href="<%= like_comment_path comment %>" data-turbo-method="post"
+                style="<% if comment.liked_by? current_user %>color: rgb(24,119,242);<% end %>"
+                >
+                    Like
+                </a>
+            </div>
+
             <a href="">Reply</a>
             <p><%= comment.time_since short: true, approx: true %></p>
         </div>

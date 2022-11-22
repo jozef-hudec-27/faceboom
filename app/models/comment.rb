@@ -12,6 +12,10 @@ class Comment < ApplicationRecord
 
   default_scope { order('created_at desc') }
 
+  def liked_by?(user)
+    likes.where(user: user).exists?
+  end
+
   def root_post
     if commentable_type == 'Post'
       return commentable

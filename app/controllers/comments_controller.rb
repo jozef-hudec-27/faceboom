@@ -37,20 +37,20 @@ class CommentsController < ApplicationController
   end
 
   def like
-    comment = Comment.find_by id: params[:id]
+    @comment = Comment.find_by id: params[:id]
 
-    return if comment.nil?
+    return if @comment.nil?
 
-    like = Like.where(likeable: comment, user: current_user).first
+    like = Like.where(likeable: @comment, user: current_user).first
 
     if like
       like.destroy
     else
-      Like.create likeable: comment, user: current_user
+      Like.create likeable: @comment, user: current_user
     end
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.update("comment-#{comment.id}-like-link", "#{comment.likes.count} likes") }
+      format.turbo_stream
     end
   end
 end
