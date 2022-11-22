@@ -101,6 +101,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .post-comments-wrapper {
@@ -110,4 +111,15 @@
 .post-page-wrapper {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr 2fr;
+
+    .back-btn {
+        position: fixed;
+        left: 24px;
+        top: 16px;
+
+        i {
+            color: white;
+            font-size: 1.2em;
+        }
+    }
 }

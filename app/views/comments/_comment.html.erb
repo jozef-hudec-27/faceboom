@@ -4,14 +4,14 @@
     </a>
 
     <div class="flexbox flex-column">
-        <div class="comment-bubble" style="position: relative;">
+        <div class="comment-bubble">
             <a href="<%= user_path comment.user %>"><%= comment.user.full_name %></a>
 
             <p><%= comment.body %></p>
 
             <% if comment.likes.any? %>
                 <i class="fa-solid fa-heart tooltip">
-                    <span class="tooltiptext" style="width: 40px; margin-left: -25px;"><%= comment.likes.count %></span>
+                    <span class="tooltiptext"><%= comment.likes.count %></span>
                 </i>
             <% end %>
         </div>
@@ -24,8 +24,7 @@
 
         <% if comment.comments.any? %>
             <%= turbo_frame_tag "comment-#{comment.id}-replies" do %>
-                <a id="comment-<%= comment.id %>-replies-link" href="<%= comment_replies_path comment %>"
-                   style="margin-left: 12px; font-size: 0.9em; color: rgb(74,74,74); font-weight: 500;"
+                <a id="comment-<%= comment.id %>-replies-link" class="comment-replies-link" href="<%= comment_replies_path comment %>"
                 >
                     <%= pluralize comment.comments.count, 'Reply' %>
                 </a>
@@ -36,3 +35,4 @@
         <% end %>
     </div>
 </div>
+

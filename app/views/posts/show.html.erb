@@ -1,6 +1,6 @@
 <div class="post-page-wrapper">
-    <a href="javascript:history.back()" style="position: fixed; left: 24px; top: 16px;">
-        <i class="fa-solid fa-xmark" style="color: white; font-size: 1.2em;"></i>
+    <a class="back-btn" href="javascript:history.back()">
+        <i class="fa-solid fa-xmark"></i>
     </a>
 
     <div></div>
@@ -12,13 +12,15 @@
     <div></div>
 
     <div class="post-sidebar">
-        <%= render 'post_info', post: @post %>
-        <%= render 'post_actions_wrapper', post: @post %>
+        <div class="scrollable full-height">
+            <%= render 'post_info', post: @post %>
+            <%= render 'post_actions_wrapper', post: @post %>
 
-        <div class="post-comments-wrapper">
-            <% @comments.each do |comment| %>
-                <%= render 'comments/comment', comment: comment %>
-            <% end %>
+            <div class="post-comments-wrapper">
+                <% @comments.each do |comment| %>
+                    <%= render 'comments/comment', comment: comment %>
+                <% end %>
+            </div>
         </div>
 
         <div class="post-comment-input-wrapper">

@@ -3,14 +3,18 @@
 .comment {
     display: flex;
     gap: 8px;
+    min-width: 340px;
+    margin-right: 16px;
 
     a:hover {
         text-decoration: underline;
     }
     
     img {
-        width: 32px;
-        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        max-width: 32px;
+        max-height: 32px;
         border-radius: 50%;
     }
 
@@ -20,6 +24,8 @@
         background-color: rgb(240, 242, 245);
         padding: 8px 12px;
         border-radius: 16px;
+        width: fit-content;
+        position: relative;
 
         a {
             font-weight: 500;
@@ -34,6 +40,11 @@
             position: absolute;
             right: -0.5em;
             bottom: -1em;
+
+            .tooltiptext {
+                width: 40px;
+                margin-left: -25px;
+            }
         }
     }
 
@@ -55,17 +66,23 @@
 }
 
 .post-comment-input-wrapper {
-    margin-top: auto;
-    margin-bottom: 12px;
+    margin: auto;
     width: 90%;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding-left: 12px;
+    padding: 12px 0;
 
     img {
         width: 32px;
         height: 32px;
         border-radius: 50%;
     }
+}
+
+.comment-replies-link {
+    margin-left: 12px;
+    font-size: 0.9em;
+    color: rgb(74, 74, 74);
+    font-weight: 500;
 }
