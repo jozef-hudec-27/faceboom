@@ -47,14 +47,6 @@
 }
 
 .post-actions-wrapper {
-    hr {
-        margin: auto;
-        margin-bottom: -6px;
-        margin-top: 6px;
-        width: 95%;
-        background-color: darken($bg-color, 5%);
-    }
-
     .post-actions {
         padding: 12px;
         display: flex;
@@ -122,4 +114,12 @@
             font-size: 1.2em;
         }
     }
+}
+
+.post-sidebar hr, .post-actions-wrapper hr {
+    margin: auto;
+    margin-bottom: -6px;
+    margin-top: 6px;
+    width: 95%;
+    background-color: darken($bg-color, 5%);
 }

@@ -1,7 +1,5 @@
 <div class="comment">
-    <a href="<%= user_path comment.user %>">
-        <%= image_tag comment.user.avatar %>
-    </a>
+    <a style="height: 32px;" href="<%= user_path comment.user %>"><%= image_tag comment.user.avatar %></a>
 
     <div class="flexbox flex-column">
         <div class="comment-bubble">

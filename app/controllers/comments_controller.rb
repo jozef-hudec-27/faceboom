@@ -11,14 +11,10 @@ class CommentsController < ApplicationController
     
     respond_to do |format|
       if @comment.save
-        if @original_comment_id.nil?
-          format.turbo_stream { render turbo_stream: turbo_stream.append('post-comments', @comment) }
-        else
-          format.turbo_stream
-        end
+        format.turbo_stream
       else
         invalid_comment_msg_style = 'font-size: 0.6em; opacity: 0.7; margin-left: 8px;'
-        format.turbo_stream { render turbo_stream: turbo_stream.update(@original_comment_id ? "#{@original_comment_id}-invalid-reply-msg-wrapper" : 'new-post-comment-input',
+        format.turbo_stream { render turbo_stream: turbo_stream.update(@original_comment_id ? "#{@original_comment_id}-invalid-reply-msg-wrapper" : 'invalid-post-comment-msg-wrapper',
                             "<p style='#{invalid_comment_msg_style}'>Invalid comment!</p>") }
       end
     end

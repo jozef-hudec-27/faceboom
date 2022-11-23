@@ -65,7 +65,7 @@
     margin-top: 16px;
 }
 
-.post-comment-input-wrapper {
+.post-comment-form-wrapper {
     margin: auto;
     width: 90%;
     display: flex;
@@ -77,6 +77,14 @@
         width: 32px;
         height: 32px;
         border-radius: 50%;
+    }
+
+    input[type="text"] {
+        background-color: rgb(240,242,245);
+        border: none;
+        outline: none;
+        box-shadow: none;
+        height: 35px;
     }
 }
 
@@ -107,7 +115,9 @@
         width: 24px;
         height: 24px;
     }
+}
 
+.comment-reply-form-wrapper, .post-comment-form-wrapper {
     input[type="submit"] {
         appearance: none;
         background-color: white;

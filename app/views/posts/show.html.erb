@@ -15,17 +15,26 @@
         <div class="scrollable full-height">
             <%= render 'post_info', post: @post %>
             <%= render 'post_actions_wrapper', post: @post %>
+            <hr style="margin: 0 auto;">
 
-            <div class="post-comments-wrapper">
+            <div class="post-comments-wrapper" id="post-comments">
                 <% @comments.each do |comment| %>
                     <%= render 'comments/comment', comment: comment %>
                 <% end %>
             </div>
         </div>
 
-        <div class="post-comment-input-wrapper">
-            <%= image_tag current_user.avatar %>
-            <input type="text" class="input is-rounded" placeholder="Write a comment...">
+        <div class="post-comment-form-wrapper" data-controller="comment">
+            <a href="<%= user_path current_user %>"><%= image_tag current_user.avatar %></a>
+
+            <%= form_with model: @comment, url: post_comments_path(@post), id: 'post-comment-form' do |f| %>
+                <div id="invalid-post-comment-msg-wrapper"></div>
+
+                <%= f.text_field :body, id: 'new-post-comment-input', class: 'input is-rounded', placeholder: 'Write a comment...', data: { comment_target: 'input' } %>
+                <%= f.hidden_field :body_copy, name: 'comment[body]', data: { comment_target: 'inputHidden' } %>
+            <% end %>
+
+            <input type="submit" value="Comment" form="post-comment-form" data-action="comment#submit">
         </div>
     </div>
 </div>
