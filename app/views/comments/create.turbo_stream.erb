@@ -1,2 +1,3 @@
 <%= turbo_stream.append("comment-#{@original_comment_id}-replies-container", @comment) %>
-<%= turbo_stream.update("comment-#{@original_comment_id}-replies-link", "#{@comment.commentable.comments.count} replies") %>
+<%= turbo_stream.update("comment-#{@original_comment_id}-replies-link", pluralize(@comment.commentable.comments.count, 'Reply')) %>
+<%= turbo_stream.update("#{@original_comment_id}-invalid-reply-msg-wrapper", '') %>

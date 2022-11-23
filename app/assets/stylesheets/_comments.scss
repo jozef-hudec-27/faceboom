@@ -86,3 +86,45 @@
     color: rgb(74, 74, 74);
     font-weight: 500;
 }
+
+.comment-reply-form-wrapper {
+    margin: 6px 0 0 12px;
+    display: flex;
+    gap: 4px;
+
+    textarea {
+        appearance: none;
+        border: none;
+        outline: none;
+        background-color: rgb(240, 242, 245);
+        padding: 10px 12px;
+        border-radius: 16px;
+        min-width: 100px;
+        min-height: 25px;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+
+    input[type="submit"] {
+        appearance: none;
+        background-color: white;
+        border: 2px solid darken($bg-color, 20%);
+        color: darken($bg-color, 20%);
+        font-weight: 500;
+        border-radius: 9999px;
+        padding: 4px 12px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(251, 251, 251);
+        }
+
+        &:active {
+            transform: scale(0.98);
+            background-color: $bg-color;
+        }
+    }
+}

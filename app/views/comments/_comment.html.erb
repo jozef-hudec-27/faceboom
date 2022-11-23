@@ -27,9 +27,12 @@
                 </a>
             </div>
 
-            <a href="">Reply</a>
+            <a href="<%= comment_reply_path comment %>" data-turbo-frame="comment-<%= comment.id %>-reply-form">Reply</a>
+
             <p><%= comment.time_since short: true, approx: true %></p>
         </div>
+
+        <%= turbo_frame_tag "comment-#{comment.id}-reply-form" do %><% end %>
 
         <% if comment.comments.any? %>
             <%= turbo_frame_tag "comment-#{comment.id}-replies" do %>

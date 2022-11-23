@@ -17,7 +17,9 @@ class CommentsController < ApplicationController
           format.turbo_stream
         end
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.before(@original_comment_id ? "comment-#{@original_comment_id}-reply-input" : 'new-post-comment-input', '<p>Invalid comment!</p>') }
+        invalid_comment_msg_style = 'font-size: 0.6em; opacity: 0.7; margin-left: 8px;'
+        format.turbo_stream { render turbo_stream: turbo_stream.update(@original_comment_id ? "#{@original_comment_id}-invalid-reply-msg-wrapper" : 'new-post-comment-input',
+                            "<p style='#{invalid_comment_msg_style}'>Invalid comment!</p>") }
       end
     end
   end
