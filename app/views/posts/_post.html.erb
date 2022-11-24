@@ -5,5 +5,9 @@
         <%= image_tag post.image&.attached? ? post.image : '' %>
     </a>
 
-    <%= render 'post_actions_wrapper', post: post %>
+    <%= render 'post_actions_wrapper', post: post, disable_comment_btn: false %>
+
+    <div class="scrollable">
+        <%= turbo_frame_tag "post-#{post.id}-comments" do %><% end %>
+    </div>
 </div>

@@ -1,0 +1,9 @@
+<div class="post">
+    <%= turbo_frame_tag "post-#{@post.id}-comments" do %>
+        <hr style="margin: 0 auto;">
+
+        <%= render 'posts/post_comment_form', comment: @comment, post: @post %>
+
+        <%= render 'posts/post_comments', comments: @comments %>
+    <% end %>
+</div>

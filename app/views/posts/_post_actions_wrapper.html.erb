@@ -5,22 +5,24 @@
             <span id="post-<%= post.id %>-like-count"><%= post.likes.count %></span>
         </p>
 
-        <a href="" style="margin-right: 12px;"><%= post.comments.count %> comments</a>
+        <a href="<% unless disable_comment_btn %><%= post_comments_path post %><% end %>" data-turbo-frame="post-<%= post.id %>-comments" style="margin-right: 12px;"><%= post.comments.count %> comments</a>
     </div>
 
     <hr>
 
     <div class="post-actions">
-        <a id="post-<%= post.id %>-like-wrapper" href="<%= like_post_path post %>" data-turbo-method="post" style="text-decoration: none;">
+        <a id="post-<%= post.id %>-like-wrapper" href="<%= like_post_path post %>" data-turbo-method="post">
             <button class="post-actions-like" tabindex="-1" style="<% if post.liked_by? current_user %>color: rgb(24,119,242);<% end %>">
                 <i class="fa-<% if post.liked_by? current_user %>solid<% else %>regular<% end %> fa-heart"></i>
                 <p>Like</p>
             </button>
         </a>
-
-        <button class="post-actions-comment" tabindex="-1">
-            <i class="fa-regular fa-message"></i>
-            <p>Comment</p>
-        </button>
+        
+        <a href="<% unless disable_comment_btn %><%= post_comments_path post %><% end %>" data-turbo-frame="post-<%= post.id %>-comments">
+            <button class="post-actions-comment" tabindex="-1">
+                <i class="fa-regular fa-message"></i>
+                <p>Comment</p>
+            </button>
+        </a>
     </div>
 </div>

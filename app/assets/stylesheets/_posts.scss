@@ -51,6 +51,10 @@
         padding: 12px;
         display: flex;
         justify-content: center;
+
+        a {
+            text-decoration: none;
+        }
         
         &-like, &-comment {
             display: flex;
@@ -116,7 +120,7 @@
     }
 }
 
-.post-sidebar hr, .post-actions-wrapper hr {
+.post-sidebar hr, .post-actions-wrapper hr, .post hr {
     margin: auto;
     margin-bottom: -6px;
     margin-top: 6px;

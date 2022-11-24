@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'errors/not_found'
-  get 'errors/internal_server_error'
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
     passwords: 'users/passwords',
@@ -21,7 +19,7 @@ Rails.application.routes.draw do
   resources :posts do
     post 'like', on: :member
 
-    resources :comments, shallow: true, only: [:create, :edit, :destroy] do
+    resources :comments, shallow: true, only: [:create, :edit, :destroy, :index] do
       post 'like', on: :member
     end
   end

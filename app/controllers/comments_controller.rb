@@ -1,6 +1,12 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @post = Post.find_by id: params[:post_id]
+    @comments = @post.comments
+    @comment =  Comment.new
+  end
+
   def create
     @original_comment_id = params[:comment_id]
 
