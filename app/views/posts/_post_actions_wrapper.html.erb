@@ -5,7 +5,9 @@
             <span id="post-<%= post.id %>-like-count"><%= post.likes.count %></span>
         </p>
 
-        <a href="<% unless disable_comment_btn %><%= post_comments_path post %><% end %>" data-turbo-frame="post-<%= post.id %>-comments" style="margin-right: 12px;"><%= post.comments.count %> comments</a>
+        <a href="<% unless disable_comment_btn %><%= post_comments_path post %><% end %>" data-turbo-frame="post-<%= post.id %>-comments" style="margin-right: 12px;">
+            <%= pluralize post.comments.count, 'comment' %>
+        </a>
     </div>
 
     <hr>

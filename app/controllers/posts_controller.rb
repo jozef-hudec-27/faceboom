@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @posts = Post.posts_for(current_user).includes :user
+    @posts = Post.posts_for(current_user).page(params[:page] || 1).includes(:user)
   end
 
   def show

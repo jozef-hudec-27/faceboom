@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  paginates_per 3
+  
   validates :body, presence: { message: "or image must be given." }, unless: ->(post) { post.image.present? }
   validates :image, presence: { message: "or body must be given." }, unless: ->(post) { post.body.present? }
 
@@ -16,5 +18,18 @@ class Post < ApplicationRecord
 
   def liked_by?(user)
     likes.where(user: user).exists?
+  end
+
+  def all_comments_count(post_comments = nil)
+    post_comments = comments if post_comments.nil?
+    q = post_comments.to_a
+    count = 0
+
+    until q.empty?
+      count += 1
+      q += q.shift.comments.to_a
+    end
+
+    count
   end
 end
