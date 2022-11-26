@@ -1,5 +1,5 @@
 <div class="post-comment-form-wrapper" data-controller="comment">
-    <a href="<%= user_path current_user %>"><%= image_tag current_user.avatar %></a>
+    <%= render 'users/avatar_link', user: current_user, size: '32px' %>
 
     <div style="flex: 1;">
         <%= form_with model: comment, url: post_comments_path(post), id: 'post-comment-form' do |f| %>

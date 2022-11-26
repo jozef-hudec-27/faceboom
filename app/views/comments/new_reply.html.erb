@@ -5,9 +5,7 @@
 
 <%= turbo_frame_tag "comment-#{@original_comment.id}-reply-form" do %>
     <div class="comment-reply-form-wrapper">
-        <a href="<%= user_path current_user %>">
-            <%= image_tag current_user.avatar %>
-        </a>
+        <%= render 'users/avatar_link', user: current_user, size: '24px' %>
         
         <div>
             <div id="<%= @original_comment.id %>-invalid-reply-msg-wrapper"></div>

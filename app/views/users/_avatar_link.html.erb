@@ -1,3 +1,10 @@
-<a href="<%= user_path user %>">
-    <%= image_tag user.avatar, style: 'width: 40px; height: 40px; border-radius: 50%;' %>
+<% size = size || '40px' %>
+
+<a href="<%= user_path user %>" style="height: <%= size %>; width: <%= size %>;">
+    <%= image_tag user.avatar, class: 'hover-shadow', style: "
+        width: #{size};
+        height: #{size};
+        border-radius: 50%;
+        "
+    %>
 </a>
