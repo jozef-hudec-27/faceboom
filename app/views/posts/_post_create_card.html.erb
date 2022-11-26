@@ -1,0 +1,35 @@
+<div class="post-create-card card">
+    <%= render 'users/avatar_link', user: current_user %>
+
+    <input type="text" class="input is-rounded" placeholder="What's on your mind, <%= current_user.first_name %>?">
+</div>
+
+<div class="modal is-active post-create-modal">
+    <div class="modal-background"></div>
+
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Create post</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+
+        <section class="modal-card-body">
+            <div class="flexbox flex-align-center" style="gap: 6px;">
+                <%= render 'users/avatar_link', user: current_user %>
+                <a href="<%= user_path current_user %>"><%= current_user.full_name %></a>
+            </div>
+
+            <textarea name="" id="" placeholder="What's on your mind, <%= current_user.first_name %>?"></textarea>
+        </section>
+
+        <footer class="modal-card-foot">
+            <div class="flexbox space-between flex-align-center full-width">
+                <p>Add to your post</p>
+
+                <i class="fa-regular fa-image"></i>
+            </div>
+
+            <button>Post</button>
+        </footer>
+    </div>
+</div>

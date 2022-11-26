@@ -1,5 +1,7 @@
 <div class="home-page-wrapper">
     <div class="posts">
+        <%= render 'post_create_card' %>
+
         <% @posts.each do |post| %>
             <%= render 'post', post: post %>
         <% end %>

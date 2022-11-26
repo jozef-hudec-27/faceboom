@@ -64,3 +64,18 @@ body {
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
+
+.card {
+    @extend .post;
+}
+
+.modal {
+    &-background {
+        background-color: rgba(240, 240, 240, 0.75);
+    }
+
+    &-card {
+        box-shadow: 0 0 12px 7px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+    }
+}
