@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['imageField', 'bodyField', 'postButton', 'pickedFile', 'imageFieldCopy', 'bodyFieldCopy']
+  static targets = ['imageField', 'bodyField', 'postButton', 'pickedFile', 'imageFieldCopy', 'bodyFieldCopy', 'inpBodyField']
 
   toggleImagePicker() {
     this.imageFieldTarget.click()
@@ -29,5 +29,9 @@ export default class extends Controller {
 
     this.imageFieldCopyTarget.value = this.imageFieldTarget.value
     this.imageFieldTarget.value = null
+  }
+
+  copyBody() {
+    this.inpBodyFieldTarget.value = this.bodyFieldTarget.value.slice()
   }
 }

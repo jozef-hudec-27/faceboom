@@ -1,15 +1,15 @@
-<div data-controller="modal">
+<div data-controller="modal post-create-modal">
     <div class="post-create-card card">
         <div class="flexbox" style="gap: 8px;">
             <%= render 'users/avatar_link', user: current_user %>
             
             <input type="text" class="input is-rounded" placeholder="What's on your mind, <%= current_user.first_name %>?"
-                data-action="click->modal#showModal" readonly>
+                data-action="click->modal#showModal" data-post-create-modal-target="inpBodyField" readonly>
         </div>
 
         <hr>
 
-        <button data-action="click->modal#showModal">
+        <button data-action="modal#showModal">
             <i class="fa-regular fa-image"></i>
             <p>Photo</p>
         </button>
@@ -18,10 +18,10 @@
     <div class="modal post-create-modal" data-modal-target="modal">
         <div class="modal-background"></div>
 
-        <div class="modal-card" data-controller="post-create-modal">
+        <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Create post</p>
-                <button class="delete" aria-label="close" data-action="modal#hideModal"></button>
+                <button class="delete" aria-label="close" data-action="post-create-modal#copyBody modal#hideModal"></button>
             </header>
 
             <section class="modal-card-body">
@@ -54,7 +54,7 @@
                 
                 <section id="post-create-btn-wrapper" class="full-width">
                     <button type="submit" form="create-post-form" data-post-create-modal-target="postButton"
-                    data-action="modal#hideModal post-create-modal#resetForm" disabled>Post</button>
+                    data-action="modal#hideModal post-create-modal#resetForm post-create-modal#copyBody" disabled>Post</button>
                 </section>
             </footer>
         </div>

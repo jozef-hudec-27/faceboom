@@ -1,13 +1,15 @@
 <div class="home-page-wrapper">
-    <div id="posts" class="posts">
+    <div class="flexbox flex-column flex-align-center">
         <% if @first_page %>
             <%= render 'post_create_card' %>
         <% end %>
 
-        <% @posts.each do |post| %>
-            <%= render 'post', post: post %>
-        <% end %>
-
+        <div id="posts" class="posts">
+            <% @posts.each do |post| %>
+                <%= render 'post', post: post %>
+            <% end %>
+        </div>
+        
         <%= paginate @posts, window: 2 %>
     </div>
 
