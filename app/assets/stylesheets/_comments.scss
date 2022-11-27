@@ -7,6 +7,20 @@
     min-width: 340px;
     margin-right: 16px;
 
+    &-delete-btn {
+        opacity: 0;
+        height: fit-content;
+        align-self: center;
+        margin-right: 12px;
+
+        .dropdown-trigger { @extend %ellipsis-dropdown-trigger; }
+        .dropdown-item { @extend %ellipsis-dropdown-item; }
+    }
+
+    &:hover &-delete-btn {
+        opacity: 1;
+    }
+
     a:hover {
         text-decoration: underline;
     }

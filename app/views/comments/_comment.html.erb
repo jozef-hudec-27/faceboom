@@ -1,19 +1,39 @@
-<div class="comment">
+<div id="comment-<%= comment.id %>" class="comment">
     <%= render 'users/avatar_link', user: comment.user, size: '32px' %>
 
     <div class="flexbox flex-column">
-        <div class="comment-bubble">
-            <a href="<%= user_path comment.user %>"><%= comment.user.full_name %></a>
+        <div class="flexbox flex-align-center" style="gap: 12px;">
+            <div class="comment-bubble">
+                <a href="<%= user_path comment.user %>"><%= comment.user.full_name %></a>
 
-            <p><%= comment.body %></p>
+                <p><%= comment.body %></p>
 
-            <div id="comment-<%= comment.id %>-likes-count-wrapper">
-                <% if comment.likes.any? %>
-                    <i class="fa-solid fa-heart tooltip">
-                        <span id="comment-<%= comment.id %>-likes-count" class="tooltiptext"><%= comment.likes.count %></span>
-                    </i>
-                <% end %>
+                <div id="comment-<%= comment.id %>-likes-count-wrapper">
+                    <% if comment.likes.any? %>
+                        <i class="fa-solid fa-heart tooltip">
+                            <span id="comment-<%= comment.id %>-likes-count" class="tooltiptext"><%= comment.likes.count %></span>
+                        </i>
+                    <% end %>
+                </div>
             </div>
+            
+            <% if comment.user == current_user %>
+                <div class="dropdown is-hoverable comment-delete-btn is-right">
+                    <div class="dropdown-trigger">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <span><i class="fa-solid fa-ellipsis"></i></span>
+                        </button>
+                    </div>
+
+                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                            <a href="<%= comment_path comment %>" class="dropdown-item" data-turbo-method="delete">
+                                <i class="fa-solid fa-trash-can"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
         </div>
 
         <div class="comment-actions">
@@ -45,4 +65,3 @@
         <% end %>
     </div>
 </div>
-

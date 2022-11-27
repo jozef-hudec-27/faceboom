@@ -40,3 +40,31 @@
     border: none;
     outline: none;
 }
+
+%ellipsis-dropdown-trigger {
+    height: 20px;
+    width: 20px;
+
+    button {
+        height: 20px;
+        width: 20px;
+        border: none;
+        padding: 0;
+
+        &:focus { outline: 1px solid black; }
+
+        i {
+            font-size: 1.3em;
+            color: rgb(101, 103, 107);
+        }
+    }
+}
+
+%ellipsis-dropdown-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-weight: normal !important;
+
+    &:hover { text-decoration: none; }
+}

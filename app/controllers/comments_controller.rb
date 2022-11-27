@@ -26,6 +26,18 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    comment = current_user.comments.find_by id: params[:id]
+
+    return redirect_to_root_with_flash("You don't have permission to do this.") if comment.nil?
+
+    comment.destroy
+    
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("comment-#{comment.id}") }
+    end
+  end
+
   def new_reply
     @original_comment = Comment.find_by id: params[:comment_id]
 

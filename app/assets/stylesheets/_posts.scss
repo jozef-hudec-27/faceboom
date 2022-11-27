@@ -37,33 +37,8 @@
     }
 
     .dropdown {
-        &-trigger {
-            height: 20px;
-            width: 20px;
-
-            button {
-                height: 20px;
-                width: 20px;
-                border: none;
-                padding: 0;
-    
-                &:focus { outline: 1px solid black; }
-    
-                i {
-                    font-size: 1.3em;
-                    color: rgb(101, 103, 107);
-                }
-            }
-        }
-
-        &-item {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-
-            &:hover { text-decoration: none; }
-        }
-
+        &-trigger { @extend %ellipsis-dropdown-trigger; }
+        &-item { @extend %ellipsis-dropdown-item; }
     }
 }
 
