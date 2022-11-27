@@ -1,14 +1,24 @@
 <div data-controller="modal">
     <div class="post-create-card card">
-        <%= render 'users/avatar_link', user: current_user %>
-        
-        <input type="text" class="input is-rounded" placeholder="What's on your mind, <%= current_user.first_name %>?" data-action="click->modal#showModal">
+        <div class="flexbox" style="gap: 8px;">
+            <%= render 'users/avatar_link', user: current_user %>
+            
+            <input type="text" class="input is-rounded" placeholder="What's on your mind, <%= current_user.first_name %>?"
+                data-action="click->modal#showModal" readonly>
+        </div>
+
+        <hr>
+
+        <button data-action="click->modal#showModal">
+            <i class="fa-regular fa-image"></i>
+            <p>Photo</p>
+        </button>
     </div>
 
     <div class="modal post-create-modal" data-modal-target="modal">
         <div class="modal-background"></div>
 
-        <div class="modal-card">
+        <div class="modal-card" data-controller="post-create-modal">
             <header class="modal-card-head">
                 <p class="modal-card-title">Create post</p>
                 <button class="delete" aria-label="close" data-action="modal#hideModal"></button>
@@ -20,17 +30,32 @@
                     <a href="<%= user_path current_user %>"><%= current_user.full_name %></a>
                 </div>
 
-                <textarea name="" id="" placeholder="What's on your mind, <%= current_user.first_name %>?"></textarea>
+                <%= form_with model: Post.new, id: 'create-post-form' do |f| %>
+                    <%= f.text_area :body, placeholder: "What's on your mind, #{current_user.first_name}?", 
+                        data: { post_create_modal_target: 'bodyField', action: 'post-create-modal#changeBody' }
+                    %>
+                    <%= f.hidden_field :body_copy, name: 'post[body]', data: { post_create_modal_target: 'bodyFieldCopy' } %>
+
+                    <%= f.file_field :image, hidden: true,
+                        data: { post_create_modal_target: 'imageField', action: 'post-create-modal#displayPickedFile' }
+                    %>
+                    <%= f.file_field :imageCopy, name: 'post[image]', hidden: true, data: { post_create_modal_target: 'imageFieldCopy' } %>
+                <% end %>
             </section>
 
             <footer class="modal-card-foot">
+                <p id="picked-image-wrapper" class="picked-image-wrapper" data-post-create-modal-target="pickedFile"></p>
+
                 <div class="flexbox space-between flex-align-center full-width">
                     <p>Add to your post</p>
 
-                    <i class="fa-regular fa-image"></i>
+                    <i class="fa-regular fa-image" data-action="click->post-create-modal#toggleImagePicker"></i>
                 </div>
-
-                <button>Post</button>
+                
+                <section id="post-create-btn-wrapper" class="full-width">
+                    <button type="submit" form="create-post-form" data-post-create-modal-target="postButton"
+                    data-action="modal#hideModal post-create-modal#resetForm" disabled>Post</button>
+                </section>
             </footer>
         </div>
     </div>

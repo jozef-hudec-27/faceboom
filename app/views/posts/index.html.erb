@@ -1,6 +1,8 @@
 <div class="home-page-wrapper">
-    <div class="posts">
-        <%= render 'post_create_card' %>
+    <div id="posts" class="posts">
+        <% if @first_page %>
+            <%= render 'post_create_card' %>
+        <% end %>
 
         <% @posts.each do |post| %>
             <%= render 'post', post: post %>

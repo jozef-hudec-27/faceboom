@@ -54,30 +54,30 @@
             color: rgb(101, 103, 107);
         }
     
-        button {
-            @extend %reset-appearance;
-            background-color: white;
-            cursor: pointer;
-            padding: 8px 32px;
-            border-radius: 8px;
-            font-size: 1.1em;
-            
-            p {
-                color: inherit;
-            }
-    
-            &:hover {
-                background-color: rgb(242, 242, 242);
-            }
-    
-            &:active {
-                background-color: rgb(232, 232, 232);
-            }
-        }
-    
         button.post-actions-like:active {
             transform: scale(0.98);
         }
+    }
+}
+
+.post-actions button, .post-create-card button {
+    @extend %reset-appearance;
+    background-color: white;
+    cursor: pointer;
+    padding: 8px 32px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    
+    p {
+        color: inherit;
+    }
+
+    &:hover {
+        background-color: rgb(242, 242, 242);
+    }
+
+    &:active {
+        background-color: rgb(232, 232, 232);
     }
 }
 
@@ -120,9 +120,19 @@
 .post-create-card {
     padding: 8px 20px;
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 10px;
     margin-bottom: 64px;
     min-height: 96px;
+
+    hr {
+        margin: auto;
+        width: 100%;
+    }
+
+    i {
+        color: rgb(69, 189, 98);
+    }
 
     input {
         background-color: $bg-color;
@@ -132,7 +142,7 @@
 
         &:hover { background-color: rgb(225, 227, 229); }
 
-        &:focus {
+        &:active {
             box-shadow: none;
             background-color: rgb(215, 217, 219);
         }
@@ -141,6 +151,15 @@
             font-weight: 300;
             color: $dark-color;
         }
+    }
+
+    button {
+        color: rgb(101, 103, 107);
+        gap: 8px;
+        width: 33%;
+        display: flex;
+        align-items: center;
+        margin-left: auto;
     }
 }
 
@@ -191,6 +210,7 @@
         i {
             color: rgb(69, 189, 98);
             font-size: 1.5em;
+            cursor: pointer;
         }
 
         button {
@@ -207,9 +227,17 @@
                 background-color: rgb(26, 110, 216);
             }
 
-            &:focus {
+            &:active {
                 transform: scale(0.98);
             }
+        }
+
+        button[disabled] {
+            background-color: rgb(228, 230,235);
+            color: rgb(188, 192, 196);
+            cursor: not-allowed;
+
+            &:active { transform: none; }
         }
     }
 }

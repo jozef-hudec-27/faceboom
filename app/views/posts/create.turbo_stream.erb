@@ -1,0 +1,9 @@
+<%= turbo_stream.prepend('posts', @post) %>
+
+<%= turbo_stream.update('post-create-btn-wrapper', '
+    <button type="submit" form="create-post-form" data-post-create-modal-target="postButton"
+    data-action="modal#hideModal post-create-modal#resetForm" disabled>Post</button>
+') 
+%>
+
+<%= turbo_stream.update('picked-image-wrapper', '') %>

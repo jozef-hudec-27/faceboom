@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.posts_for(current_user).page(params[:page] || 1).includes(:user)
+    @first_page = params[:page].nil? || params[:page] == '1'
   end
 
   def show
@@ -21,12 +22,17 @@ class PostsController < ApplicationController
   end
 
   def create
+    params[:post] = params[:post].except(:image) if params[:post][:image] == ""
+
     @post = current_user.posts.build post_params
 
-    if @post.save
-      redirect_to @post
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @post.save
+        format.turbo_stream
+      else
+        flash[:alert] = 'Post must have at least body or image!'
+        format.html { redirect_to root_path }
+      end
     end
   end
 
