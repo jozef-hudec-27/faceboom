@@ -13,7 +13,7 @@
 
     <div class="post-sidebar">
         <div class="scrollable full-height">
-            <%= render 'post_info', post: @post %>
+            <%= render 'post_info', post: @post, is_detail: true %>
             <%= render 'post_actions_wrapper', post: @post, disable_comment_btn: true %>
             
             <%= turbo_frame_tag "post-#{@post.id}-comments" do %>

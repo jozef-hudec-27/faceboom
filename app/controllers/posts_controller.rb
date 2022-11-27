@@ -17,10 +17,6 @@ class PostsController < ApplicationController
     render layout: 'basic'
   end
 
-  def new
-    @post = Post.new
-  end
-
   def create
     params[:post] = params[:post].except(:image) if params[:post][:image] == ""
 
@@ -32,6 +28,23 @@ class PostsController < ApplicationController
       else
         flash[:alert] = 'Post must have at least body or image!'
         format.html { redirect_to root_path }
+      end
+    end
+  end
+
+  def destroy
+    post = current_user.posts.find_by id: params[:id]
+
+    return redirect_to_root_with_flash("You don't have permission to do this.") if post.nil?
+
+    post.destroy
+
+    respond_to do |format|
+      if request.referer&.include? post_path(post) # we came from post detail page
+        flash[:notice] = 'Successfully deleted post.'
+        format.html { redirect_to root_path }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("post-#{post.id}") }
       end
     end
   end
