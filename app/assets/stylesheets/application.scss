@@ -77,5 +77,18 @@ body {
     &-card {
         box-shadow: 0 0 12px 7px rgba(0, 0, 0, 0.1);
         border-radius: 12px;
+        max-width: 500px;
+
+        &-head, &-foot {
+            background-color: white;
+            text-align: center;
+    
+            p {
+                font-weight: 600;
+                color: rgb(54, 54, 54);
+            }
+        }
+
+        &-foot { border: none; }
     }
 }

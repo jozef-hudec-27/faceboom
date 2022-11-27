@@ -10,7 +10,7 @@
         </div>
         
         <% if post.user == current_user %>
-            <div class="dropdown is-hoverable <% if is_detail %>is-right<% end %>" style="margin-left: auto;">
+            <div class="dropdown is-hoverable <% if is_detail %>is-right<% end %>" data-controller="modal" style="margin-left: auto;">
                 <div class="dropdown-trigger">
                     <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                         <span><i class="fa-solid fa-ellipsis"></i></span>
@@ -19,11 +19,13 @@
 
                 <div class="dropdown-menu" id="dropdown-menu" role="menu">
                     <div class="dropdown-content">
-                        <a href="<%= post_path post %>" class="dropdown-item" data-turbo-method="delete">
+                        <a class="dropdown-item" data-action="modal#showModal">
                             <i class="fa-solid fa-trash-can"></i> Delete
                         </a>
                     </div>
                 </div>
+
+                <%= render 'post_delete_confirm_modal', post: post %>
             </div>
         <% end %>
     </div>
