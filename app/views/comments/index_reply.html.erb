@@ -9,7 +9,7 @@
     <div id="comment-<%=@comment.id%>-replies-container" class="comment-replies">
         <% @replies.each do |reply| %>
             <div class="reply">
-                <%= render 'comment', comment: reply %>
+                <%= render 'comments/comment', comment: reply %>
             </div>
         <% end %>
     </div>

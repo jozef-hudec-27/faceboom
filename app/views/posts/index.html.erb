@@ -1,12 +1,12 @@
 <div class="home-page-wrapper">
     <div class="flexbox flex-column flex-align-center">
         <% if @first_page %>
-            <%= render 'post_create_card' %>
+            <%= render 'posts/post_create_card' %>
         <% end %>
 
         <div id="posts" class="posts">
             <% @posts.each do |post| %>
-                <%= render 'post', post: post %>
+                <%= render 'posts/post', post: post %>
             <% end %>
         </div>
         

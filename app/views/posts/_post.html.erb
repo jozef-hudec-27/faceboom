@@ -1,11 +1,11 @@
 <div class="post" id="post-<%= post.id %>">
-    <%= render 'post_info', post: post %>
+    <%= render 'posts/post_info', post: post %>
     
     <a href="<%= post_path post %>">
         <%= image_tag post.image&.attached? ? post.image : '' %>
     </a>
 
-    <%= render 'post_actions_wrapper', post: post, disable_comment_btn: false %>
+    <%= render 'posts/post_actions_wrapper', post: post, disable_comment_btn: false %>
 
     <div class="scrollable">
         <%= turbo_frame_tag "post-#{post.id}-comments" do %><% end %>

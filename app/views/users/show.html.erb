@@ -26,15 +26,56 @@
             </div>
 
             <div id="posts-section-container" data-tabs-target="tabContainer">
-                USER POSTS
+                <%= render 'posts/post_create_card' if @user == current_user %>
+
+                <div id="posts">
+                    <%= render(partial: "posts/post", collection: @user.posts) || 'User has no posts.' %>
+                </div>
             </div>
 
             <div id="about-section-container" data-tabs-target="tabContainer" hidden>
-                ABOUT USER
+                <div class="flexbox flex-column card" style="gap: 16px; padding: 12px;">
+                    <div>
+                        <p>First name: <strong><%= @user.first_name %></strong></p>
+                    </div>
+                    
+                    <div>
+                        <p>Last name: <strong><%= @user.last_name %></strong></p>
+                    </div>
+
+                    <div>
+                        <p>Username:
+                            <% if @user.username.empty? %>
+                                <i>No username set</i>
+                            <% else %>
+                                <strong><%= @user.username.empty? ? 'No username' : @user.username %></strong>
+                            <% end %>
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>BIO:<br>
+                            <% if @user.bio.empty? %>
+                                <i>No BIO available</i>
+                            <% else %>
+                                <textarea name="" id="" cols="30" rows="10" readonly><%= @user.bio %></textarea>
+                            <% end %>
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <div id="friends-section-container" data-tabs-target="tabContainer" hidden>
-                USER FRIENDS
+                <div class="card">
+                    <div class="user-friends-wrapper">
+                        <% @user.friends.each do |friend| %>
+                            <div class="friend">
+                                <%= image_tag friend.avatar %>
+                                <a href="<%= user_path friend %>"><%= friend.full_name %></a>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

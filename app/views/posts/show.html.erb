@@ -13,15 +13,15 @@
 
     <div class="post-sidebar">
         <div class="scrollable full-height">
-            <%= render 'post_info', post: @post, is_detail: true %>
-            <%= render 'post_actions_wrapper', post: @post, disable_comment_btn: true %>
+            <%= render 'posts/post_info', post: @post, is_detail: true %>
+            <%= render 'posts/post_actions_wrapper', post: @post, disable_comment_btn: true %>
             
             <%= turbo_frame_tag "post-#{@post.id}-comments" do %>
                 <hr style="margin: 0 auto;">
-                <%= render 'post_comments', comments: @comments %>
+                <%= render 'posts/post_comments', comments: @comments %>
             <% end %>
         </div>
         
-        <%= render 'post_comment_form', comment: @comment, post: @post %>
+        <%= render 'posts/post_comment_form', comment: @comment, post: @post %>
     </div>
 </div>
