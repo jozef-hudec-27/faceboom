@@ -1,36 +1,43 @@
-<h1>User detail page</h1>
+<div class="user-page-wrapper">
+    <div></div>
 
-<%= image_tag @user.avatar, style: 'border-radius: 50%; width: 64px; height: 64px;' %>
+    <div>
+        <div class="flexbox flex-align-center" style="gap: 16px;">
+            <%= image_tag @user.avatar, style: 'border-radius: 50%; width: 176px; height: 176px;' %>
+            
+            <div class="flexbox flex-column">
+                <h2><%= @user.full_name %> <% if @user.username != '' %><span style="font-size: 0.8em;">(<%= @user.username %>)</span><% end %></h2>
+                <p><%= pluralize @user.friends.count, 'friend' %></p>
+            </div>
 
-<h2><%= @user.full_name %> <% if @user.username != '' %><span style="font-size: 0.8em;">(<%= @user.username %>)</span><% end %></h2>
-<p><%= @user.bio %></p> 
-
-<% if @is_self %>
-    <%= link_to 'Edit profile', edit_user_registration_path %>
-<% else %>
-    <form id="profile-action-form" action="<%= @profile_action_data[:url] %>" method="post">
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <input type="hidden" name="id" value="<%=@profile_action_data[:obj_id]%>" />
-    </form>
-
-    <input type="submit" name="commit" form="profile-action-form" value="<%=@profile_action_data[:submit_text]%>">
-
-    <% if @friend_request_status == 2 %>
-        <form id="profile-action-form-reject-request" action="<%= friend_request_reject_path %>" method="post">
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-            <input type="hidden" name="id" value="<%=@profile_action_data[:obj_id]%>" />
-        </form>
-
-        <input type="submit" name="commit" form="profile-action-form-reject-request" value="Reject request">
-    <% end %>
-<% end %>
-
-<h3><%= @user.full_name %>'s posts </h3>
-<% @user.posts.each do |post| %>
-    <a href="<%= post_path(post) %>">
-        <div class="post">
-            <p><%= post.body %></p>
-            <% if post.image&.attached? %><%= image_tag post.image, style: 'width: 300px;' %><% end %>
+            <button style="margin-left: auto;">Action</button>
         </div>
-    </a>
-<% end %>
+
+        <div data-controller="tabs">
+            <div class="tabs is-centered is-small is-fullwidth">
+                <ul>
+                    <li class="is-active"><a data-tabs-target="tabButton" data-action="tabs#changeTab"
+                        data-container-id="posts-section-container">Posts</a></li>
+                    <li><a data-tabs-target="tabButton" data-action="tabs#changeTab"
+                        data-container-id="about-section-container">About</a></li>
+                    <li><a data-tabs-target="tabButton" data-action="tabs#changeTab"
+                        data-container-id="friends-section-container">Friends</a></li>
+                </ul>
+            </div>
+
+            <div id="posts-section-container" data-tabs-target="tabContainer">
+                USER POSTS
+            </div>
+
+            <div id="about-section-container" data-tabs-target="tabContainer" hidden>
+                ABOUT USER
+            </div>
+
+            <div id="friends-section-container" data-tabs-target="tabContainer" hidden>
+                USER FRIENDS
+            </div>
+        </div>
+    </div>
+
+    <div></div>
+</div>
