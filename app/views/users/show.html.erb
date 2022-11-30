@@ -2,16 +2,18 @@
     <div></div>
 
     <div>
-        <div class="flexbox flex-align-center" style="gap: 16px;">
-            <%= image_tag @user.avatar, style: 'border-radius: 50%; width: 176px; height: 176px;' %>
+        <div class="user-badge" style="gap: 16px;">
+            <%= image_tag @user.avatar, class: 'hover-shadow' %>
             
             <div class="flexbox flex-column">
-                <h2><%= @user.full_name %> <% if @user.username != '' %><span style="font-size: 0.8em;">(<%= @user.username %>)</span><% end %></h2>
+                <h2><%= @user.full_name %> <% if @user.username != '' %><span style="font-size: 0.5em;">(<%= @user.username %>)</span><% end %></h2>
                 <p><%= pluralize @user.friends.count, 'friend' %></p>
             </div>
 
-            <button style="margin-left: auto;">Action</button>
+            <button>Action</button>
         </div>
+
+        <hr>
 
         <div data-controller="tabs">
             <div class="tabs is-centered is-small is-fullwidth">

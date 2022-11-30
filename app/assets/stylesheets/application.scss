@@ -93,3 +93,36 @@ body {
         &-foot { border: none; }
     }
 }
+
+.tabs {
+    ul {
+        border: none;
+
+        li a {
+            font-weight: 600;
+            font-size: 1.15em;
+            border: none;
+            color: rgb(101, 103, 107);
+            border-radius: 4px;
+    
+            &:hover {
+                background-color: darken($bg-color, 4%);
+                color: rgb(101, 103, 107);
+            }
+    
+            &:active {
+                background-color: darken($bg-color, 7%);
+            }
+        }
+    
+        li.is-active a {
+            color: rgb(24, 118, 242);
+            border-bottom: 4px solid rgb(24, 118, 242);
+            border-radius: 0;
+    
+            &:hover {
+                background-color: $bg-color;
+            }
+        }
+    }
+}
