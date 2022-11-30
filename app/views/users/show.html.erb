@@ -35,8 +35,10 @@
                 </div>
             </div>
 
-            <div id="about-section-container" data-tabs-target="tabContainer" hidden>
+            <div id="about-section-container" data-tabs-target="tabContainer" hidden>                
                 <div class="flexbox flex-column card" style="gap: 16px; padding: 12px;">
+                    <h2 style="font-weight: 500; font-size: 1.4em;">About</h2>
+
                     <div>
                         <p>First name: <strong><%= @user.first_name %></strong></p>
                     </div>
@@ -68,12 +70,36 @@
             </div>
 
             <div id="friends-section-container" data-tabs-target="tabContainer" hidden>
-                <div class="card">
+                <div class="card full-width">
+                    <h2 style="font-weight: 500; font-size: 1.4em; margin-left: 12px; margin-top: 12px;">Friends</h2>
+
                     <div class="user-friends-wrapper">
                         <% @user.friends.each do |friend| %>
                             <div class="friend">
-                                <%= image_tag friend.avatar %>
+                                <a href="<%= user_path friend %>">
+                                    <%= image_tag friend.avatar %>
+                                </a>
+
                                 <a href="<%= user_path friend %>"><%= friend.full_name %></a>
+                                
+                                <% if current_user.friends_with? friend %>
+                                    <div class="dropdown is-hoverable">
+                                        <div class="dropdown-trigger">
+                                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                                <span><i class="fa-solid fa-ellipsis"></i></span>
+                                            </button>
+                                        </div>
+
+                                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                            <div class="dropdown-content">
+                                                <a href="" class="dropdown-item" data-turbo-method="delete">
+                                                    <i class="fa-regular fa-circle-xmark"></i></i> Unfriend
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% else %>
+                                <% end %>
                             </div>
                         <% end %>
                     </div>
