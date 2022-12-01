@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     return redirect_to_root_with_flash('User not found.') if user.nil?
 
     current_user.unfriend user
-    redirect_to user
+    redirect_back fallback_location: user_path(user)
   end
 
   def mail_sent

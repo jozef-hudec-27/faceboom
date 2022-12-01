@@ -13,7 +13,6 @@ class FriendRequestsController < ApplicationController
       if params[:respond_format] == 'turbo-stream'
         format.turbo_stream { render turbo_stream: turbo_stream.remove("user-#{receiver.id}") }
       else
-        flash[:notice] = "Successfully sent friend request to #{receiver.full_name}."
         format.html { redirect_back(fallback_location: user_path(receiver)) }
       end
     end
@@ -21,13 +20,12 @@ class FriendRequestsController < ApplicationController
 
   def cancel
     request = FriendRequest.find_by id: params[:id]
-    receiver = request.receiver
+    sender = request.sender
 
     return redirect_to_root_with_flash('Request not found.') if request.nil?
     
     request.destroy
-    flash[:notice] = "Successfully canceled friend request to #{receiver.full_name}."
-    redirect_back fallback_location: user_path(receiver)
+    redirect_back fallback_location: user_path(sender)
   end
 
   def accept
@@ -48,7 +46,6 @@ class FriendRequestsController < ApplicationController
     return redirect_to_root_with_flash('Request not found.') if request.nil?
 
     request.reject
-    flash[:notice] = "Rejected #{sender.full_name}'s friend request."
     redirect_back fallback_location: user_path(sender)
   end
 end
