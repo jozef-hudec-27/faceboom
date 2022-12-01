@@ -3,24 +3,13 @@
         <%= image_tag friend.avatar %>
     </a>
 
-    <a href="<%= user_path friend %>"><%= friend.full_name %></a>
-    
-    <% if current_user.friends_with? friend %>
-        <div class="dropdown is-hoverable">
-            <div class="dropdown-trigger">
-                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                    <span><i class="fa-solid fa-ellipsis"></i></span>
-                </button>
-            </div>
+    <div class="flexbox flex-column">
+        <a href="<%= user_path friend %>"><%= friend.full_name %></a>
 
-            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                <div class="dropdown-content">
-                    <a href="" class="dropdown-item" data-turbo-method="delete">
-                        <i class="fa-regular fa-circle-xmark"></i></i> Unfriend
-                    </a>
-                </div>
-            </div>
-        </div>
-    <% else %>
-    <% end %>
+        <% if current_user.friends_with?(friend) && !is_self %>
+            <p>Mutual friend</p>
+        <% elsif current_user == friend %>
+            <p>Me</p>
+        <% end %>
+    </div>
 </div>

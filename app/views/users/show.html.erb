@@ -77,7 +77,7 @@
                     <h2 style="font-weight: 500; font-size: 1.4em; margin-left: 12px; margin-top: 12px;">Friends</h2>
 
                     <div class="user-friends-wrapper">
-                        <%= render(partial: 'friend', collection: @user.friends) || 'User has no friends.' %>
+                        <%= render(partial: 'friend', collection: @user.friends, locals: { is_self: @is_self }) || 'User has no friends.' %>
                     </div>
                 </div>
             </div>
