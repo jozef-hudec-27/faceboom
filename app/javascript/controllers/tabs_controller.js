@@ -15,9 +15,9 @@ export default class extends Controller {
 
     this.tabContainerTargets.forEach(container => {
       if (container.id != tabContainerId) {
-        container.hidden = true
+        container.classList.add('hidden')
       } else {
-        container.hidden = false
+        container.classList.remove('hidden')
       }
     })
   }

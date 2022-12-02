@@ -35,6 +35,10 @@
     box-shadow: 0 0 5px 5px rgb(240, 242, 245);
 }
 
+.hidden {
+    display: none !important;
+}
+
 %reset-appearance {
     appearance: none;
     border: none;

@@ -21,7 +21,7 @@
         <% end %>
     </div>
 
-    <div id="unread-notifications-container" data-tabs-target="tabContainer" hidden>
+    <div id="unread-notifications-container" class="hidden" data-tabs-target="tabContainer">
         <% if unread_notifications.any? %>
             <% unread_notifications.each do |notification| %>
                 <%= render 'notifications/notification', notification: notification %>
