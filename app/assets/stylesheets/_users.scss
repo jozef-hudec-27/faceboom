@@ -39,6 +39,27 @@
     }
 }
 
+.user-edit-page-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .field { width: 100%; }
+
+    input[type="submit"] {
+        @extend %reset-appearance;
+
+        background-color: white;
+        color: rgb(24, 119, 242);
+        cursor: pointer;
+        padding: 12px 8px;
+        border-radius: 4px;
+
+        &:hover { background-color: rgb(242, 242, 242); }
+
+        &:active { background-color: rgb(232, 232, 232); }
+    }
+}
+
 .user-friends-wrapper {
     display: flex;
     flex-wrap: wrap;
