@@ -93,3 +93,14 @@ body {
         &-foot { border: none; }
     }
 }
+
+.field_with_errors > * {
+    border-color: rgb(241, 70, 104);
+
+    &:hover { border-color: rgb(241, 70, 104); }
+
+    &:active, &:focus {
+        box-shadow: 0 0 0 0.125em rgba(241, 70, 104, 0.251);
+        border-color: rgb(241, 70, 104);
+    }
+}
