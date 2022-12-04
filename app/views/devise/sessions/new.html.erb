@@ -1,7 +1,8 @@
 <div class="login-page-wrapper">
-    <div>
-        FACEBOOM
-        faceboom brings you closer to people you love
+    <div class="page-slogan-wrapper">
+        <h2 class="faceboom-logo">faceboom</h2>
+
+        <p>Faceboom brings you closer to <br> the people you love.</p>
     </div>
 
     <div class="card" data-turbo="false">
@@ -35,7 +36,9 @@
         <% end %>
 
         <div class="forgot-password-link-wrapper" data-turbo="true">
-            <%= link_to 'Forgot your password?', new_password_path(resource_name) %>
+            <%= link_to 'Forgot your password?', new_password_path(resource_name) %> <span>•</span>
+            <%= link_to 'Resend unlock insturctions', new_unlock_path(resource_name) %> <span>•</span>
+            <%= link_to 'Resend confirm mail', new_confirmation_path(resource_name) %>
         </div>
 
         <hr>

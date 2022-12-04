@@ -66,9 +66,23 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    height: 80vh;
+
+    .page-slogan-wrapper {
+        display: flex;
+        flex-direction: column;
+        
+        h2 { font-size: 3.5em; }
+
+        p {
+            font-size: 1.5em;
+            color: $dark-color;
+        }
+    }
 
     > .card {
         padding: 16px;
+        width: 29%;
 
         input::placeholder { color: lighten($dark-color, 25%); }
 
@@ -103,6 +117,11 @@
             margin: 12px 0;
 
             a { color: rgb(24, 119, 242); }
+
+            span {
+                font-size: 0.7em;
+                color: darken($bg-color, 33%);
+            }
         }
 
         .create-account-link-wrapper {
