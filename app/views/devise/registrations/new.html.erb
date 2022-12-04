@@ -1,39 +1,70 @@
-<h2>Sign up</h2>
+<div class="register-page-wrapper">
+    <h2 class="faceboom-logo">faceboom</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="card" data-turbo="false">
+        <div class="flexbox flex-column">
+            <h1 class="page-heading">Create a new account</h1>
+            <p class="page-subtitle">It's quick and easy.</p>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <hr>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first-name" %>
-  </div>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+            
+            <div class="flexbox" style="gap: 4px;">
+                <div class="field">
+                    <%= f.label :first_name %>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last-name" %>
-  </div>
+                    <div class="control">
+                        <%= f.text_field :first_name, autofocus: true, autocomplete: 'first-name', class: 'input', placeholder: 'First name' %>
+                    </div>
+                </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+                <div class="field">
+                    <%= f.label :last_name %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+                    <div class="control">
+                        <%= f.text_field :last_name, autocomplete: 'last-name', class: 'input', placeholder: 'Last name' %>
+                    </div>
+                </div>
+            </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+            <div class="field">
+                <%= f.label :email %>
 
-<%= render "devise/shared/links" %>
+                <div class="control">
+                    <%= f.email_field :email, autocomplete: 'email', class: 'input', placeholder: 'E-mail' %>
+                </div>
+            </div>
+
+            <div class="field">
+                <%= f.label :password %>
+
+                <div class="control">
+                    <%= f.password_field :password, autocomplete: 'new-password', class: 'input', placeholder: 'Password' %>
+                </div>
+            </div>
+
+            <div class="field">
+                <%= f.label :password_confirmation %>
+
+                <div class="control">
+                    <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'input', placeholder: 'Password confirmation' %>
+                </div>
+
+                <% if @minimum_password_length %>
+                    <p class="help">
+                        <%= @minimum_password_length %> characters minimum
+                    </p>
+                <% end %>
+            </div>
+
+            <div class="sign-up-btn-wrapper">
+                <%= f.submit 'Sign up' %>
+
+                <a href="<%= new_user_session_path %>" data-turbo="true">Already have an account?</a>
+            </div>
+        <% end %>
+    </div>
+</div>

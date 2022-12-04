@@ -72,3 +72,16 @@
 
     &:hover { text-decoration: none; }
 }
+
+.green-btn {
+    @extend %reset-appearance;
+
+    color: white;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: rgb(66, 183, 42);
+    text-decoration: none;
+}

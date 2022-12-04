@@ -130,17 +130,59 @@
 
             button { margin-top: 16px; }
 
-            a {
-                @extend %reset-appearance;
+            a { @extend .green-btn; }
+        }
+    }
+}
 
-                color: white;
-                font-weight: 500;
-                font-size: 1em;
-                padding: 12px 16px;
-                border-radius: 8px;
-                cursor: pointer;
-                background-color: rgb(66, 183, 42);
-                text-decoration: none;
+.register-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    .faceboom-logo {
+        font-size: 3.5em;
+    }
+
+    .page-heading {
+        text-align: center;
+
+        + .page-subtitle { text-align: center; }
+    }
+
+    hr {
+        margin: 12px auto;
+        width: 100%;
+    }
+
+    > .card {
+        padding: 16px;
+        width: 29%;
+
+        input::placeholder { color: lighten($dark-color, 25%); }
+
+        label {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .sign-up-btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+
+            a { color: rgb(24, 119, 242); }
+
+            input {
+                @extend .green-btn;
+    
+                padding: 6px 64px;
+
+                &:hover { background-color: rgb(56, 173, 32); }
+    
+                &:active, &:focus { transform: translate(0, 2px); }
             }
         }
     }
