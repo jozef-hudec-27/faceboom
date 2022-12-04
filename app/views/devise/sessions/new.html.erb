@@ -44,7 +44,11 @@
         <hr>
 
         <div class="create-account-link-wrapper" data-turbo="true">
-            <%= link_to 'Create new account', new_registration_path(resource_name) %>
+            <div>
+                <%= link_to 'Create new account', new_registration_path(resource_name) %>
+
+                <%= render 'shared/fb_social_btn' %>
+            </div>
         </div>
     </div>
 </div>
