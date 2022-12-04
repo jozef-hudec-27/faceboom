@@ -1,5 +1,5 @@
 <div class="user-edit-page-wrapper">
-    <div class="card" style="padding: 16px;" data-turbo="false">
+    <div class="card" data-turbo="false">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
 
