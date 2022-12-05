@@ -8,7 +8,7 @@
             <%= render "devise/shared/error_messages", resource: resource %>
 
             <div class="flexbox flex-column gap-16" style="padding: 6px 0;">
-                <p class="dark-color">Please enter your email address to resend instructions.</p>
+                <p class="dark-color">Please enter your email address to send instructions to reset your password.</p>
 
                 <div class="field">
                     <%= f.label :email %>
@@ -22,7 +22,7 @@
             <hr>
             
             <div class="flexbox flex-justify-end gap-8">
-                <%= link_to 'Cancel', :back %>
+                <%= link_to 'Cancel', new_user_session_path, data: { turbo: true } %>
                 <%= f.submit 'Send' %>
             </div>
         <% end %>
