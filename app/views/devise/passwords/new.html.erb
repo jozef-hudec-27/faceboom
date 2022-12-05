@@ -1,18 +1,30 @@
-<h2>Forgot your password?</h2>
+<div class="forgot-password-page-wrapper">
+    <div class="card" data-turbo="false">
+        <h1 class="page-heading">Send reset password instructions</h1>
 
-<div data-turbo="false">
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+        <hr>
 
-    <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="flexbox flex-column gap-16" style="padding: 6px 0;">
+                <p class="dark-color">Please enter your email address to resend instructions.</p>
+
+                <div class="field">
+                    <%= f.label :email %>
+
+                    <div class="control">
+                        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'input', placeholder: 'E-mail' %>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            
+            <div class="flexbox flex-justify-end gap-8">
+                <%= link_to 'Cancel', :back %>
+                <%= f.submit 'Send' %>
+            </div>
+        <% end %>
     </div>
-
-    <div class="actions">
-        <%= f.submit "Send me reset password instructions" %>
-    </div>
-    <% end %>
 </div>
-
-<%= render "devise/shared/links" %>
