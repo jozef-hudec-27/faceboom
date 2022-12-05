@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :posts, except: :new do
     post 'like', on: :member
 
-    resources :comments, shallow: true, only: [:create, :edit, :destroy, :index] do
+    resources :comments, shallow: true, only: [:create, :destroy, :index] do
       post 'like', on: :member
     end
   end
