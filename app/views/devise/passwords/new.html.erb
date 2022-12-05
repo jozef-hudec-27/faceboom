@@ -1,30 +1,4 @@
-<div class="forgot-password-page-wrapper">
-    <div class="card" data-turbo="false">
-        <h1 class="page-heading">Send reset password instructions</h1>
-
-        <hr>
-
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-            <%= render "devise/shared/error_messages", resource: resource %>
-
-            <div class="flexbox flex-column gap-16" style="padding: 6px 0;">
-                <p class="dark-color">Please enter your email address to send instructions to reset your password.</p>
-
-                <div class="field">
-                    <%= f.label :email %>
-
-                    <div class="control">
-                        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'input', placeholder: 'E-mail' %>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-            
-            <div class="flexbox flex-justify-end gap-8">
-                <%= link_to 'Cancel', new_user_session_path, data: { turbo: true } %>
-                <%= f.submit 'Send' %>
-            </div>
-        <% end %>
-    </div>
-</div>
+<% content_for :class do %>forgot-password<% end %>
+<% content_for :heading do %>Send reset password instructions<% end %>
+<% content_for :path do %><%= password_path resource_name %><% end %>
+<% content_for :message do %>Please enter your email address to send instructions to reset your password.<% end %>

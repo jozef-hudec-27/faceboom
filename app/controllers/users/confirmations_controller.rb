@@ -3,6 +3,7 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
   def new
     super
+    render layout: 'instructions_page'
   end
 
   def create
@@ -12,7 +13,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if successfully_sent?(resource)
       respond_with({}, location: after_resending_confirmation_instructions_path_for(resource))
     else
-      respond_with resource
+      render :new, layout: 'instructions_page'
     end
   end
 
