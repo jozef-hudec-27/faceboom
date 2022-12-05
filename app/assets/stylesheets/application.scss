@@ -121,3 +121,7 @@ body {
     color: rgb(96, 103, 112);
     font-size: 15px;
 }
+
+#notice, #alert { width: fit-content; }
+#notice { border: 1px solid #296fa8; }
+#alert { border: 1px solid #cc0f35; }

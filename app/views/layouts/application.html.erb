@@ -14,8 +14,21 @@
     <% if user_signed_in? %><%= render 'shared/navbar' %><% end %>
 
     <div style="padding: 16px;">
-        <p class="notice" id="notice"><%= notice %></p>
-        <p class="alert" id="alert"><%= alert %></p>
+        <% if notice%>
+            <div id="notice" class="notification is-info is-light" data-controller="notification"
+            data-notification-target="container">
+                <button class="delete" data-action="notification#hideNotification"></button>
+                <%= notice %>
+            </div>
+        <% end %>
+
+        <% if alert %>
+            <div id="alert" class="notification is-danger is-light" data-controller="notification"
+            data-notification-target="container">
+                <button class="delete" data-action="notification#hideNotification"></button>
+                <%= alert %>
+            </div>
+        <% end %>
         
         <%= yield %>
     </div>
