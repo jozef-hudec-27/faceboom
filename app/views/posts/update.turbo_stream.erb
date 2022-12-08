@@ -1,0 +1,7 @@
+<%= turbo_stream.update("post-#{@post.id}-body-wrapper", "<p>#{@post.body}</p>") %>
+
+<%= turbo_stream.update("post-#{@post.id}-edit-btn-wrapper","
+    <button type='submit' form='edit-post-form' data-post-edit-modal-target='editButton'
+    data-action='modal#hideModal post-edit-modal#updateOriginalAttributes'  data-mdl='post-edit-modal' disabled>Edit</button>
+")
+%>

@@ -168,7 +168,7 @@
     }
 }
 
-.post-create-modal {
+.post-create-modal, .post-edit-modal {
     textarea {
         @extend %reset-appearance;
         min-width: 90%;

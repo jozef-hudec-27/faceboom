@@ -19,18 +19,24 @@
 
                 <div class="dropdown-menu" id="dropdown-menu" role="menu">
                     <div class="dropdown-content">
-                        <a class="dropdown-item" data-action="modal#showModal">
+                        <a class="dropdown-item" data-action="modal#showModal" data-mdl="post-delete-confirm-modal">
                             <i class="fa-solid fa-trash-can"></i> Delete
+                        </a>
+
+
+                        <a class="dropdown-item" data-action="modal#showModal" data-mdl="post-edit-modal">
+                            <i class="fa-solid fa-pen"></i> Edit
                         </a>
                     </div>
                 </div>
 
                 <%= render 'posts/post_delete_confirm_modal', post: post %>
+                <%= render 'posts/post_edit_modal', post: post %>
             </div>
         <% end %>
     </div>
 
-    <div class="post-body-wrapper">
+    <div id="post-<%= post.id %>-body-wrapper" class="post-body-wrapper">
         <p><%= post.body %></p>
     </div>
 </div>

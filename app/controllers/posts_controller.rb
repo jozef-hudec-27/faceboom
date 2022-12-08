@@ -49,6 +49,21 @@ class PostsController < ApplicationController
     end
   end
 
+  def update
+    @post = current_user.posts.find_by id: params[:id]
+
+    return redirect_to_root_with_flash("You don't have permissions to do this.") if @post.nil?
+
+    respond_to do |format|
+      if @post.update(body: params.dig(:post)&.dig(:body))
+        format.turbo_stream
+      else
+        flash[:alert] = "Could not edit post."
+        redirect_to root_path
+      end
+    end
+  end
+
   def like
     @post = Post.find_by id: params[:id]
 
