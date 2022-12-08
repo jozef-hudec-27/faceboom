@@ -1,4 +1,6 @@
-class PostsController < ApplicationController
+class PostsController < ApplicationController  
+  include ActiveStorage::SetCurrent
+  
   before_action :authenticate_user!
 
   def index
@@ -53,14 +55,17 @@ class PostsController < ApplicationController
     @post = current_user.posts.find_by id: params[:id]
 
     return redirect_to_root_with_flash("You don't have permissions to do this.") if @post.nil?
+    return redirect_to_root_with_flash('Invalid action.') if params[:post].nil?
+
+    @post.image.attach(params[:post][:image]) unless params[:post][:image].nil?
 
     respond_to do |format|
-      if @post.update(body: params.dig(:post)&.dig(:body))
-        format.turbo_stream
-      else
-        flash[:alert] = "Could not edit post."
-        redirect_to root_path
-      end
+        if @post.update(body: params[:post][:body])
+          format.turbo_stream
+        else
+          flash[:alert] = "Could not edit post."
+          redirect_to root_path
+        end
     end
   end
 

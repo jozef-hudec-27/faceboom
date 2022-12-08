@@ -5,3 +5,5 @@
     data-action='modal#hideModal post-edit-modal#updateOriginalAttributes'  data-mdl='post-edit-modal' disabled>Edit</button>
 ")
 %>
+
+<%= turbo_stream.update("post-#{@post.id}-image-wrapper", "<img src='#{@post.image.url}'>") %>

@@ -14,7 +14,7 @@
                 <a href="<%= user_path current_user %>"><%= current_user.full_name %></a>
             </div>
 
-            <%= form_with model: post, id: 'edit-post-form' do |f| %>
+            <%= form_with model: post, id: "edit-post-#{post.id}-form" do |f| %>
                 <%= f.text_area :body, placeholder: "What's on your mind, #{current_user.first_name}?", 
                     data: { post_edit_modal_target: 'bodyField', action: 'post-edit-modal#changeBody' }
                 %>
@@ -39,7 +39,7 @@
             </div>
             
             <section id="post-<%= post.id %>-edit-btn-wrapper" class="full-width">
-                <button type="submit" form="edit-post-form" data-post-edit-modal-target="editButton"
+                <button type="submit" form="edit-post-<%= post.id %>-form" data-post-edit-modal-target="editButton"
                 data-action="modal#hideModal post-edit-modal#updateOriginalAttributes"  data-mdl="post-edit-modal" disabled>Edit</button>
             </section>
         </footer>

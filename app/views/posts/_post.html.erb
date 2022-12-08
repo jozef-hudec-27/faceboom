@@ -1,7 +1,7 @@
 <div class="post" id="post-<%= post.id %>">
     <%= render 'posts/post_info', post: post %>
     
-    <a href="<%= post_path post %>">
+    <a id="post-<%= post.id %>-image-wrapper" href="<%= post_path post %>">
         <%= image_tag post.image&.attached? ? post.image : '' %>
     </a>
 

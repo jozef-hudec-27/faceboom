@@ -12,7 +12,7 @@ export default class extends Controller {
     let validBody = (body) => body.split(' ').some(word => !!word) && body != this.originalBody
     let postBody = e.target.value 
 
-    if (validBody(postBody) || (this.pickedFileTarget.textContent.trim() && this.pickedFileTarget.textContent.trim() != 'Current post image')) {
+    if (validBody(postBody) || (this.pickedFileTarget.textContent.trim())) {
       this.editButtonTarget.disabled = false
     } else {
       this.editButtonTarget.disabled = true

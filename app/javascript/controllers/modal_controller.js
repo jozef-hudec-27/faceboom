@@ -8,7 +8,7 @@ export default class extends Controller {
       return this.modalTarget
     }
 
-    return this.modalTargets.find(m => m.id == caller.dataset.mdl || caller.parentNode.dataset.mdl)
+    return this.modalTargets.find(m => m.id == (caller.dataset.mdl || caller.parentNode.dataset.mdl))
   }
 
   showModal(e) {
