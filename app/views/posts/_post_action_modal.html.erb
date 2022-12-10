@@ -1,0 +1,79 @@
+<div id="post-<%= action %>-modal"
+     class="modal post-<%= action %>-modal"
+     data-modal-target="modal"
+     <% if action == 'edit' %>data-controller="post-edit-modal"<% end %>
+>
+    <div class="modal-background"></div>
+
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title"><%= action.capitalize %> post</p>
+
+            <button class="delete"
+                    aria-label="close"
+                    data-action="modal#hideModal <%= action == 'edit' ? 'post-edit-modal#resetForm post-edit-modal#disableSubmitButton' : 'post-create-modal#copyBody' %>"
+                    <% if action == 'edit' %>data-mdl="post-edit-modal"<% end %>
+            >
+            </button>
+        </header>
+
+        <section class="modal-card-body">
+            <div class="flexbox flex-align-center" style="gap: 6px;">
+                <%= render 'users/avatar_link', user: current_user %>
+                <a href="<%= user_path current_user %>"><%= current_user.full_name %></a>
+            </div>
+            
+            <% if action == 'edit' %>
+                <%= form_with model: post, id: "edit-post-#{post.id}-form" do |f| %>
+                    <%= f.text_area :body, placeholder: "What's on your mind, #{current_user.first_name}?", 
+                        data: { post_edit_modal_target: 'body', action: 'post-edit-modal#changeBody' }
+                    %>
+
+                    <%= f.file_field :image, hidden: true,
+                        data: { post_edit_modal_target: 'image', action: 'post-edit-modal#changeFilePreview' }
+                    %>
+                <% end %>
+            <% elsif action == 'create' %>
+                <%= form_with model: Post.new, id: 'create-post-form' do |f| %>
+                    <%= f.text_area :body, placeholder: "What's on your mind, #{current_user.first_name}?", 
+                        data: { post_create_modal_target: 'body', action: 'post-create-modal#changeBody' }
+                    %>
+                    <%= f.hidden_field :body_copy, name: 'post[body]', data: { post_create_modal_target: 'bodyCopy' } %>
+
+                    <%= f.file_field :image, hidden: true,
+                        data: { post_create_modal_target: 'image', action: 'post-create-modal#changeFilePreview' }
+                    %>
+                    <%= f.file_field :imageCopy, name: 'post[image]', hidden: true, data: { post_create_modal_target: 'imageCopy' } %>
+                <% end %>
+            <% end %>
+        </section>
+
+        <footer class="modal-card-foot">
+            <p id="picked-image-wrapper" class="picked-image-wrapper" data-post-<%= action %>-modal-target="filePreview">
+                <% if action == 'edit' && post.image.attached? %>
+                    Current post image
+                <% end %>
+            </p>
+
+            <div class="flexbox space-between flex-align-center full-width">
+                <p>Add to your post</p>
+
+                <i class="fa-regular fa-image" data-action="click->post-<%= action %>-modal#toggleImagePicker"></i>
+            </div>
+            
+            
+            <section id="<%= action == 'edit' ? "post-#{post.id}-edit-btn-wrapper" : 'post-create-btn-wrapper' %>"
+                     class="full-width"
+            >
+                <button type="submit"
+                        form="<%= action == 'edit' ? "edit-post-#{post.id}-form" : 'create-post-form' %>" 
+                        data-post-<%= action %>-modal-target="submit"
+                        data-action="modal#hideModal <%= action == 'edit' ? 'post-edit-modal#updateOriginalAttributes' : 'post-create-modal#resetForm post-create-modal#copyBody' %>"
+                        <% if action == 'edit' %>data-mdl="post-edit-modal"<% end %> disabled
+                >
+                    <%= action == 'edit' ? 'Edit' : 'Post' %>
+                </button>
+            </section>
+        </footer>
+    </div>
+</div>

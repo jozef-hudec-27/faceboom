@@ -1,37 +1,45 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['imageField', 'bodyField', 'postButton', 'pickedFile', 'imageFieldCopy', 'bodyFieldCopy', 'inpBodyField']
+  static targets = ['image', 'body', 'submit', 'filePreview', 'imageCopy', 'bodyCopy', 'bodyPreview']
 
   toggleImagePicker() {
-    this.imageFieldTarget.click()
+    this.imageTarget.click()
   }
 
   changeBody(e) {
-    let validBody = (body) => body.split(' ').some(word => !!word)
+    let isValidBody = (body) => body.split(' ').some(word => !!word)
     let postBody = e.target.value 
 
-    if (validBody(postBody) || this.imageFieldTarget.value) {
-      this.postButtonTarget.disabled = false
+    if (isValidBody(postBody) || this.imageTarget.value) {
+      this.enableSubmitButton()
     } else {
-      this.postButtonTarget.disabled = true
+      this.disableSubmitButton()
     }
   }
 
-  displayPickedFile(e) {
-    this.postButtonTarget.disabled = false
-    this.pickedFileTarget.textContent = e.target.value.replace(/.*[\/\\]/, '')
+  changeFilePreview(e) {
+    this.enableSubmitButton()
+    this.filePreviewTarget.textContent = e.target.value.replace(/.*[\/\\]/, '')
   }
 
   resetForm() {
-    this.bodyFieldCopyTarget.value = this.bodyFieldTarget.value.slice()
-    this.bodyFieldTarget.value = ''
+    this.bodyCopyTarget.value = this.bodyTarget.value.slice()
+    this.bodyTarget.value = ''
 
-    this.imageFieldCopyTarget.value = this.imageFieldTarget.value
-    this.imageFieldTarget.value = null
+    this.imageCopyTarget.value = this.imageTarget.value
+    this.imageTarget.value = null
   }
 
   copyBody() {
-    this.inpBodyFieldTarget.value = this.bodyFieldTarget.value.slice()
+    this.bodyPreviewTarget.value = this.bodyTarget.value.slice()
+  }
+
+  disableSubmitButton() {
+    this.submitTarget.disabled = true
+  }
+
+  enableSubmitButton() {
+    this.submitTarget.disabled = false
   }
 }
