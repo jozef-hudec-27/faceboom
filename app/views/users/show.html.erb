@@ -91,10 +91,16 @@
                     <h2 style="margin-left: 12px; margin-top: 12px;">Saved posts</h2>
 
                     <% @user.saved_posts.each do |post| %>
-                        <div class="saved-post card full-width">
-                            <a href="<%= post_path post %>">
-                                <%= image_tag(post.image.attached? ? post.image : post.user.avatar) %>
-                            </a>
+                        <div id="saved-post-<%= post.id %>" class="saved-post card full-width">
+                            <div class="flexbox flex-column gap-4 flex-align-center">
+                                <a href="<%= post_path post %>">
+                                    <%= image_tag(post.image.attached? ? post.image : post.user.avatar) %>
+                                </a>
+
+                                <a href="<%= save_post_path post %>" data-turbo-method="post" style="font-size: 0.7em; color: red; font-weight: normal;">
+                                    <i class="fa-solid fa-xmark"></i> Unsave
+                                </a>
+                            </div>
 
                             <a href="<%= post_path post %>" style="text-align: justify;"><%= post.body %></a>
                         </div>

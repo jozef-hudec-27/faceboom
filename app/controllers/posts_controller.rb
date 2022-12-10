@@ -101,7 +101,11 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      format.turbo_stream
+      if request.referer&.include? user_path(current_user) # we came from user detail page
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("saved-post-#{@post.id}") }
+      else
+        format.turbo_stream
+      end
     end
   end
 
