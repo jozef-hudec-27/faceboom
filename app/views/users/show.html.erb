@@ -27,6 +27,10 @@
                         data-container-id="about-section-container">About</a></li>
                     <li><a data-tabs-target="tabButton" data-action="tabs#changeTab"
                         data-container-id="friends-section-container">Friends</a></li>
+                    <% if @user == current_user %>
+                        <li><a data-tabs-target="tabButton" data-action="tabs#changeTab"
+                            data-container-id="saved-posts-section-container">Saved</a></li>
+                    <% end %>
                 </ul>
             </div>
 
@@ -40,7 +44,7 @@
 
             <div id="about-section-container" class="hidden" data-tabs-target="tabContainer">                
                 <div class="card">
-                    <h2 style="font-weight: 500; font-size: 1.4em;">About</h2>
+                    <h2>About</h2>
 
                     <div>
                         <p>First name: <strong><%= @user.first_name %></strong></p>
@@ -74,13 +78,29 @@
 
             <div id="friends-section-container" class="hidden" data-tabs-target="tabContainer">
                 <div class="card full-width">
-                    <h2 style="font-weight: 500; font-size: 1.4em; margin-left: 12px; margin-top: 12px;">Friends</h2>
+                    <h2 style="margin-left: 12px; margin-top: 12px;">Friends</h2>
 
                     <div class="user-friends-wrapper">
                         <%= render(partial: 'friend', collection: @user.friends, locals: { is_self: @is_self }) || 'User has no friends.' %>
                     </div>
                 </div>
             </div>
+            
+            <% if @user == current_user %>
+                <div id="saved-posts-section-container" class="hidden" data-tabs-target="tabContainer">
+                    <h2 style="margin-left: 12px; margin-top: 12px;">Saved posts</h2>
+
+                    <% @user.saved_posts.each do |post| %>
+                        <div class="saved-post card full-width">
+                            <a href="<%= post_path post %>">
+                                <%= image_tag(post.image.attached? ? post.image : post.user.avatar) %>
+                            </a>
+
+                            <a href="<%= post_path post %>" style="text-align: justify;"><%= post.body %></a>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
         </div>
     </div>
 

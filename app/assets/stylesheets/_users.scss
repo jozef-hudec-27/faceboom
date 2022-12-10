@@ -216,13 +216,13 @@
     }
 }
 
-.user-friends-wrapper {
+.user-friends-wrapper, #saved-posts-section-container {
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
     gap: 8px;
 
-    .friend {
+    .friend, .saved-post {
         width: 45%;
         display: flex;
         align-items: center;
@@ -238,8 +238,10 @@
         img {
             @extend .hover-shadow;
 
-            width: 80px;
-            height: 80px;
+            min-width: 80px;
+            min-height: 80px;
+            max-width: 80px;
+            max-height: 80px;
             border-radius: 10px;
         }
 
@@ -339,4 +341,9 @@
     flex-direction: column;
     margin-left: auto;
     gap: 2px;
+}
+
+div[id$="section-container"] h2 {
+    font-size: 1.4em;
+    font-weight: 500;
 }
