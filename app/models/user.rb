@@ -16,6 +16,7 @@ class User < ApplicationRecord
                                     join_table: :friendships,
                                     foreign_key: :user_id,
                                     association_foreign_key: :friend_user_id 
+  has_and_belongs_to_many :saved_posts, class_name: 'Post', join_table: :saved_posts
                             
   has_one_attached :avatar
 

@@ -89,6 +89,22 @@ class PostsController < ApplicationController
     end
   end
 
+  def save
+    @post = Post.find_by id: params[:id]
+
+    return if @post.nil?
+
+    if current_user.saved_posts.find_by id: @post.id
+      current_user.saved_posts.delete @post
+    else
+      current_user.saved_posts << @post
+    end
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
 
   def post_params

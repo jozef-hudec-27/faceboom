@@ -20,6 +20,10 @@ class Post < ApplicationRecord
     likes.where(user: user).exists?
   end
 
+  def saved_by?(user)
+    !user.saved_posts.find_by(id: id).nil?
+  end
+
   def all_comments_count(post_comments = nil)
     post_comments = comments if post_comments.nil?
     q = post_comments.to_a
