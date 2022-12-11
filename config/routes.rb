@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     get 'chat', on: :member, to: 'chats#show'
   end
 
+  resources :messages, only: [:create]
+
   scope '/friend_requests', as: :friend_request do
     post '/create', to: 'friend_requests#create'
     post '/cancel', to: 'friend_requests#cancel'

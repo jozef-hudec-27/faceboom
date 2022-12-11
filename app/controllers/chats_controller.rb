@@ -11,6 +11,6 @@ class ChatsController < ApplicationController
     return redirect_to_root_with_flash('Chat not found.') unless @chat.is_active
 
     @messages = @chat.messages.includes(:sender)
-    @new_message = @chat.messages.build
+    @message = @chat.messages.build
   end
 end

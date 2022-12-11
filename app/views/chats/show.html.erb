@@ -1,1 +1,16 @@
 <h2 class="page-heading">Chat between <%= @chat.users.map { |u| u.full_name }.join(', ') %></h2>
+
+<p><%= @messages.count %> messages</p>
+
+<%= form_with model: @message do |f| %>
+    <%= render 'devise/shared/error_messages', resource: @message %>
+
+    <%= f.hidden_field :chat, value: @message.chat.id %>
+
+    <%= f.label :body, class: 'label' %>
+    <div class="control">
+        <%= f.text_area :body, autofocus: true, required: true, autocomplete: 'body', class: 'textarea' %>
+    </div>
+
+    <%= f.submit %>
+<% end %>
