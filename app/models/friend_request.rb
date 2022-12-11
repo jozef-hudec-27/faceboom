@@ -11,6 +11,13 @@ class FriendRequest < ApplicationRecord
     receiver.friends << sender
     destroy
     Notification.create sender: receiver, receiver: sender, text: "#{receiver.full_name} accepted your friend request.", url: user_path(receiver) 
+
+    if chat = Chat.between(sender, receiver)
+      chat.update is_active: true
+    else
+      ids = [sender.id, receiver.id].sort
+      Chat.create key: "#{ids[0]}u#{ids[1]}u"
+    end
   end
 
   def reject

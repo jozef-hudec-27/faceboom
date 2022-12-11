@@ -65,6 +65,7 @@ class User < ApplicationRecord
   def unfriend(user)
     friends.delete user
     user.friends.delete self
+    Chat.between(self, user).update is_active: false
   end
 
   def unread_notifications
