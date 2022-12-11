@@ -1,0 +1,7 @@
+<div class="chat-message comment flex-align-end <% if message.sender == current_user %>is-my<% end %>">
+    <% unless message.sender == current_user %>
+        <%= image_tag message.sender.avatar %>
+    <% end %>
+
+    <p class="chat-message-bubble comment-bubble"><%= message.body %></p>
+</div>

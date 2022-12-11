@@ -8,6 +8,20 @@
     }
 }
 
+@for $i from 1 through 20 {
+    .p-#{$i} {
+        padding: #{$i}px;
+    }
+
+    .px-#{$i} {
+        padding: 0 #{$i}px;
+    }
+
+    .py-#{$i} {
+        padding: #{$i}px 0;
+    }
+}
+
 .flex-center {
     justify-content: center;
     align-items: center;
@@ -19,6 +33,10 @@
 
 .flex-align-center {
     align-items: center;
+}
+
+.flex-align-end {
+    align-items: flex-end;
 }
 
 .flex-justify-end {

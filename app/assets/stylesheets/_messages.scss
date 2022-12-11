@@ -1,0 +1,38 @@
+@import "partials/config";   
+
+.chat-tile {
+    input[type="text"] {
+        background-color: $bg-color;
+    }
+}
+
+.chat-messages {
+    height: 500px;
+    margin-bottom: 20px;
+}
+
+.chat-message {
+    min-width: fit-content;
+
+    .chat-message-bubble {
+        color: $dark-color;
+    }
+
+    img {
+        min-width: 28px;
+        min-height: 28px;
+        max-width: 28px;
+        max-height: 28px;
+        border-radius: 50%;
+    }
+}
+
+.is-my {
+    align-self: flex-end;
+
+    .chat-message-bubble {
+        color: white;
+        background-color: rgb(0, 132, 255);
+    }
+
+}

@@ -1,16 +1,19 @@
-<h2 class="page-heading">Chat between <%= @chat.users.map { |u| u.full_name }.join(', ') %></h2>
+<div class="chat-page-wrapper flexbox flex-column flex-center">
+    <h2 class="page-heading">Chat between <%= @chat.users.map { |u| u.full_name }.join(', ') %></h2>
 
-<p><%= @messages.count %> messages</p>
+    <div class="chat-tile card p-8">
+        <div class="chat-messages scrollable flexbox flex-column gap-6">
+            <%= render(partial: 'messages/message', collection: @messages) || 'No messages yet.' %>
+        </div>
+        
+        <%= form_with model: @message do |f| %>
+            <%= render 'devise/shared/error_messages', resource: @message %>
 
-<%= form_with model: @message do |f| %>
-    <%= render 'devise/shared/error_messages', resource: @message %>
+            <%= f.hidden_field :chat, value: @message.chat.id %>
 
-    <%= f.hidden_field :chat, value: @message.chat.id %>
-
-    <%= f.label :body, class: 'label' %>
-    <div class="control">
-        <%= f.text_area :body, autofocus: true, required: true, autocomplete: 'body', class: 'textarea' %>
+            <div class="control">
+                <%= f.text_field :body, autofocus: true, required: true, autocomplete: 'body', class: 'input is-rounded' %>
+            </div>
+        <% end %>
     </div>
-
-    <%= f.submit %>
-<% end %>
+</div>
