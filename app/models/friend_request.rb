@@ -16,7 +16,7 @@ class FriendRequest < ApplicationRecord
       chat.update is_active: true
     else
       ids = [sender.id, receiver.id].sort
-      Chat.create key: "#{ids[0]}u#{ids[1]}u"
+      Chat.create key: "#{ids[0]}u_#{ids[1]}u"
     end
   end
 

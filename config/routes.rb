@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     post 'unfriend', on: :collection
     get 'mail_sent', on: :member
+    get 'chat', on: :member, to: 'chats#show'
   end
 
   scope '/friend_requests', as: :friend_request do

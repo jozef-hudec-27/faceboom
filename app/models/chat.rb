@@ -1,9 +1,11 @@
 class Chat < ApplicationRecord
+  has_many :messages
+
   validates_uniqueness_of :key
 
   def self.between(user1, user2)
     user_a, user_b = *[user1, user2].sort_by { |user| user.id }
-    key = "#{user_a.id}u#{user_b.id}u"
+    key = "#{user_a.id}u_#{user_b.id}u"
     self.find_by key: key
   end
   
