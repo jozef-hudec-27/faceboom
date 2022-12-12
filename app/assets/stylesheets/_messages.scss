@@ -11,7 +11,7 @@
     margin-bottom: 20px;
 }
 
-.chat-message {
+div[class^="chat-message"] {
     min-width: fit-content;
 
     .chat-message-bubble {

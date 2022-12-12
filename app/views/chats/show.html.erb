@@ -1,8 +1,10 @@
+<%= turbo_stream_from 'chat_' %>
+
 <div class="chat-page-wrapper flexbox flex-column flex-center">
-    <h2 class="page-heading">Chat between <%= @chat.users.map { |u| u.full_name }.join(', ') %></h2>
+    <h2 class="page-heading"><%= @chat.users.find { |u| u != current_user }.full_name %></h2>
 
     <div class="chat-tile card p-8">
-        <div class="chat-messages scrollable flexbox flex-column gap-6">
+        <div id="chat-messages" class="chat-messages scrollable flexbox flex-column gap-6">
             <%= render(partial: 'messages/message', collection: @messages) || 'No messages yet.' %>
         </div>
         

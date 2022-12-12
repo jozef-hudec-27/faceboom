@@ -32,5 +32,22 @@
         
         <%= yield %>
     </div>
+
+    <% if user_signed_in? %>
+        <style>
+            <%= ".chat-message-#{current_user.id}" %> {
+                align-self: flex-end;
+            }
+
+            <%= ".chat-message-#{current_user.id} .chat-message-bubble" %> {
+                color: white !important;
+                background-color: rgb(0, 132, 255);
+            }
+
+            <%= ".chat-message-#{current_user.id} img" %> {
+                display: none;
+            }
+        </style>
+    <% end %>
   </body>
 </html>

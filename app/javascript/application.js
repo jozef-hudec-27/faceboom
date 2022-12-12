@@ -19,3 +19,4 @@ document.addEventListener('turbo:load', function() {
     }
   }
 })
+import "channels"
