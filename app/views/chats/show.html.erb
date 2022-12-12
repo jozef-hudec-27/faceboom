@@ -1,4 +1,4 @@
-<%= turbo_stream_from 'chat_' %>
+<%= turbo_stream_from "chat_#{@message.chat.key}" %>
 
 <div class="chat-page-wrapper flexbox flex-column flex-center">
     <h2 class="page-heading"><%= @chat.users.find { |u| u != current_user }.full_name %></h2>

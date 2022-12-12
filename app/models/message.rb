@@ -5,7 +5,7 @@ class Message < ApplicationRecord
   validates :body, presence: true
 
   after_create_commit -> {
-    broadcast_append_to('chat_',
+    broadcast_append_to("chat_#{chat.key}",
                         partial: 'messages/message',
                         locals: { message: self },
                         target: 'chat-messages'
