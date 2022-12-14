@@ -16,6 +16,9 @@ div[class^="chat-message"] {
 
     .chat-message-bubble {
         color: $dark-color;
+        max-width: 200px;
+
+        .tooltip-text-right { min-width: 100px; }
     }
 
     img {
@@ -25,14 +28,4 @@ div[class^="chat-message"] {
         max-height: 28px;
         border-radius: 50%;
     }
-}
-
-.is-my {
-    align-self: flex-end;
-
-    .chat-message-bubble {
-        color: white;
-        background-color: rgb(0, 132, 255);
-    }
-
 }

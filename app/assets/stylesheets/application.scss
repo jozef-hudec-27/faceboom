@@ -48,23 +48,46 @@ body {
     
     }
 }
-  
-.tooltip .tooltiptext {
-    font-size: 0.8em;
-    transition-delay: 0.2s;
+
+[class^="tooltip-text"] {
     visibility: hidden;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
     position: absolute;
-    z-index: 1;
-    top: 110%;
+    z-index: 2;
+    color: white;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
+    min-width: fit-content;
+    transition-delay: 0.4s;
 }
-  
-.tooltip:hover .tooltiptext {
-    visibility: visible;
+
+.tooltip-text-top {
+    top: -40px;
+    left: -50%;
+}
+
+.tooltip-text-bottom {
+    top: 25px;
+    left: -50%;
+}
+
+.tooltip-text-left {
+    top: 0;
+    right: 105%;
+}
+
+.tooltip-text-right {
+    top: 0;
+    left: 105%;
+}
+
+.tooltip {
+    position: relative;
+
+    &:hover [class^="tooltip-text"] {
+        visibility: visible;
+    }
 }
 
 .card {

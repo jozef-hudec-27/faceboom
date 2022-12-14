@@ -11,7 +11,7 @@
                 <div id="comment-<%= comment.id %>-likes-count-wrapper">
                     <% if comment.likes.any? %>
                         <i class="fa-solid fa-heart tooltip">
-                            <span id="comment-<%= comment.id %>-likes-count" class="tooltiptext"><%= comment.likes.count %></span>
+                            <span id="comment-<%= comment.id %>-likes-count" class="tooltip-text-bottom"><%= comment.likes.count %></span>
                         </i>
                     <% end %>
                 </div>

@@ -3,7 +3,7 @@
 <% elsif @comment.likes.count == 1 %>
     <%= turbo_stream.update("comment-#{@comment.id}-likes-count-wrapper", "
         <i class='fa-solid fa-heart tooltip'>
-            <span id='comment-#{@comment.id}-likes-count' class='tooltiptext'>#{@comment.likes.count}</span>
+            <span id='comment-#{@comment.id}-likes-count' class='tooltip-text-bottom'>#{@comment.likes.count}</span>
         </i>
         ")
     %>

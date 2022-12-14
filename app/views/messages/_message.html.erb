@@ -1,5 +1,9 @@
 <div class="chat-message-<%= message.sender.id %> comment flex-align-end">
     <%= image_tag message.sender.avatar %>
 
-    <p class="chat-message-bubble comment-bubble"><%= message.body %></p>
+    <p class="chat-message-bubble comment-bubble tooltip" >
+        <%= message.body %>
+
+        <span class="tooltip-text-right flexbox flex-center"><%= message.time_since %> ago</span>
+    </p>
 </div>
