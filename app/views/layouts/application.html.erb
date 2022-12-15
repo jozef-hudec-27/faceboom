@@ -52,6 +52,14 @@
                 left: unset;
                 right: 105%;
             }
+
+            <%= ".chat-message-#{current_user.id}-wrapper" %> {
+                justify-content: flex-end;
+            }
+
+            <%= ".chat-message-#{current_user.id}-wrapper:hover .remove-msg-btn" %> {
+                display: block !important;
+            }
         </style>
     <% end %>
   </body>

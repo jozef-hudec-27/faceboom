@@ -28,4 +28,20 @@ div[class^="chat-message"] {
         max-height: 28px;
         border-radius: 50%;
     }
+
+    .remove-msg-btn {
+        border: none;
+        outline: none;
+        box-shadow: none;
+        border-radius: 50%;
+        display: none;
+
+        i { color: lighten($dark-color, 25%); }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+
+            i { color: lighten($dark-color, 15%); }
+        }
+    }
 }

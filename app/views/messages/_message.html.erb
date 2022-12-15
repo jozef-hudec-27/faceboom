@@ -1,9 +1,19 @@
-<div class="chat-message-<%= message.sender.id %> comment flex-align-end">
-    <%= image_tag message.sender.avatar %>
+<div class="chat-message-<%= message.sender.id %>-wrapper flexbox">
+    <div class="chat-message-<%= message.sender.id %> comment flex-align-end">
+        <%= image_tag message.sender.avatar %>
 
-    <p class="chat-message-bubble comment-bubble tooltip" >
-        <%= message.body %>
+        <div class="flexbox flex-align-center gap-8">
+            <button class="button remove-msg-btn">
+                <span class="icon is-small flexbox">
+                    <i class="fa-solid fa-xmark"></i>
+                </span>
+            </button>
 
-        <span class="tooltip-text-right flexbox flex-center"><%= message.time_since %> ago</span>
-    </p>
+            <p class="chat-message-bubble comment-bubble tooltip" >
+                <%= message.body %>
+
+                <span class="tooltip-text-right flexbox flex-center"><%= message.time_since %> ago</span>
+            </p>
+        </div>
+    </div>
 </div>
