@@ -4,6 +4,8 @@ class Message < ApplicationRecord
 
   validates :body, presence: true
 
+  default_scope { order(:created_at) }
+
   after_create_commit -> {
     broadcast_append_to("chat_#{chat.key}",
                         partial: 'messages/message',

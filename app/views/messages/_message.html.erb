@@ -1,19 +1,45 @@
-<div class="chat-message-<%= message.sender.id %>-wrapper flexbox">
-    <div class="chat-message-<%= message.sender.id %> comment flex-align-end">
+<div class="chat-message-<%= message.sender.id %>-wrapper flexbox" data-controller="modal">
+    <div id="msg-<%= message.id %>" class="chat-message-<%= message.sender.id %> comment flex-align-end">
         <%= image_tag message.sender.avatar %>
 
         <div class="flexbox flex-align-center gap-8">
-            <button class="button remove-msg-btn">
-                <span class="icon is-small flexbox">
-                    <i class="fa-solid fa-xmark"></i>
-                </span>
-            </button>
+            <% unless message.is_removed %>
+                <button id="remove-msg-<%= message.id %>-btn" class="button remove-msg-btn" data-action="modal#showModal">
+                    <span class="icon is-small flexbox">
+                        <i class="fa-solid fa-xmark"></i>
+                    </span>
+                </button>
+            <% end %>
 
             <p class="chat-message-bubble comment-bubble tooltip" >
-                <%= message.body %>
+                <span id="msg-<%= message.id %>-body" class="<% if message.is_removed %>removed<% end %>">
+                    <%= message.is_removed ? 'Message has been removed' : message.body %>
+                </span>
 
                 <span class="tooltip-text-right flexbox flex-center"><%= message.time_since %> ago</span>
             </p>
+        </div>
+    </div>
+
+    <div class="message-remove-confirm-modal modal" data-modal-target="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Remove message?</p>
+                <button class="delete" aria-label="close" data-action="modal#hideModal"></button>
+            </header>
+
+            <section class="modal-card-body">
+                <p>Do you really want to remove this message? Others in the chat may have already seen it.</p>
+            </section>
+
+            <footer class="modal-card-foot flexbox gap-8 flex-justify-end">
+                <button class="modal-btn-secondary" data-action="modal#hideModal">Cancel</button>
+
+                <a href="<%= message_path message %>" data-turbo-method="delete">
+                    <button class="modal-btn-primary" tabindex="-1" data-action="modal#hideModal">Remove</button>
+                </a>
+            </footer>
         </div>
     </div>
 </div>

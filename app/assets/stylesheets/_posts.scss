@@ -242,39 +242,7 @@
         justify-content: flex-end;
         gap: 10px;
 
-        button {
-            @extend %reset-appearance;
-            padding: 10px 40px;
-            cursor: pointer;
-            font-weight: 500;
-            border-radius: 8px;
-
-            &:active {
-                transform: scale(0.98);
-            }
-        }
-
-        .cancel-btn {
-            color: rgb(24, 119, 242);
-            background-color: white;
-
-            &:focus, &:hover {
-                background-color: $bg-color;
-            }
-        }
-
-        .delete-btn {
-            color: white;
-            background-color: rgb(24, 119, 242);
-
-            &:hover {
-                background-color: rgb(14, 109, 232);
-            }
-
-            &:focus {
-                background-color: rgb(4, 99, 222);
-            }
-        }
+        button:active { transform: scale(0.98); }
     }
 }
 

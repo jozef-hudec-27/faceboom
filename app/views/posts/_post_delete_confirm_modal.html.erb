@@ -9,10 +9,10 @@
       <p>Are you sure you want to delete this post?</p>
     </section>
     <footer class="modal-card-foot">
-      <button class="cancel-btn" data-action="modal#hideModal" data-mdl="post-delete-confirm-modal">Cancel</button>
+      <button class="modal-btn-secondary" data-action="modal#hideModal" data-mdl="post-delete-confirm-modal">Cancel</button>
 
       <a href="<%= post_path post %>" data-turbo-method="delete">
-        <button class="delete-btn" tabindex="-1" data-action="modal#hideModal" data-mdl="post-delete-confirm-modal">Delete</button>
+        <button class="modal-btn-primary" tabindex="-1" data-action="modal#hideModal" data-mdl="post-delete-confirm-modal">Delete</button>
       </a>
     </footer>
   </div>

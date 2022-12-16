@@ -1,4 +1,5 @@
 @import "partials/config";   
+@import "partials/utilities";
 
 .chat-tile {
     input[type="text"] {
@@ -19,6 +20,7 @@ div[class^="chat-message"] {
         max-width: 200px;
 
         .tooltip-text-right { min-width: 100px; }
+        .removed { font-style: italic; }
     }
 
     img {
