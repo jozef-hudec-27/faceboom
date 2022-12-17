@@ -347,3 +347,32 @@ div[id$="section-container"] h2 {
     font-size: 1.4em;
     font-weight: 500;
 }
+
+.contacts-wrapper {
+    max-height: 90vh;
+    
+    h3 { font-weight: 600;}
+    p { color: $dark-color; }
+
+    .contact {
+        border-radius: 12px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($bg-color, 4%);
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+    }
+
+    .current-chat-wrapper {
+        max-width: 400px;
+        position: fixed;
+        bottom: -16px;
+        right: 200px;
+    }
+}

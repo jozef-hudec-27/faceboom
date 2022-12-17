@@ -1,21 +1,41 @@
-<%= turbo_stream_from "chat_#{@message.chat.key}" %>
 
-<div class="chat-page-wrapper flexbox flex-column flex-center">
-    <h2 class="page-heading"><%= @chat.users.find { |u| u != current_user }.full_name %></h2>
+<div class="chat-page-wrapper flexbox flex-center">
+    <%= turbo_frame_tag 'current-chat' do %>
+        <%= turbo_stream_from "chat_#{@message.chat.key}" %>
 
-    <div class="chat-tile card p-8">
-        <div id="chat-messages" class="chat-messages scrollable flexbox flex-column gap-6">
-            <%= render(partial: 'messages/message', collection: @messages) || 'No messages yet.' %>
-        </div>
-        
-        <%= form_with model: @message do |f| %>
-            <%= render 'devise/shared/error_messages', resource: @message %>
+        <div class="chat-tile card p-8">
+            <div class="chat-tile-top flexbox"> 
+                <div class="flexbox flex-align-center gap-8">
+                    <%= render 'users/avatar_link', user: @other_user, size: '32px' %>
+                    <a href="<%= user_path @other_user %>" class="bold decoration-none"><%= @other_user.full_name %></a>
+                </div>
 
-            <%= f.hidden_field :chat, value: @message.chat.id %>
-
-            <div class="control">
-                <%= f.text_field :body, autofocus: true, required: true, autocomplete: 'body', class: 'input is-rounded' %>
+                <% if @show_close_btn %>
+                    <a href="<%= root_path %>" class="decoration-none rounded" style="margin-left: auto;" data-turbo-frame="current-chat">
+                        <button class="button" tabindex="-1">
+                            <span class="icon is-small flexbox">
+                                <i class="fa-solid fa-xmark"></i>
+                            </span>
+                        </button>
+                    </a>
+                <% end %>
             </div>
-        <% end %>
-    </div>
+
+            <div id="chat-messages" class="chat-messages scrollable flexbox flex-column gap-6">
+                <%= render(partial: 'messages/message', collection: @messages) ||
+                    '<i id="empty-chat-msg" style="text-align: center;">You are now connected on Faceboom.</i>'.html_safe
+                %>
+            </div>
+            
+            <%= form_with model: @message do |f| %>
+                <%= render 'devise/shared/error_messages', resource: @message %>
+
+                <%= f.hidden_field :chat, value: @message.chat.id %>
+
+                <div class="control">
+                    <%= f.text_field :body, autofocus: true, required: true, autocomplete: 'body', placeholder: 'Aa', class: 'input is-rounded' %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
 </div>

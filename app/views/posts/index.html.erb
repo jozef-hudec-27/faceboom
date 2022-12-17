@@ -13,5 +13,23 @@
         <%= paginate @posts, window: 2 %>
     </div>
 
-    <div></div>
+    <div class="contacts-wrapper flexbox flex-column gap-12">
+        <h3 class="px-12">Contacts</h3>
+
+        <div class="scrollable">
+            <% current_user.friends.each do |user| %>
+                <a href="<%= chat_user_path user %>?exit=_" data-turbo-frame="current-chat">
+                    <div class="contact flexbox gap-8 p-12">
+                        <%= image_tag user.avatar %>
+
+                        <p><%= user.full_name %></p>
+                    </div>
+                </a>
+            <% end %>
+        </div>
+        
+        <div class="current-chat-wrapper">
+            <%= turbo_frame_tag 'current-chat' do %><% end %>
+        </div>
+    </div>
 </div>

@@ -6,11 +6,13 @@ class Message < ApplicationRecord
 
   default_scope { order(:created_at) }
 
-  after_create_commit -> {
+    after_create_commit -> {
     broadcast_append_to("chat_#{chat.key}",
                         partial: 'messages/message',
                         locals: { message: self },
                         target: 'chat-messages'
                       )
+
+    broadcast_remove_to("chat_#{chat.key}", target: 'empty-chat-msg') 
   }
 end

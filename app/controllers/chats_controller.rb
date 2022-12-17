@@ -10,6 +10,9 @@ class ChatsController < ApplicationController
 
     return redirect_to_root_with_flash('Chat not found.') unless @chat.is_active
 
+    @other_user = @chat.users.find { |u| u != current_user }
+    @show_close_btn = !params[:exit].nil?
+
     @messages = @chat.messages.includes(:sender)
     @message = @chat.messages.build
   end

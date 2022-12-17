@@ -5,11 +5,30 @@
     input[type="text"] {
         background-color: $bg-color;
     }
+
+    &-top {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        padding-bottom: 6px;
+
+        button {
+            @extend %reset-appearance;
+
+            border-radius: 50%;
+            
+            &:hover i { color: rgb(34, 129, 252); }
+
+            i {
+                color: rgb(24, 119, 242);
+                font-size: 1.2em;
+            }
+        }
+    }
 }
 
 .chat-messages {
-    height: 500px;
+    height: 400px;
     margin-bottom: 20px;
+    padding-top: 6px;
 }
 
 div[class^="chat-message"] {
