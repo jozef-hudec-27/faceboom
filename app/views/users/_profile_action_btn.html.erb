@@ -1,21 +1,24 @@
+<% submit_btn_style = submit_btn_style ? submit_btn_style : '' %>
+<% respond_format = respond_format ? respond_format : nil %>
+
 <% if is_self %>
     <%= link_to 'Edit profile', edit_user_registration_path %>
 <% else %>
     <div class="action-btn-wrapper">
-        <form id="profile-action-form" action="<%= profile_action_data[:url] %>" method="post">
+        <form action="<%= profile_action_data[:url] %><%= respond_format ? "?respond_format=#{respond_format}" : '' %>" method="post">
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
             <input type="hidden" name="id" value="<%= profile_action_data[:obj_id] %>" />
+
+            <button type="submit" name="commit" class="<%= submit_btn_style %>"><%= profile_action_data[:submit_text] %></button>
         </form>
 
-        <button type="submit" name="commit" form="profile-action-form"><%= profile_action_data[:submit_text] %></button>
-
         <% if friend_request_status == 2 %>
-            <form id="profile-action-form-reject-request" action="<%= friend_request_reject_path %>" method="post">
+            <form action="<%= friend_request_reject_path %><%= respond_format ? "?respond_format=#{respond_format}" : '' %>" method="post">
                 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                 <input type="hidden" name="id" value="<%= profile_action_data[:obj_id] %>" />
-            </form>
 
-            <button type="submit" name="commit" form="profile-action-form-reject-request">Reject request</button>
+                <button type="submit" name="commit" class="<%= submit_btn_style %>">Reject request</button>
+            </form>
         <% end %>
     </div>
 <% end %>

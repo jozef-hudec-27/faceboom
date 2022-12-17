@@ -376,3 +376,5 @@ div[id$="section-container"] h2 {
         right: 200px;
     }
 }
+
+[id^="user-"] button:active { transform: scale(0.95); }

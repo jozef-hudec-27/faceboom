@@ -1,18 +1,38 @@
-<h1>Explore users page</h1>
+<div class="flexbox flex-center">
+    <div class="card p-12">
+        <h1 class="page-heading">People</h1>
 
-<% @users.each do |user| %>
-    <div id="user-<%= user.id %>">
-        <%= image_tag user.avatar, style: 'width: 64px; height: 64px; border-radius: 50%;' %>
-        <a href="<%= user_path(user) %>">
-            <h5><%= user.full_name %> <span style="display: <% if user.username == '' %>none<% end %>">(@<%= user.username  %>)</span></h5>
-        </a>
+        <% @users.each do |user, request_status, is_friend, data| %>
+            <div id="user-<%= user.id %>" class="flexbox gap-12 py-3">
+                <%= render 'users/avatar_link', user: user, size: '64px' %>
 
-        <form id="<%= user.id %>-send-request-form" action="<%= friend_request_create_path %>" method="post">
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-            <input type="hidden" name="respond_format" value="turbo-stream" />
-            <input type="hidden" name="id" value="<%= user.id %>" />
-            <input type="submit" name="commit" value="Send friend request">
-        </form>
+                <div class="flexbox flex-column">
+                    <a href="<%= user_path user %>">
+                        <p class="bold dark-color"><%= user.full_name %> <span class="<% if user.username == '' %>hidden<% end %>">(@<%= user.username  %>)</span></p>
+                    </a>
+
+                    <% if is_friend %>
+                        <p style="font-size: 0.9em;">Friend</p>
+                    <% else %>
+                        <p style="font-size: 0.75em;"><%= user.bio[..100] + (user.bio.length > 100 && '...') %></p>
+                    <% end %>
+                </div>
+                
+                <div style="margin-left: auto; align-self: center;">
+                    <% if is_friend %>
+                        <button class="light-blue-btn px-12 py-2">Message</button>
+                    <% else %>
+                        <div id="profile-<%= user.id %>-action-btn-container">
+                            <%= render 'users/profile_action_btn', is_self: false,
+                                                    profile_action_data: data,
+                                                    friend_request_status: request_status,
+                                                    submit_btn_style: 'light-blue-btn px-12 py-2',
+                                                    respond_format: 'turbo-stream'
+                            %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
     </div>
-<% end %>
-
+</div>

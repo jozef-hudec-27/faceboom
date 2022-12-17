@@ -138,6 +138,15 @@
     background-color: rgb(240, 242, 245);
 }
 
+.light-blue-btn {
+    @extend %btn;
+
+    color: rgb(24, 119, 242);
+    background-color: rgb(231, 243, 255);
+
+    &:hover { background-color: rgb(221, 233, 245); }
+}
+
 .bold {
     font-weight: 600;
 }

@@ -3,7 +3,18 @@ class UsersController < ApplicationController
   before_action :unauthenicate_user!, only: [:mail_sent]
 
   def index
-    @users = User.where.not(id: current_user.friend_ids + [current_user.id]).filter { |user| current_user.pending_friend_request_with(user).nil? }
+    @users = []
+    User.where.not(id: current_user.id).each do |user|
+      is_friend = current_user.friends_with?(user)
+      request_status = current_user.friend_request_status_with(user)
+      profile_action_data = {
+        url: is_friend ? nil : [friend_request_create_path, friend_request_cancel_path, friend_request_accept_path][request_status],
+        obj_id: is_friend ? nil : request_status.zero? ? user.id : current_user.pending_friend_request_with(user)&.id,
+        submit_text: is_friend ? nil : ['Send request', 'Cancel request', 'Accept request'][request_status]
+      }
+
+      @users << [user, request_status, is_friend, profile_action_data]
+    end
   end
 
   def show
