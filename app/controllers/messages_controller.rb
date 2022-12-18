@@ -9,16 +9,7 @@ class MessagesController < ApplicationController
     
     respond_to do |format|
       if @message.save
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('message_body', "<input autofocus='autofocus'
-                                                                            required='required'
-                                                                            autocomplete='body'
-                                                                            class='input is-rounded'
-                                                                            type='text'
-                                                                            name='message[body]'
-                                                                            id='message_body'
-                                                                      >")
-        end
+        format.turbo_stream
       else
         @chat = @message.chat
         @messages = @chat.messages

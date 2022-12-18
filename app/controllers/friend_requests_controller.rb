@@ -2,25 +2,25 @@ class FriendRequestsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    receiver = User.find_by id: params[:id]
+    @receiver = User.find_by id: params[:id]
 
-    return redirect_to_root_with_flash('Invalid user.') if receiver.nil? || receiver == current_user || current_user.friends_with?(receiver)
-    return redirect_to_root_with_flash('Friend request already sent.') if current_user.pending_friend_request_with receiver
+    return redirect_to_root_with_flash('Invalid user.') if @receiver.nil? || @receiver == current_user || current_user.friends_with?(@receiver)
+    return redirect_to_root_with_flash('Friend request already sent.') if current_user.pending_friend_request_with @receiver
 
-    current_user.send_friend_request_to receiver
+    current_user.send_friend_request_to @receiver
     
     respond_to do |format|
       if params[:respond_format] == 'turbo-stream'
-        format.turbo_stream { render turbo_stream: turbo_stream.update("profile-#{receiver.id}-action-btn-container", '<i>Friend request sent.</i>') }
+        format.turbo_stream 
       else
-        format.html { redirect_back(fallback_location: user_path(receiver)) }
+        format.html { redirect_back(fallback_location: user_path(@receiver)) }
       end
     end
   end
 
   def cancel
     request = FriendRequest.find_by id: params[:id]
-    receiver = request.receiver
+    @receiver = request.receiver
 
     return redirect_to_root_with_flash('Request not found.') if request.nil?
     
@@ -28,25 +28,22 @@ class FriendRequestsController < ApplicationController
 
     respond_to do |format|
       if params[:respond_format] == 'turbo-stream'
-        profile_action_btn_partial_locals = {
+        @profile_action_btn_partial_locals = {
           submit_btn_style: 'light-blue-btn px-12 py-2', respond_format: 'turbo-stream',
           is_self: false, friend_request_status: 0,
-          profile_action_data: { url: friend_request_create_path, obj_id: receiver.id, submit_text: 'Send request' }
+          profile_action_data: { url: friend_request_create_path, obj_id: @receiver.id, submit_text: 'Send request' }
         }
 
-        format.turbo_stream do render(turbo_stream: turbo_stream.update("profile-#{receiver.id}-action-btn-container",
-                                                                       partial: 'users/profile_action_btn',
-                                                                       locals: profile_action_btn_partial_locals))
-        end
+        format.turbo_stream
       else
-        format.html { redirect_back(fallback_location: user_path(receiver)) }
+        format.html { redirect_back(fallback_location: user_path(@receiver)) }
       end
     end
   end
 
   def accept
     request = FriendRequest.find_by id: params[:id]
-    sender = request.sender
+    @sender = request.sender
 
     return redirect_to_root_with_flash('Request not found.') if request.nil?
 
@@ -54,22 +51,17 @@ class FriendRequestsController < ApplicationController
     
     respond_to do |format|
       if params[:respond_format] == 'turbo-stream'
-        format.turbo_stream do render(turbo_stream: turbo_stream.update("profile-#{sender.id}-action-btn-container", "
-          <a href='#{chat_user_path sender}?exit=_' data-turbo-frame='current-chat'>
-            <button class='light-blue-btn px-12 py-2' tabindex='-1'>Message</button>
-          </a>
-          "))
-        end
+        format.turbo_stream
       else
-        flash[:notice] = "You are now friends with #{sender.full_name}."
-        format.html { redirect_back(fallback_location: user_path(sender)) }
+        flash[:notice] = "You are now friends with #{@sender.full_name}."
+        format.html { redirect_back(fallback_location: user_path(@sender)) }
       end
     end
   end
 
   def reject
     request = FriendRequest.find_by id: params[:id]
-    sender = request.sender
+    @sender = request.sender
 
     return redirect_to_root_with_flash('Request not found.') if request.nil?
 
@@ -77,18 +69,15 @@ class FriendRequestsController < ApplicationController
 
     respond_to do |format|
       if params[:respond_format] == 'turbo-stream'
-        profile_action_btn_partial_locals = {
+        @profile_action_btn_partial_locals = {
           submit_btn_style: 'light-blue-btn px-12 py-2', respond_format: 'turbo-stream',
           is_self: false, friend_request_status: 0,
-          profile_action_data: { url: friend_request_create_path, obj_id: sender.id, submit_text: 'Send request' }
+          profile_action_data: { url: friend_request_create_path, obj_id: @sender.id, submit_text: 'Send request' }
         }
 
-        format.turbo_stream do render(turbo_stream: turbo_stream.update("profile-#{sender.id}-action-btn-container",
-                                                                       partial: 'users/profile_action_btn',
-                                                                       locals: profile_action_btn_partial_locals))
-        end
+        format.turbo_stream
       else
-        format.html { redirect_back fallback_location: user_path(sender) }
+        format.html { redirect_back fallback_location: user_path(@sender) }
       end
     end
   end

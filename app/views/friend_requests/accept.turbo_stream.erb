@@ -1,0 +1,5 @@
+<%= turbo_stream.update("profile-#{@sender.id}-action-btn-container", "
+    <a href='#{chat_user_path @sender}?exit=_' data-turbo-frame='current-chat'>
+        <button class='light-blue-btn px-12 py-2' tabindex='-1'>Message</button>
+    </a>")
+%>

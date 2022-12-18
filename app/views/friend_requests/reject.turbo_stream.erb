@@ -1,0 +1,4 @@
+<%= turbo_stream.update("profile-#{@sender.id}-action-btn-container",
+                        partial: 'users/profile_action_btn',
+                        locals: @profile_action_btn_partial_locals)
+%>
