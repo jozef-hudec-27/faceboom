@@ -369,12 +369,13 @@ div[id$="section-container"] h2 {
         }
     }
 
-    .current-chat-wrapper {
-        max-width: 400px;
-        position: fixed;
-        bottom: -16px;
-        right: 200px;
-    }
+}
+
+.current-chat-wrapper {
+    max-width: 400px;
+    position: fixed;
+    bottom: -16px;
+    right: 200px;
 }
 
 [id^="user-"] button:active { transform: scale(0.95); }

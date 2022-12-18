@@ -54,7 +54,12 @@ class FriendRequestsController < ApplicationController
     
     respond_to do |format|
       if params[:respond_format] == 'turbo-stream'
-        format.turbo_stream { render turbo_stream: turbo_stream.update("profile-#{sender.id}-action-btn-container", "<i>#{sender.first_name} is now your friend.</i>") }
+        format.turbo_stream do render(turbo_stream: turbo_stream.update("profile-#{sender.id}-action-btn-container", "
+          <a href='#{chat_user_path sender}?exit=_' data-turbo-frame='current-chat'>
+            <button class='light-blue-btn px-12 py-2' tabindex='-1'>Message</button>
+          </a>
+          "))
+        end
       else
         flash[:notice] = "You are now friends with #{sender.full_name}."
         format.html { redirect_back(fallback_location: user_path(sender)) }
