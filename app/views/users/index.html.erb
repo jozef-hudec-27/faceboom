@@ -2,6 +2,8 @@
     <div class="card p-12">
         <h1 class="page-heading">People</h1>
 
+        <% if @users.empty? %><i>No people found.</i><% end %>
+
         <% @users.each do |user, request_status, is_friend, data| %>
             <div id="user-<%= user.id %>" class="flexbox gap-12 py-3">
                 <%= render 'users/avatar_link', user: user, size: '64px' %>
@@ -36,7 +38,6 @@
                 </div>
             </div>
         <% end %>
-
     </div>
 
     <div class="current-chat-wrapper">

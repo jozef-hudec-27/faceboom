@@ -3,8 +3,10 @@ class UsersController < ApplicationController
   before_action :unauthenicate_user!, only: [:mail_sent]
 
   def index
+    query = params[:q]&.downcase || ''
     @users = []
-    User.where.not(id: current_user.id).each do |user|
+    User.where('LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?', '%' +  User.sanitize_sql_like(query) + '%', '%' +  User.sanitize_sql_like(query) + '%')
+        .where.not(id: current_user.id).each do |user|
       is_friend = current_user.friends_with?(user)
       request_status = current_user.friend_request_status_with(user)
       profile_action_data = {
