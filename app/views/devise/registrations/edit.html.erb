@@ -104,10 +104,41 @@
                 </div>
             <% end %>
 
-
             <div class="actions">
-                <%= f.submit "Update" %>
+                <%= f.submit 'Update profile' %>
             </div>
         <% end %>
+
+        <div data-controller="modal">
+            <p class="bold">Danger zone!</p>
+
+            <button class="light-blue-btn px-2 py-1 full-width" data-action="modal#showModal">Delete account</button>
+
+            <div class="account-delete-confirm-modal modal" data-modal-target="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Delete account?</p>
+                        <button class="delete" aria-label="close" data-action="modal#hideModal"></button>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <p>
+                            Are you sure you want to permanently delete your account?
+                            This will also, among other things delete all your posts and comments.
+                            <strong>This action is irreversible</strong>.
+                        </p>
+                    </section>
+
+                    <footer class="modal-card-foot flexbox gap-8 flex-justify-end" data-turbo="true">
+                        <button class="modal-btn-secondary" data-action="modal#hideModal">Cancel</button>
+
+                        <a href="<%= registration_path resource_name %>" data-turbo-method="delete">
+                            <button class="modal-btn-primary" tabindex="-1" data-action="modal#hideModal">Delete</button>
+                        </a>
+                    </footer>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

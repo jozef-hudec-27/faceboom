@@ -60,6 +60,18 @@
     }
 
     > .card { padding: 16px; }
+
+    [data-controller="modal"] {
+        margin-top: 24px;
+
+        > p {
+            color: white;
+            background-color: red;
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 4px;
+        }
+    }
 }
 
 .login-page-wrapper {
