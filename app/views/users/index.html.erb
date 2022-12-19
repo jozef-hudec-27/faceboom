@@ -14,13 +14,13 @@
                     </a>
 
                     <% if is_friend %>
-                        <p style="font-size: 0.9em;">Friend</p>
+                        <p  class="font-09">Friend</p>
                     <% else %>
-                        <p style="font-size: 0.75em;"><%= user.bio[..100] + (user.bio&.length > 100 ? '...' : '') %></p>
+                        <p class="font-08"><%= user.bio[..100] + (user.bio&.length > 100 ? '...' : '') %></p>
                     <% end %>
                 </div>
                 
-                <div style="margin-left: auto; align-self: center;">
+                <div class="ml-auto" style="align-self: center;">
                     <div id="profile-<%= user.id %>-action-btn-container">
                         <% if is_friend %>
                             <a href="<%= chat_user_path user %>?exit=_" data-turbo-frame="current-chat">

@@ -6,10 +6,10 @@
 
         <div class="flexbox flex-column">
             <h4><%= link_to post.user.full_name, post.user %></h4>
-            <p style="font-size: 0.7em;"><%= post.time_since approx: true, short: true %></p>
+            <p class="font-07"><%= post.time_since approx: true, short: true %></p>
         </div>
         
-        <div class="dropdown is-hoverable <% if is_detail %>is-right<% end %>" data-controller="modal" style="margin-left: auto;">
+        <div class="dropdown is-hoverable ml-auto <% if is_detail %>is-right<% end %>" data-controller="modal">
             <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                     <span><i class="fa-solid fa-ellipsis"></i></span>

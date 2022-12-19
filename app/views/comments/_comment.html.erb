@@ -2,7 +2,7 @@
     <%= render 'users/avatar_link', user: comment.user, size: '32px' %>
 
     <div class="flexbox flex-column">
-        <div class="flexbox flex-align-center" style="gap: 12px;">
+        <div class="flexbox flex-align-center gap-12">
             <div class="comment-bubble">
                 <a href="<%= user_path comment.user %>"><%= comment.user.full_name %></a>
 

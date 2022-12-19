@@ -20,7 +20,7 @@
             <%= form_for(resource, as: resource_name, url: yield(:path), html: { method: :post }) do |f| %>
                 <%= render "devise/shared/error_messages", resource: resource %>
 
-                <div class="flexbox flex-column gap-16" style="padding: 6px 0;">
+                <div class="flexbox flex-column gap-16 py-6">
                     <p class="dark-color"><%= yield :message %></p>
 
                     <div class="field">

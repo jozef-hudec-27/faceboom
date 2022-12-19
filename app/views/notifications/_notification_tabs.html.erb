@@ -27,7 +27,7 @@
                 <%= render 'notifications/notification', notification: notification %>
             <% end %>
 
-            <a href="<%= notifications_read_all_path %>" data-turbo-method="post" style="margin-left: 12px;">Mark all as read</a>
+            <a href="<%= notifications_read_all_path %>" data-turbo-method="post" class="ml-12">Mark all as read</a>
         <% else %>
             <div class="empty-notifications-container">
                 <i class="fa-solid fa-check"></i>

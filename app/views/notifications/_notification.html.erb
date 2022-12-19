@@ -8,11 +8,11 @@
         <%= image_tag notification.sender.avatar %>    
 
         <div>
-            <p style="font-size: 1.1em; <% unless notification.read %>color: rgb(50,50,50)<% end %>">
+            <p class="font-11" style="<% unless notification.read %>color: rgb(50,50,50)<% end %>">
                 <%= notification.text %>
             </p>
             
-            <p style="font-size: 0.8em; <% unless notification.read %>color: rgb(24,119,242); font-weight: 600;<% end %>">
+            <p class="font-08" style="<% unless notification.read %>color: rgb(24,119,242); font-weight: 600;<% end %>">
                 <%= notification.time_since %> ago
             </p> 
         </div>

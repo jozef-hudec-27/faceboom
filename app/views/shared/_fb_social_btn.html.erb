@@ -1,9 +1,9 @@
 <form method="post" action="<%= omniauth_authorize_path resource_name, 'facebook' %>" data-turbo="false">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-    <button type="submit" class="button" style="background-color: rgb(60,102,196); color: white; font-weight: 500;">
+    <button type="submit" class="button white" style="background-color: rgb(60,102,196); font-weight: 500;">
         <span class="icon is-small">
-            <i class="fa-brands fa-square-facebook" style="color: white; font-size: 1.2em;"></i>
+            <i class="fa-brands fa-square-facebook white font-12"></i>
         </span>
 
         <span>Continue with Facebook</span>

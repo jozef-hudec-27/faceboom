@@ -78,7 +78,7 @@
 
             <div id="friends-section-container" class="hidden" data-tabs-target="tabContainer">
                 <div class="card full-width">
-                    <h2 style="margin-left: 12px; margin-top: 12px;">Friends</h2>
+                    <h2 class="ml-12 mt-12">Friends</h2>
 
                     <div class="user-friends-wrapper">
                         <%= render(partial: 'friend', collection: @user.friends, locals: { is_self: @is_self }) || 'User has no friends.' %>
@@ -88,7 +88,7 @@
             
             <% if @user == current_user %>
                 <div id="saved-posts-section-container" class="hidden" data-tabs-target="tabContainer">
-                    <h2 style="margin-left: 12px; margin-top: 12px;">Saved posts</h2>
+                    <h2 class="ml-12 mt-12">Saved posts</h2>
 
                     <% if @user.saved_posts.empty? %>
                         <p class="full-width">You have no saved posts.</p>
@@ -100,7 +100,7 @@
                                         <%= image_tag(post.image.attached? ? post.image : post.user.avatar) %>
                                     </a>
 
-                                    <a href="<%= save_post_path post %>" data-turbo-method="post" style="font-size: 0.7em; color: red; font-weight: normal;">
+                                    <a href="<%= save_post_path post %>" data-turbo-method="post" class="font-07" style="color: red;">
                                         <i class="fa-solid fa-xmark"></i> Unsave
                                     </a>
                                 </div>

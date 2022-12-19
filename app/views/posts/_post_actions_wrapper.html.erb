@@ -1,11 +1,11 @@
 <div class="post-actions-wrapper">
     <div class="flexbox space-between">
-        <p style="margin-left: 12px;">
-            <i class="fa-solid fa-heart" style="font-size: 0.8em; color: white; background-color: rgb(233,35,70); padding: 4px; border-radius: 50%;"></i>
+        <p class="ml-12">
+            <i class="fa-solid fa-heart p-1 rounded white font-08" style="background-color: rgb(233,35,70);"></i>
             <span id="post-<%= post.id %>-like-count"><%= post.likes.count %></span>
         </p>
 
-        <a href="<% unless disable_comment_btn %><%= post_comments_path post %><% end %>" data-turbo-frame="post-<%= post.id %>-comments" style="margin-right: 12px;">
+        <a href="<% unless disable_comment_btn %><%= post_comments_path post %><% end %>" data-turbo-frame="post-<%= post.id %>-comments" class="mr-12">
             <%= pluralize post.comments.count, 'comment' %>
         </a>
     </div>

@@ -1,9 +1,8 @@
 <% size = size || '40px' %>
 
 <a href="<%= user_path user %>" style="height: <%= size %>; width: <%= size %>;">
-    <%= image_tag user.avatar, class: 'hover-shadow', style: "
+    <%= image_tag user.avatar, class: 'hover-shadow rounded', style: "
         min-width: #{size}; min-height: #{size};
-        max-width: #{size}; max-height: #{size};
-        border-radius: 50%;"
+        max-width: #{size}; max-height: #{size};"
     %>
 </a>
