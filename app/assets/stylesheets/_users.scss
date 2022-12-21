@@ -16,13 +16,11 @@
                 color: rgb(101, 103, 107);
                 border-radius: 4px;
         
+                &:active { background-color: darken($bg-color, 7%); }
+
                 &:hover {
                     background-color: darken($bg-color, 4%);
                     color: rgb(101, 103, 107);
-                }
-        
-                &:active {
-                    background-color: darken($bg-color, 7%);
                 }
             }
         
@@ -31,9 +29,7 @@
                 border-bottom: 4px solid rgb(24, 118, 242);
                 border-radius: 0;
         
-                &:hover {
-                    background-color: $bg-color;
-                }
+                &:hover { background-color: $bg-color; }
             }
         }
     }
@@ -55,7 +51,6 @@
         border-radius: 4px;
 
         &:hover { background-color: rgb(242, 242, 242); }
-
         &:active { background-color: rgb(232, 232, 232); }
     }
 
@@ -150,9 +145,7 @@
     align-items: center;
     gap: 8px;
 
-    .faceboom-logo {
-        font-size: 3.5em;
-    }
+    .faceboom-logo { font-size: 3.5em; }
 
     .page-heading {
         text-align: center;
@@ -244,7 +237,6 @@
         padding: 10px;
 
         a { font-weight: bold; }
-
         p { font-size: 0.7em; }
 
         img {
@@ -273,6 +265,8 @@
 
     span { font-size: 0.5em; }
 
+    + hr { background-color: darken($bg-color, 4%); }
+
     h2 {
         font-weight: 600;
         font-size: 2em;
@@ -281,10 +275,6 @@
     p {
         font-weight: 500;
         color: rgb(101, 103, 107);
-    }
-
-    + hr {
-        background-color: darken($bg-color, 4%);
     }
 
     button, a {
@@ -299,13 +289,8 @@
         border-radius: 8px;
         cursor: pointer;
 
-        &:hover {
-            background-color: rgb(14, 109, 232);
-        }
-
-        &:active {
-            transform: scale(0.98);
-        }
+        &:hover { background-color: rgb(14, 109, 232); }
+        &:active { transform: scale(0.98); }
     }
 
     img {
@@ -313,9 +298,7 @@
         width: 176px;
         height: 176px;
 
-        &:hover {
-            box-shadow: 0 0 10px 10px darken($bg-color, 5%);
-        }
+        &:hover { box-shadow: 0 0 10px 10px darken($bg-color, 5%); }
     }
 }
 
@@ -370,9 +353,7 @@ div[id$="section-container"] h2 {
         border-radius: 12px;
         cursor: pointer;
 
-        &:hover {
-            background-color: darken($bg-color, 4%);
-        }
+        &:hover { background-color: darken($bg-color, 4%); }
 
         img {
             width: 24px;

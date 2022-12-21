@@ -28,9 +28,7 @@
 @import "users";
 @import "messages";
 
-html {
-    background-color: $bg-color;
-}
+html { background-color: $bg-color; }
 
 body {
     margin: 0;
@@ -45,7 +43,6 @@ body {
         @extend .flexbox;
         @extend .flex-column;
         @extend .flex-center;
-    
     }
 }
 
@@ -85,24 +82,20 @@ body {
 .tooltip {
     position: relative;
 
-    &:hover [class^="tooltip-text"] {
-        visibility: visible;
-    }
+    &:hover [class^="tooltip-text"] { visibility: visible; }
 }
 
-.card {
-    @extend .post;
-}
+.card { @extend .post; }
 
 .modal {
-    &-background {
-        background-color: rgba(240, 240, 240, 0.75);
-    }
+    &-background { background-color: rgba(240, 240, 240, 0.75); }
 
     &-card {
         box-shadow: 0 0 12px 7px rgba(0, 0, 0, 0.1);
         border-radius: 12px;
         max-width: 500px;
+
+        &-foot { border: none; }
 
         &-head, &-foot {
             background-color: white;
@@ -113,8 +106,6 @@ body {
                 color: rgb(54, 54, 54);
             }
         }
-
-        &-foot { border: none; }
     }
 
     button[class^="modal-btn"] {

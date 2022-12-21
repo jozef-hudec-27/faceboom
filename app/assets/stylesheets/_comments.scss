@@ -17,13 +17,9 @@
         .dropdown-item { @extend %ellipsis-dropdown-item; }
     }
 
-    &:hover &-delete-btn {
-        opacity: 1;
-    }
+    &:hover &-delete-btn { opacity: 1; }
 
-    a:hover {
-        text-decoration: underline;
-    }
+    a:hover { text-decoration: underline; }
     
     &-bubble {
         display: flex;
@@ -68,13 +64,9 @@
     }
 }
 
-.comment-replies {
-    margin-top: 16px;
-}
+.comment-replies { margin-top: 16px; }
 
-turbo-frame > .post-comment-form-wrapper {
-    margin-left: 12px;
-}
+turbo-frame > .post-comment-form-wrapper { margin-left: 12px; }
 
 .post-comment-form-wrapper {
     margin: auto;
@@ -126,9 +118,7 @@ turbo-frame > .post-comment-form-wrapper {
         padding: 4px 12px;
         cursor: pointer;
 
-        &:hover {
-            background-color: rgb(251, 251, 251);
-        }
+        &:hover { background-color: rgb(251, 251, 251); }
 
         &:active {
             transform: scale(0.98);

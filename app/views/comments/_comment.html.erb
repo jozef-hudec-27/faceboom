@@ -4,7 +4,7 @@
     <div class="flexbox flex-column">
         <div class="flexbox flex-align-center gap-12">
             <div class="comment-bubble">
-                <a href="<%= user_path comment.user %>"><%= comment.user.full_name %></a>
+                <a href="<%= user_path comment.user %>" data-turbo-frame="_top"><%= comment.user.full_name %></a>
 
                 <p><%= comment.body %></p>
 

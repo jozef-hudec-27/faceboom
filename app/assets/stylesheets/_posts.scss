@@ -7,20 +7,14 @@
     border: 1px solid darken($bg-color, 10%);
     border-radius: 8px;
     margin-bottom: 16px;
-
-    img {
-        width: 100%;
-    }
-
-    p, a {
-        color: rgb(96, 98, 102);
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }    
-
+    
     &-body-wrapper { text-align: justify; }
+
+    img { width: 100%; }
+
+    p, a { color: rgb(96, 98, 102); }
+
+    a:hover { text-decoration: underline; }    
 }
 
 .post-info {
@@ -50,9 +44,9 @@
         display: flex;
         justify-content: center;
 
-        a {
-            text-decoration: none;
-        }
+        a { text-decoration: none; }
+
+        button.post-actions-like:active { transform: scale(0.98); }
         
         &-like, &-comment {
             display: flex;
@@ -60,32 +54,22 @@
             gap: 8px;
             color: rgb(101, 103, 107);
         }
-    
-        button.post-actions-like:active {
-            transform: scale(0.98);
-        }
     }
 }
 
 .post-actions button, .post-create-card button {
     @extend %reset-appearance;
+
     background-color: white;
     cursor: pointer;
     padding: 8px 32px;
     border-radius: 8px;
     font-size: 1.1em;
     
-    p {
-        color: inherit;
-    }
+    &:hover { background-color: rgb(242, 242, 242); }
+    &:active { background-color: rgb(232, 232, 232); }
 
-    &:hover {
-        background-color: rgb(242, 242, 242);
-    }
-
-    &:active {
-        background-color: rgb(232, 232, 232);
-    }
+    p { color: inherit; }
 }
 
 .post-sidebar {
@@ -96,9 +80,7 @@
     min-width: 0;
 }
 
-.post-comments-wrapper {
-    padding: 12px;
-}
+.post-comments-wrapper { padding: 12px; }
 
 .post-page-wrapper {
     display: grid;
@@ -132,13 +114,11 @@
     margin-bottom: 64px;
     min-height: 96px;
 
+    i { color: rgb(69, 189, 98); }
+
     hr {
         margin: auto;
         width: 100%;
-    }
-
-    i {
-        color: rgb(69, 189, 98);
     }
 
     input {
@@ -173,6 +153,7 @@
 .post-create-modal, .post-edit-modal {
     textarea {
         @extend %reset-appearance;
+
         min-width: 90%;
         max-width: 90%;
         min-height: 150px;
@@ -208,6 +189,7 @@
 
         button {
             @extend %reset-appearance;
+
             padding: 12px 0;
             border-radius: 8px;
             cursor: pointer;
@@ -216,13 +198,8 @@
             color: white;
             font-weight: 500;
     
-            &:hover {
-                background-color: rgb(26, 110, 216);
-            }
-
-            &:active {
-                transform: scale(0.98);
-            }
+            &:hover { background-color: rgb(26, 110, 216); }
+            &:active { transform: scale(0.98); }
         }
 
         button[disabled] {
@@ -263,9 +240,7 @@ nav.pagination {
         justify-content: center;
         font-size: 0.9em;
 
-        &:hover {
-            background-color: rgb(221, 233, 245);
-        }
+        &:hover { background-color: rgb(221, 233, 245); }
     }
 
     p {

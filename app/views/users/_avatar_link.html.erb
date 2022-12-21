@@ -1,6 +1,6 @@
 <% size = size || '40px' %>
 
-<a href="<%= user_path user %>" style="height: <%= size %>; width: <%= size %>;">
+<a href="<%= user_path user %>" data-turbo-frame="_top" style="height: <%= size %>; width: <%= size %>;">
     <%= image_tag user.avatar, class: 'hover-shadow rounded', style: "
         min-width: #{size}; min-height: #{size};
         max-width: #{size}; max-height: #{size};"

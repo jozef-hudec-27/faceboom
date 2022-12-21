@@ -13,13 +13,13 @@
             outline: none;
     
             &:hover { background-color: rgb(228, 230, 232); }
+
+            + .icon { color:  $dark-color; }
     
             &:focus {
                 box-shadow: none;
                 background-color: $bg-color;
             }
-    
-            + .icon { color:  $dark-color; }
     
             &::placeholder {
                 font-weight: 300;

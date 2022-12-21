@@ -4,13 +4,11 @@
 .notifications {
     min-width: 350px;
 
+    h4.is-4 { margin-bottom: 8px; }
+
     .title {
         margin: 0;
         margin-left: 12px;
-    }
-
-    h4.is-4 {
-        margin-bottom: 8px;
     }
 
     .noti {
@@ -21,9 +19,9 @@
         border-radius: 16px;
         gap: 12px;
 
-        &:hover {
-            background-color: rgb(242, 242, 242);
-        }
+        &:hover { background-color: rgb(242, 242, 242); }
+
+        p { color: rgb(96, 98, 102); }
 
         img {
             max-width: 48px;
@@ -36,30 +34,22 @@
             margin-left: auto;
             color: rgb(24, 118, 242);
         }
-
-        p {
-            color: rgb(96, 98, 102);
-        }
     }
 
     .tabs {
+        ul { gap: 16px; }
+
         li.is-active a {
             color: rgb(24, 119, 242);
             background-color: rgb(231, 243, 255);
         
-            &:hover {
-                background-color: rgb(221, 233, 245);
-            }
+            &:hover { background-color: rgb(221, 233, 245); }
         }
 
         li a {
             font-weight: 600;
             border: none;
             border-radius: 9999px;
-        }
-
-        ul {
-            gap: 16px;
         }
     }
 

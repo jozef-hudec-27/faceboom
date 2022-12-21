@@ -2,9 +2,7 @@
 @import "partials/utilities";
 
 .chat-tile {
-    input[type="text"] {
-        background-color: $bg-color;
-    }
+    input[type="text"] { background-color: $bg-color; }
 
     &-top {
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -39,6 +37,7 @@ div[class^="chat-message"] {
         max-width: 200px;
 
         .tooltip-text-right { min-width: 100px; }
+        
         .removed { font-style: italic; }
     }
 
