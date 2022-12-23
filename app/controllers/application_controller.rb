@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  helper_method :get_unread_notifications
-  helper_method :get_latest_notifications
+  helper_method :get_unread_notifications, :get_latest_notifications
+  helper_method :get_message_notifications, :get_unseen_message_notifications
   
   protected
   
@@ -20,5 +20,13 @@ class ApplicationController < ActionController::Base
 
   def get_latest_notifications
     current_user&.latest_notifications
+  end
+
+  def get_message_notifications
+    current_user&.received_message_notifications.includes(:message, :sender)
+  end
+
+  def get_unseen_message_notifications
+    current_user&.received_message_notifications.unseen
   end
 end
