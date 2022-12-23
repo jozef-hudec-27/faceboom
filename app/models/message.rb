@@ -2,6 +2,8 @@ class Message < ApplicationRecord
   belongs_to :sender, class_name: 'User'
   belongs_to :chat
 
+  has_one :message_notification
+
   validates :body, presence: true
 
   default_scope { order(:created_at) }

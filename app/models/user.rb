@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_message_notifications, class_name: 'MessageNotification', foreign_key: 'receiver_id', dependent: :destroy
   has_and_belongs_to_many :friends, class_name: 'User',
                                     join_table: :friendships,
                                     foreign_key: :user_id,

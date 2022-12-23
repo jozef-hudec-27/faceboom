@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_15_192144) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_22_181412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -85,6 +85,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_192144) do
     t.datetime "updated_at", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "message_notifications", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.bigint "receiver_id", null: false
+    t.boolean "seen", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_message_notifications_on_message_id"
+    t.index ["receiver_id"], name: "index_message_notifications_on_receiver_id"
+    t.index ["seen"], name: "index_message_notifications_on_seen"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -163,6 +174,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_192144) do
   add_foreign_key "friend_requests", "users", column: "receiver_id"
   add_foreign_key "friend_requests", "users", column: "sender_id"
   add_foreign_key "likes", "users"
+  add_foreign_key "message_notifications", "messages"
+  add_foreign_key "message_notifications", "users", column: "receiver_id"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "notifications", "users", column: "receiver_id"
