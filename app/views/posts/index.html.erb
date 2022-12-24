@@ -27,9 +27,12 @@
                 </a>
             <% end %>
         </div>
-        
-        <div class="current-chat-wrapper">
-            <%= turbo_frame_tag 'current-chat' do %><% end %>
-        </div>
     </div>
 </div>
+
+<% if @is_turbo_frame_request %>
+    <div class="current-chat-wrapper">
+        <%= turbo_frame_tag 'current-chat' do %><% end %>
+    </div>
+<% end %>
+

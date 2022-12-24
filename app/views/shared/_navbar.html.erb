@@ -35,7 +35,7 @@
                         <h4 class="title is-4">Chats</h4>
 
                         <% get_message_notifications.each do |noti| %>
-                            <a href="">
+                            <a href="<%= chat_user_path noti.sender %>?exit=_" data-turbo-frame="current-chat">
                                 <div class="noti">
                                     <%= image_tag noti.sender.avatar, style: 'max-width: 56px; max-height: 56px;' %>
 

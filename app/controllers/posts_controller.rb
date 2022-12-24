@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.posts_for(current_user).page(params[:page] || 1).includes(:user)
     @first_page = params[:page].nil? || params[:page] == '1'
+    @is_turbo_frame_request = !params[:t].nil?
   end
 
   def show

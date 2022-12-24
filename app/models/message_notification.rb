@@ -14,6 +14,6 @@ class MessageNotification < ApplicationRecord
 
   def destroy_previous_notification
     prev_msg = Message.where(chat_id: message.chat.id, sender_id: sender.id).last(2)[0]
-    prev_msg&.notification.destroy
+    prev_msg&.notification&.destroy
   end
 end

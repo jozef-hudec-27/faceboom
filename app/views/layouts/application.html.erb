@@ -31,6 +31,10 @@
         <% end %>
         
         <%= yield %>
+
+        <div class="current-chat-wrapper">
+            <%= turbo_frame_tag 'current-chat' do %><% end %>
+        </div>
     </div>
 
     <% if user_signed_in? %>
