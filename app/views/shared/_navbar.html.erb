@@ -25,9 +25,10 @@
 
     <div class="navbar-end">
         <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
-            <a id="message-notifications-btn" class="navbar-link is-arrowless <% if get_unseen_message_notifications.any? %>has-text-danger<%end %>" data-action="dropdown#showDropdown">
-                <i class="fa-solid fa-message"></i>
-            </a>
+            <%= link_to '<i class="fa-solid fa-message"></i>'.html_safe, message_notifications_see_all_path,
+                        id: 'message-notifications-btn', class: "navbar-link is-arrowless #{get_unseen_message_notifications.any? && 'has-text-danger'}",
+                        data: { action: 'dropdown#showDropdown', turbo_method: :put }
+            %>
 
             <div class="navbar-dropdown is-right">
                 <div class="dropdown-content p-8 pr-0">
@@ -40,10 +41,12 @@
                                     <%= image_tag noti.sender.avatar, style: 'max-width: 56px; max-height: 56px;' %>
 
                                     <div class="flexbox flex-column gap-1">
-                                        <p class="dark-color font-11 <% unless noti.message.is_read %>bold<% end %>"><%= noti.sender.full_name %></p>
+                                        <p id="msg-noti-<%= noti.id %>-sender" class="dark-color font-11 <% unless noti.message.is_read %>bold<% end %>">
+                                            <%= noti.sender.full_name %>
+                                        </p>
 
                                         <div class="flexbox flex-align-center gap-4">
-                                            <p class="font-09" style="line-height: 1em; <% unless noti.message.is_read %>font-weight: 600; color: #1877f2;<% end %>">
+                                            <p id="msg-noti-<%= noti.id %>-body" class="font-09" style="line-height: 1em; <% unless noti.message.is_read %>font-weight: 600; color: #1877f2;<% end %>">
                                                 <%= noti.message.body[..25] + (noti.message.body.size > 25 ? '...' : '') %>
                                             </p>
                                             <p class="flexbox flex-center gap-6">
@@ -53,7 +56,7 @@
                                     </div>
                                     
                                     <% unless noti.message.is_read %>
-                                        <span class="ml-auto font-35" style="color: #1877f2;">•</span>
+                                        <span id="msg-noti-<%= noti.id %>-dot" class="ml-auto font-35" style="color: #1877f2;">•</span>
                                     <% end %>
                                 </div>
                             </a>

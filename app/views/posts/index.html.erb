@@ -18,7 +18,11 @@
 
         <div class="scrollable">
             <% current_user.friends.each do |user| %>
-                <a href="<%= chat_user_path user %>?exit=_" data-turbo-frame="current-chat">
+                <a class="contact" href="<%= chat_user_path user %>?exit=_"
+                   data-turbo-frame="current-chat" data-user-id="<%= user.id %>" data-session-cookie="<%= @session_cookie %>" 
+                   data-read-messages-link="<%= messages_read_url user %>.json"
+                   data-see-notification-link="<%= message_notifications_see_url user %>.json"
+                >
                     <div class="contact flexbox gap-8 p-12">
                         <%= image_tag user.avatar %>
 
@@ -35,4 +39,3 @@
         <%= turbo_frame_tag 'current-chat' do %><% end %>
     </div>
 <% end %>
-

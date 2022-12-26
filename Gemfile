@@ -83,3 +83,5 @@ gem 'omniauth-rails_csrf_protection'
 gem 'font-awesome-sass'
 
 gem 'kaminari'
+
+gem 'http'

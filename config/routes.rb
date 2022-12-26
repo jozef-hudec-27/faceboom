@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :messages, only: [:create, :destroy]
+  put '/messages/:user_id/read_all', to: 'messages#read_all', as: :messages_read
 
   scope '/friend_requests', as: :friend_request do
     post '/create', to: 'friend_requests#create'
@@ -44,5 +45,10 @@ Rails.application.routes.draw do
     get '', to: 'notifications#index'
     post '/:id/read', to: 'notifications#read', as: :read
     post '/read_all', to: 'notifications#read_all', as: :read_all
+  end
+
+  scope '/message_notifications', as: :message_notifications do
+    put '/see_all', to: 'message_notifications#mark_all_seen', as: :see_all
+    put '/:user_id/see', to: 'message_notifications#mark_seen', as: :see
   end
 end

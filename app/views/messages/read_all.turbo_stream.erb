@@ -1,0 +1,16 @@
+<% unless @last_message_notification.nil? %>
+    <%= turbo_stream.replace("msg-noti-#{@last_message_notification.id}-sender","
+        <p i class='dark-color font-11'>
+            #{@last_message_notification.sender.full_name}
+        </p>
+    ")
+    %>
+
+    <%= turbo_stream.replace("msg-noti-#{@last_message_notification.id}-body", "
+        <p class='font-09' style='line-height: 1em;'>
+            #{@last_message_notification.message.body[..25] + (@last_message_notification.message.body.size > 25 ? '...' : '')}
+        </p>
+    ") %>
+
+    <%= turbo_stream.remove("msg-noti-#{@last_message_notification.id}-dot") %>
+<% end %>

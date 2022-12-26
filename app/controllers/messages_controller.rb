@@ -31,4 +31,20 @@ class MessagesController < ApplicationController
                                                                            locals: { message: message }
                                               )
   end
+
+  def read_all
+    user = current_user.friends.find_by(id: params[:user_id])
+
+    return unless chat = Chat.between(current_user, user)
+
+    unread_messages = chat.messages.where(sender: user, is_read: false)
+    unread_messages.each { |message| message.update(is_read: true) } 
+
+    @last_message_notification = unread_messages.last&.notification
+
+    respond_to do |format|
+      format.turbo_stream
+      format.json { render json: { last_noti_id: @last_message_notification&.id } }
+    end
+  end
 end

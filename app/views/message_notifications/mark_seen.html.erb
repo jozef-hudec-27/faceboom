@@ -1,0 +1,7 @@
+<% if get_unseen_message_notifications.empty? %>
+    <%= turbo_stream.replace('message-notifications-btn', '
+        <a id="message-notifications-btn" class="navbar-link is-arrowless" data-action="dropdown#showDropdown">
+            <i class="fa-solid fa-message"></i>
+        </a>')
+    %>  
+<% end %>
