@@ -1,3 +1,5 @@
+<% session_cookie = get_session_cookie %>
+
 <div class="home-page-wrapper">
     <div class="flexbox flex-column flex-align-center">
         <% if @first_page %>
@@ -19,7 +21,7 @@
         <div class="scrollable">
             <% current_user.friends.each do |user| %>
                 <a class="contact" href="<%= chat_user_path user %>?exit=_"
-                   data-turbo-frame="current-chat" data-user-id="<%= user.id %>" data-session-cookie="<%= @session_cookie %>" 
+                   data-turbo-frame="current-chat" data-user-id="<%= user.id %>" data-session-cookie="<%= session_cookie %>" 
                    data-read-messages-link="<%= messages_read_url user %>.json"
                    data-see-notification-link="<%= message_notifications_see_url user %>.json"
                 >

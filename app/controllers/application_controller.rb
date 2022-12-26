@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :get_unread_notifications, :get_latest_notifications
   helper_method :get_message_notifications, :get_unseen_message_notifications
+  helper_method :get_session_cookie
   
   protected
   
@@ -28,5 +29,9 @@ class ApplicationController < ActionController::Base
 
   def get_unseen_message_notifications
     current_user&.received_message_notifications.unseen
+  end
+
+  def get_session_cookie
+    CGI.escape(cookies[:_faceboom_session] || '')
   end
 end

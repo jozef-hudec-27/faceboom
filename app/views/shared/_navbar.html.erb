@@ -1,3 +1,5 @@
+<% session_cookie = get_session_cookie %>
+
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="<%= root_path %>">
@@ -36,7 +38,9 @@
                         <h4 class="title is-4">Chats</h4>
 
                         <% get_message_notifications.each do |noti| %>
-                            <a href="<%= chat_user_path noti.sender %>?exit=_" data-turbo-frame="current-chat">
+                            <a class="msg-noti-<%= noti.id %>-wrapper" href="<%= chat_user_path noti.sender %>?exit=_"
+                               data-turbo-frame="current-chat" data-session-cookie="<%= session_cookie %>" data-read-messages-link="<%= messages_read_url noti.sender %>.json"
+                            >
                                 <div class="noti">
                                     <%= image_tag noti.sender.avatar, style: 'max-width: 56px; max-height: 56px;' %>
 

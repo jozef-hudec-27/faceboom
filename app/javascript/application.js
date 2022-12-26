@@ -29,3 +29,17 @@ document.querySelectorAll('a.contact').forEach(el => {
     }
   })
 })
+
+document.querySelectorAll('[class^="msg-noti-"][class$="-wrapper"]').forEach( el => {
+  el.addEventListener('click', async () => {
+    let requestOptions = { method: 'PUT', headers: { 'X-CSRF-Token': csrfToken, 'Cookie': `_faceboom_session=${el.dataset.sessionCookie}` } }
+    let response = await fetch(el.dataset.readMessagesLink, requestOptions)
+    let data = await response.json()
+
+    if (data.last_noti_id) { 
+      document.getElementById(`msg-noti-${data.last_noti_id}-sender`).classList.remove('bold')
+      document.getElementById(`msg-noti-${data.last_noti_id}-body`).style = 'line-height: 1em;'
+      document.getElementById(`msg-noti-${data.last_noti_id}-dot`).remove()
+    }
+  })
+})
