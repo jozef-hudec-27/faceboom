@@ -85,3 +85,5 @@ gem 'font-awesome-sass'
 gem 'kaminari'
 
 gem 'http'
+
+gem 'redis'

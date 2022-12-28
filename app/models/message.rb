@@ -13,7 +13,7 @@ class Message < ApplicationRecord
   private
 
   def broadcast_message
-    broadcast_append_to("chat_#{chat.key}",
+    broadcast_append_later_to("chat_#{chat.key}",
       partial: 'messages/message',
       locals: { message: self },
       target: 'chat-messages'

@@ -18,15 +18,15 @@ class MessagesController < ApplicationController
     end
   end
 
-  def destroy
+def destroy
     message = current_user.sent_messages.find_by id: params[:id]
 
     return if message.nil?
 
     message.update is_removed: true
 
-    Turbo::StreamsChannel.broadcast_remove_to("chat_#{message.chat.key}", target: "remove-msg-#{message.id}-btn")
-    Turbo::StreamsChannel.broadcast_replace_to("chat_#{message.chat.key}", target: "msg-#{message.id}-body",
+    CustomStreamsChannel.broadcast_remove_to("chat_#{message.chat.key}", target: "remove-msg-#{message.id}-btn")
+    CustomStreamsChannel.broadcast_replace_later_to("chat_#{message.chat.key}", target: "msg-#{message.id}-body",
                                                                            partial: 'messages/removed_msg_body',
                                                                            locals: { message: message }
                                               )
