@@ -1,6 +1,6 @@
 <div class="chat-page-wrapper flexbox flex-center">
     <%= turbo_frame_tag 'current-chat' do %>
-        <%= turbo_stream_from "chat_#{@message.chat.key}", channel: CustomStreamsChannel %>
+        <%= turbo_stream_from "chat_#{@message.chat.key}", channel: ChatChannel %>
 
         <div class="chat-tile card p-8">
             <div class="chat-tile-top flexbox"> 

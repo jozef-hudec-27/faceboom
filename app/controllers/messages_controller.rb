@@ -25,8 +25,8 @@ def destroy
 
     message.update is_removed: true
 
-    CustomStreamsChannel.broadcast_remove_to("chat_#{message.chat.key}", target: "remove-msg-#{message.id}-btn")
-    CustomStreamsChannel.broadcast_replace_later_to("chat_#{message.chat.key}", target: "msg-#{message.id}-body",
+    ChatChannel.broadcast_remove_to("chat_#{message.chat.key}", target: "remove-msg-#{message.id}-btn")
+    ChatChannel.broadcast_replace_later_to("chat_#{message.chat.key}", target: "msg-#{message.id}-body",
                                                                            partial: 'messages/removed_msg_body',
                                                                            locals: { message: message }
                                               )

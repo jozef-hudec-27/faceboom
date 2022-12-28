@@ -1,4 +1,4 @@
-class ChannelConnections
+class ChannelSubscriptions
   REDIS_KEY = 'connected_nodes'
 
   def self.redis

@@ -1,7 +1,13 @@
-document.addEventListener('keydown', e => {
-  if (e.code == 'Enter' && document.activeElement == document.getElementById('search-faceboom-input')) {
-      window.location.href = '/users/?q=' + document.getElementById('search-faceboom-input').value;
-  }
-});
+document.addEventListener('turbo:load', () => {
+  let searchFaceboomInput = document.getElementById('search-faceboom-input');
 
-document.getElementById('search-faceboom-input').value = new URLSearchParams(window.location.search).get('q');
+  if (searchFaceboomInput) {
+    searchFaceboomInput.value = new URLSearchParams(window.location.search).get('q');
+    
+    document.addEventListener('keydown', e => {
+      if (e.code == 'Enter' && document.activeElement == searchFaceboomInput) {
+          window.location.href = '/users/?q=' + searchFaceboomInput.value;
+      };
+    });
+  };
+});
