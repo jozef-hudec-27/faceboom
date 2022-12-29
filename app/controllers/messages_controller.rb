@@ -4,11 +4,17 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(body: params.dig(:message)&.dig(:body),
                            chat_id: params.dig(:message)&.dig(:chat),
-                           sender_id: current_user.id
-                          )
+                           sender_id: current_user.id)
     
     respond_to do |format|
       if @message.save
+        receiver = @message.chat.users.find { |u| u != current_user }
+
+        if ChannelSubscriptions.connected?("#{receiver.id}-chat_#{@message.chat.key}")
+          @message.update is_read: true
+          @message.notification.update seen: true
+        end
+
         format.turbo_stream
       else
         @chat = @message.chat
@@ -18,7 +24,7 @@ class MessagesController < ApplicationController
     end
   end
 
-def destroy
+  def destroy
     message = current_user.sent_messages.find_by id: params[:id]
 
     return if message.nil?
@@ -27,8 +33,8 @@ def destroy
 
     ChatChannel.broadcast_remove_to("chat_#{message.chat.key}", target: "remove-msg-#{message.id}-btn")
     ChatChannel.broadcast_replace_later_to("chat_#{message.chat.key}", target: "msg-#{message.id}-body",
-                                                                           partial: 'messages/removed_msg_body',
-                                                                           locals: { message: message }
+                                                                            partial: 'messages/removed_msg_body',
+                                                                            locals: { message: message }
                                               )
   end
 

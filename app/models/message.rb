@@ -23,6 +23,10 @@ class Message < ApplicationRecord
   end
 
   def create_notification
-    MessageNotification.create(message: self, receiver: chat.users.find { |u| u != sender })
+    MessageNotification.create(
+      message: self,
+      receiver: chat.users.find { |u| u != sender },
+      seen: is_read
+    )
   end
 end
