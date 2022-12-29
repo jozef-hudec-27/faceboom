@@ -42,6 +42,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def connected_to?(chat)
+    ChannelSubscriptions.connected? "#{id}-chat_#{chat.key}"
+  end
+
   def friends_with?(user)
     !friends.find_by(id: user.id).nil?
   end

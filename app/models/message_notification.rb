@@ -8,12 +8,20 @@ class MessageNotification < ApplicationRecord
 
   default_scope { order('created_at desc') }
 
-  after_create_commit :destroy_previous_notification
+  after_create_commit do
+    remove_prev_noti_from_dom if receiver.connected_to? message.chat
+    destroy_previous_notification
+  end
 
   private
 
   def destroy_previous_notification
     prev_msg = Message.where(chat_id: message.chat.id, sender_id: sender.id).last(2)[0]
     prev_msg&.notification&.destroy
+  end
+
+  def remove_prev_noti_from_dom
+    prev_msg = message.chat.messages.where(sender: sender).where.not(id: message.id).last
+    UserChannel.broadcast_remove_to("user-#{receiver.id}", target: "msg-noti-#{prev_msg.notification.id}") if prev_msg&.notification
   end
 end

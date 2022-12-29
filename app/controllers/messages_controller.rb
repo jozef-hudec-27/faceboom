@@ -8,12 +8,10 @@ class MessagesController < ApplicationController
     
     respond_to do |format|
       if @message.save
-        receiver = @message.chat.users.find { |u| u != current_user }
-
-        if ChannelSubscriptions.connected?("#{receiver.id}-chat_#{@message.chat.key}")
-          @message.update is_read: true
-          @message.notification.update seen: true
-        end
+        UserChannel.broadcast_prepend_later_to("user-#{@message.receiver.id}", target: 'message-notifications-wrapper',
+          partial: 'message_notifications/noti',
+          locals: { noti: @message.notification, session_cookie: get_session_cookie }
+        ) if @message.receiver.connected_to? @message.chat
 
         format.turbo_stream
       else

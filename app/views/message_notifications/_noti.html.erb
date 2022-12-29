@@ -1,0 +1,27 @@
+<a id="msg-noti-<%= noti.id %>" href="<%= chat_user_path noti.sender %>?exit=_" data-turbo-frame="current-chat"
+    data-controller="chat" data-chat-read-messages-link-value="<%= messages_read_url noti.sender %>.json"
+    data-chat-session-cookie-value="<%= session_cookie %>" data-action="chat#readUnreadMessages"
+>
+    <div class="noti">
+        <%= image_tag noti.sender.avatar, style: 'max-width: 56px; max-height: 56px;' %>
+
+        <div class="flexbox flex-column gap-1">
+            <p id="msg-noti-<%= noti.id %>-sender" class="dark-color font-11 <% unless noti.message.is_read %>bold<% end %>">
+                <%= noti.sender.full_name %>
+            </p>
+
+            <div class="flexbox flex-align-center gap-4">
+                <p id="msg-noti-<%= noti.id %>-body" class="font-09" style="line-height: 1em; <% unless noti.message.is_read %>font-weight: 600; color: #1877f2;<% end %>">
+                    <%= noti.message.body[..25] + (noti.message.body.size > 25 ? '...' : '') %>
+                </p>
+                <p class="flexbox flex-center gap-6">
+                    <span class="font-07">•</span> <%= noti.message.time_since short: true, approx: true %>
+                </p>
+            </div>
+        </div>
+        
+        <% unless noti.message.is_read %>
+            <span id="msg-noti-<%= noti.id %>-dot" class="ml-auto font-35" style="color: #1877f2;">•</span>
+        <% end %>
+    </div>
+</a>

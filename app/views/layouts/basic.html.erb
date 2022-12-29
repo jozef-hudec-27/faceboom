@@ -11,6 +11,7 @@
   </head>
 
   <body style="background-color: black;">
+    <% if user_signed_in? %><%= turbo_stream_from "user-#{current_user.id}", channel: UserChannel %><% end %>
     <%= yield %>
   </body>
 </html>

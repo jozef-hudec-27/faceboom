@@ -11,7 +11,10 @@
   </head>
 
   <body>
-    <% if user_signed_in? %><%= render 'shared/navbar' %><% end %>
+    <% if user_signed_in? %>
+        <%= render 'shared/navbar' %>
+        <%= turbo_stream_from "user-#{current_user.id}", channel: UserChannel %>
+    <% end %>
 
     <div class="p-16">
         <% if notice%>
