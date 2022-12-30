@@ -9,8 +9,9 @@ class MessageNotification < ApplicationRecord
   default_scope { order('created_at desc') }
 
   after_create_commit do
-    remove_prev_noti_from_dom if receiver.connected_to? message.chat
+    remove_prev_noti_from_dom if receiver.online?
     destroy_previous_notification
+    display_push_notification if receiver.online? && !receiver.connected_to?(message.chat)
   end
 
   private
@@ -23,5 +24,12 @@ class MessageNotification < ApplicationRecord
   def remove_prev_noti_from_dom
     prev_msg = message.chat.messages.where(sender: sender).where.not(id: message.id).last
     UserChannel.broadcast_remove_to("user-#{receiver.id}", target: "msg-noti-#{prev_msg.notification.id}") if prev_msg&.notification
+  end
+
+  def display_push_notification
+    UserChannel.broadcast_prepend_later_to("user-#{receiver.id}", target: 'msg-noti-container',
+                                          partial: 'message_notifications/live_noti',
+                                          locals: { noti: self }
+    )
   end
 end

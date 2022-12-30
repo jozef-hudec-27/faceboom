@@ -11,7 +11,11 @@ class MessagesController < ApplicationController
         UserChannel.broadcast_prepend_later_to("user-#{@message.receiver.id}", target: 'message-notifications-wrapper',
           partial: 'message_notifications/noti',
           locals: { noti: @message.notification, session_cookie: get_session_cookie }
-        ) if @message.receiver.connected_to? @message.chat
+        ) if @message.receiver.online? 
+
+        if @message.receiver.online? && !@message.receiver.connected_to?(@message.chat)
+          ActionCable.server.broadcast "user-#{@message.receiver.id.to_s}", @message
+        end
 
         format.turbo_stream
       else

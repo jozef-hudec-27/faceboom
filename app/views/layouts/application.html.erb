@@ -11,6 +11,8 @@
   </head>
 
   <body>
+    <div id="msg-noti-container" class="flexbox flex-column gap-6"></div>
+    
     <% if user_signed_in? %>
         <%= render 'shared/navbar' %>
         <%= turbo_stream_from "user-#{current_user.id}", channel: UserChannel %>

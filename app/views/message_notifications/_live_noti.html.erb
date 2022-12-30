@@ -1,0 +1,7 @@
+<div class="live-msg-noti flexbox flex-align-center" data-controller="live-msg-noti" data-live-msg-noti-target="noti">
+    <%= image_tag noti.sender.avatar, class: 'rounded' %>
+
+    <p class="live-msg-noti-body flexbox flex-align-center rounded py-2 pr-4 white">
+        <%= noti.message.body[..30] + (noti.message.body.length > 30 ? '...' : '') %>
+    </p>
+</div>

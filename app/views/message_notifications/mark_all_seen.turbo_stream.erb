@@ -1,5 +1,7 @@
-<%= turbo_stream.replace('message-notifications-btn', '
-    <a id="message-notifications-btn" class="navbar-link is-arrowless" data-action="dropdown#showDropdown">
-        <i class="fa-solid fa-message"></i>
-    </a>')
+<%= turbo_stream.replace('message-notifications-btn', "
+    <a id='message-notifications-btn' class='navbar-link is-arrowless' data-action='dropdown#showDropdown'
+     data-turbo-method='put' href='#{message_notifications_see_all_path}'
+    >
+        <i class='fa-solid fa-message'></i>
+    </a>")
 %>
