@@ -43,7 +43,11 @@ class User < ApplicationRecord
   end
 
   def connected_to?(chat)
-    ChannelSubscriptions.connected? "#{id}-chat_#{chat.key}"
+    ChannelSubscriptions.connected? 'ChatChannel', "#{id}-chat_#{chat.key}"
+  end
+
+  def online?
+    ChannelSubscriptions.connected? 'UserChannel', id.to_s
   end
 
   def friends_with?(user)
