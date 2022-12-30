@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
         ) if @message.receiver.online? 
 
         if @message.receiver.online? && !@message.receiver.connected_to?(@message.chat)
-          ActionCable.server.broadcast "user-#{@message.receiver.id.to_s}", @message
+          ActionCable.server.broadcast "user-#{@message.receiver.id.to_s}", { new_message: true }
         end
 
         format.turbo_stream

@@ -13,7 +13,11 @@
   <body style="background-color: black;">
     <div id="msg-noti-container" class="flexbox flex-column gap-6"></div>
 
-    <% if user_signed_in? %><%= turbo_stream_from "user-#{current_user.id}", channel: UserChannel %><% end %>
+    <% if user_signed_in? %>
+        <audio class="hidden" id="msg-noti-sound"><source src="<%= asset_path 'msg-noti-sound.mp3' %>" type="audio/mpeg"></audio>
+        <%= turbo_stream_from "user-#{current_user.id}", channel: UserChannel %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
