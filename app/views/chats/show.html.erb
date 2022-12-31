@@ -5,7 +5,11 @@
         <div class="chat-tile card p-8">
             <div class="chat-tile-top flexbox"> 
                 <div class="flexbox flex-align-center gap-8">
-                    <%= render 'users/avatar_link', user: @other_user, size: '32px' %>
+                    <div class="online-avatar-wrapper">
+                        <%= render 'users/avatar_link', user: @other_user, size: '32px' %>
+                        <span class="online-dot"></span>
+                    </div>
+
                     <a href="<%= user_path @other_user %>" class="bold decoration-none"><%= @other_user.full_name %></a>
                 </div>
 

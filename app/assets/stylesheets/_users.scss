@@ -349,6 +349,8 @@ div[id$="section-container"] h2 {
     h3 { font-weight: 600;}
     p { color: $dark-color; }
 
+    .online-dot { box-shadow: -2px 0 0 0 $bg-color, 0 -2px 0 0 $bg-color; }
+
     .contact {
         border-radius: 12px;
         cursor: pointer;
@@ -361,7 +363,6 @@ div[id$="section-container"] h2 {
             border-radius: 50%;
         }
     }
-
 }
 
 .current-chat-wrapper {
@@ -372,3 +373,19 @@ div[id$="section-container"] h2 {
 }
 
 [id^="user-"] button:active { transform: scale(0.95); }
+
+.online-avatar-wrapper {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+
+    .online-dot {
+        width: 20%;
+        height: 20%;
+        border-radius: 50%;
+        background-color: #31A24C;
+        position: absolute;
+        right: 0;
+        top: 60%;
+    }
+}

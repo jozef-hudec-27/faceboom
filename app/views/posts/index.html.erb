@@ -26,7 +26,10 @@
                    data-chat-see-msg-notifications-link-value="<%= message_notifications_see_url user %>.json"
                 >
                     <div class="contact flexbox gap-8 p-12">
-                        <%= image_tag user.avatar %>
+                        <div class="online-avatar-wrapper">
+                            <%= image_tag user.avatar %>
+                            <% if user.online? %><span class="online-dot"></span><% end %>
+                        </div>
 
                         <p><%= user.full_name %></p>
                     </div>

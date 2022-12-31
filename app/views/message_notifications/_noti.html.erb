@@ -3,7 +3,10 @@
     data-chat-session-cookie-value="<%= session_cookie %>" data-action="chat#readUnreadMessages"
 >
     <div class="noti">
-        <%= image_tag noti.sender.avatar, style: 'max-width: 56px; max-height: 56px;' %>
+        <div class="online-avatar-wrapper">
+            <%= image_tag noti.sender.avatar, style: 'max-width: 56px; max-height: 56px;' %>
+            <% if noti.sender.online? %><span class="online-dot"></span><% end %>
+        </div>
 
         <div class="flexbox flex-column gap-1">
             <p id="msg-noti-<%= noti.id %>-sender" class="dark-color font-11 <% unless noti.message.is_read %>bold<% end %>">

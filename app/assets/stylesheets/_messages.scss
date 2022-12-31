@@ -8,6 +8,8 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
         padding-bottom: 6px;
 
+        .online-dot { box-shadow: -2px 0 0 0 white, 0 -2px 0 0 white; }
+
         button {
             @extend %reset-appearance;
 

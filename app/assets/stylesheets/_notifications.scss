@@ -20,8 +20,10 @@
         gap: 12px;
 
         &:hover { background-color: rgb(242, 242, 242); }
-
+        
         p { color: rgb(96, 98, 102); }
+
+        .online-dot { box-shadow: -2px 0 0 0 white, 0 -2px 0 0 white; }
 
         img {
             max-width: 48px;
