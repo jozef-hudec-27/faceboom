@@ -8,11 +8,11 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @original_comment_id = params[:comment_id]
+    @parent_comment_id = params[:comment_id]
 
     @comment = current_user.comments.build(body: params[:comment][:body],
-                                           commentable_id: @original_comment_id || params[:post_id],
-                                           commentable_type: @original_comment_id ? 'Comment' : 'Post')
+                                           commentable_id: @parent_comment_id || params[:post_id],
+                                           commentable_type: @parent_comment_id ? 'Comment' : 'Post')
 
     respond_to do |format|
       if @comment.save
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
       else
         invalid_comment_msg_style = 'font-size: 0.6em; opacity: 0.7; margin-left: 8px;'
         format.turbo_stream do
-          render(turbo_stream: turbo_stream.update(@original_comment_id ? "#{@original_comment_id}-invalid-reply-msg-wrapper" : 'invalid-post-comment-msg-wrapper',
+          render(turbo_stream: turbo_stream.update(@parent_comment_id ? "#{@parent_comment_id}-invalid-reply-msg-wrapper" : 'invalid-post-comment-msg-wrapper',
                                                    "<p style='#{invalid_comment_msg_style}'>Invalid comment!</p>"))
         end
       end
@@ -38,9 +38,9 @@ class CommentsController < ApplicationController
   end
 
   def new_reply
-    @original_comment = Comment.find_by id: params[:comment_id]
+    @parent_comment = Comment.find_by id: params[:comment_id]
 
-    return redirect_to_root_with_flash('Comment not found.') if @original_comment.nil?
+    return redirect_to_root_with_flash('Comment not found.') if @parent_comment.nil?
 
     @new_comment = Comment.new
   end

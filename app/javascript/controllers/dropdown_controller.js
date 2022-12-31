@@ -1,9 +1,9 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ['main']
+  static targets = ['main'];
 
   showDropdown() {
-    this.mainTarget.classList.toggle('is-active')
-  }
-}
+    this.mainTarget.classList.toggle('is-active');
+  };
+};

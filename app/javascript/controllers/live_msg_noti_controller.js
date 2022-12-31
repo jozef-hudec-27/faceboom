@@ -11,5 +11,5 @@ export default class extends Controller {
         this.notiTarget.remove();
       }, 750);
     }, 5000);
-  }
+  };
 };

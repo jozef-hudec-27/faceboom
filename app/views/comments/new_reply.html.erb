@@ -1,13 +1,13 @@
-<%= turbo_frame_tag "comment-#{@original_comment.id}-reply-form" do %>
+<%= turbo_frame_tag "comment-#{@parent_comment.id}-reply-form" do %>
     <div class="comment-reply-form-wrapper">
         <%= render 'users/avatar_link', user: current_user, size: '24px' %>
         
         <div>
-            <div id="<%= @original_comment.id %>-invalid-reply-msg-wrapper"></div>
+            <div id="<%= @parent_comment.id %>-invalid-reply-msg-wrapper"></div>
 
-            <%= form_with model: @new_comment, url: post_comments_path(@original_comment.commentable), data: { controller: 'comment' } do |f| %>
-                <%= f.hidden_field :comment_id, value: @original_comment.id, name: 'comment_id' %>
-                <%= f.text_area :body, id: "comment-#{@original_comment.id}-reply-input", placeholder: "Reply to #{@original_comment.user.full_name}", data: { comment_target: 'input' } %><br>
+            <%= form_with model: @new_comment, url: post_comments_path(@parent_comment.commentable), data: { controller: 'comment' } do |f| %>
+                <%= f.hidden_field :comment_id, value: @parent_comment.id, name: 'comment_id' %>
+                <%= f.text_area :body, id: "comment-#{@parent_comment.id}-reply-input", placeholder: "Reply to #{@parent_comment.user.full_name}", data: { comment_target: 'input' } %><br>
                 <%= f.hidden_field :body_copy, name: 'comment[body]', data: { comment_target: 'inputHidden' } %>
                 <%= f.submit 'Respond', data: { action: 'comment#submit' } %>
             <% end %>

@@ -1,8 +1,8 @@
-<% if @original_comment_id.nil? %>
+<% if @parent_comment_id.nil? %>
     <%= turbo_stream.prepend('post-comments', @comment) %>
     <%= turbo_stream.update('invalid-post-comment-msg-wrapper', '') %>
 <% else %>
-    <%= turbo_stream.append("comment-#{@original_comment_id}-replies-container", @comment) %>
-    <%= turbo_stream.update("comment-#{@original_comment_id}-replies-link", pluralize(@comment.commentable.comments.count, 'Reply')) %>
-    <%= turbo_stream.update("#{@original_comment_id}-invalid-reply-msg-wrapper", '') %>
+    <%= turbo_stream.append("comment-#{@parent_comment_id}-replies-container", @comment) %>
+    <%= turbo_stream.update("comment-#{@parent_comment_id}-replies-link", pluralize(@comment.commentable.comments.count, 'Reply')) %>
+    <%= turbo_stream.update("#{@parent_comment_id}-invalid-reply-msg-wrapper", '') %>
 <% end %>

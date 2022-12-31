@@ -10,8 +10,8 @@ document.addEventListener('turbo:load', function() {
       let offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
       window.scrollTo({
-          top: offsetPosition,
+          top: offsetPosition
       });
-    }
-  }
-})
+    };
+  };
+});

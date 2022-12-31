@@ -4,9 +4,7 @@ class MessageNotificationsController < ApplicationController
   def mark_all_seen
     message_notifications = current_user.received_message_notifications.unseen
 
-    message_notifications.each do |noti|
-      noti.update seen: true
-    end
+    message_notifications.each { |noti| noti.update seen: true }
 
     respond_to { |format| format.turbo_stream }
   end
