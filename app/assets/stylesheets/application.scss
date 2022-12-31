@@ -164,3 +164,11 @@ body {
 #notice, #alert { width: fit-content; }
 #notice { border: 1px solid #296fa8; }
 #alert { border: 1px solid #cc0f35; }
+
+.warning-msg {
+    font-weight: 500;
+    position: fixed;
+    z-index: 2;
+    max-width: 500px;
+    box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.15);
+}
