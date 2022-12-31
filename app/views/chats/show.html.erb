@@ -7,7 +7,7 @@
                 <div class="flexbox flex-align-center gap-8">
                     <div class="online-avatar-wrapper">
                         <%= render 'users/avatar_link', user: @other_user, size: '32px' %>
-                        <span class="online-dot"></span>
+                        <% if @other_user.online? %><span class="online-dot"></span><% end %>
                     </div>
 
                     <a href="<%= user_path @other_user %>" class="bold decoration-none"><%= @other_user.full_name %></a>

@@ -12,16 +12,16 @@ class CommentsController < ApplicationController
 
     @comment = current_user.comments.build(body: params[:comment][:body],
                                            commentable_id: @original_comment_id || params[:post_id],
-                                           commentable_type: @original_comment_id ? 'Comment' : 'Post'
-                                          )
-    
+                                           commentable_type: @original_comment_id ? 'Comment' : 'Post')
+
     respond_to do |format|
       if @comment.save
         format.turbo_stream
       else
         invalid_comment_msg_style = 'font-size: 0.6em; opacity: 0.7; margin-left: 8px;'
-        format.turbo_stream do render(turbo_stream: turbo_stream.update(@original_comment_id ? "#{@original_comment_id}-invalid-reply-msg-wrapper" : 'invalid-post-comment-msg-wrapper',
-          "<p style='#{invalid_comment_msg_style}'>Invalid comment!</p>"))
+        format.turbo_stream do
+          render(turbo_stream: turbo_stream.update(@original_comment_id ? "#{@original_comment_id}-invalid-reply-msg-wrapper" : 'invalid-post-comment-msg-wrapper',
+                                                   "<p style='#{invalid_comment_msg_style}'>Invalid comment!</p>"))
         end
       end
     end
@@ -33,10 +33,8 @@ class CommentsController < ApplicationController
     return redirect_to_root_with_flash("You don't have permission to do this.") if comment.nil?
 
     comment.destroy
-    
-    respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove("comment-#{comment.id}") }
-    end
+
+    respond_to { |format| format.turbo_stream { render turbo_stream: turbo_stream.remove("comment-#{comment.id}") } }
   end
 
   def new_reply
@@ -60,14 +58,9 @@ class CommentsController < ApplicationController
 
     like = Like.where(likeable: @comment, user: current_user).first
 
-    if like
-      like.destroy
-    else
-      Like.create likeable: @comment, user: current_user
-    end
+    like&.destroy
+    Like.create(likeable: @comment, user: current_user) unless like
 
-    respond_to do |format|
-      format.turbo_stream
-    end
+    respond_to { |format| format.turbo_stream }
   end
 end

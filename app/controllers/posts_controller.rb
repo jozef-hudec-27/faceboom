@@ -1,6 +1,6 @@
-class PostsController < ApplicationController  
+class PostsController < ApplicationController
   include ActiveStorage::SetCurrent
-  
+
   before_action :authenticate_user!
 
   def index
@@ -16,12 +16,12 @@ class PostsController < ApplicationController
 
     @comments = @post.comments.includes :user, :likes, :comments
     @comment = Comment.new
-    
+
     render layout: 'basic'
   end
 
   def create
-    params[:post] = params[:post].except(:image) if params[:post][:image] == ""
+    params[:post] = params[:post].except(:image) if params[:post][:image] == ''
 
     @post = current_user.posts.build post_params
 
@@ -61,12 +61,12 @@ class PostsController < ApplicationController
     @post.image.attach(params[:post][:image]) unless params[:post][:image].nil?
 
     respond_to do |format|
-        if @post.update(body: params[:post][:body])
-          format.turbo_stream
-        else
-          flash[:alert] = "Could not edit post."
-          redirect_to root_path
-        end
+      if @post.update(body: params[:post][:body])
+        format.turbo_stream
+      else
+        flash[:alert] = 'Could not edit post.'
+        redirect_to root_path
+      end
     end
   end
 
@@ -74,20 +74,15 @@ class PostsController < ApplicationController
     @post = Post.find_by id: params[:id]
 
     return if @post.nil?
-    
+
     like = Like.where(likeable: @post, user: current_user).first
 
-    if like
-      like.destroy
-    else
-      Like.create likeable: @post, user: current_user
-    end
+    like&.destroy
+    Like.create(likeable: @post, user: current_user) unless like
 
     @is_liked = @post.liked_by? current_user
 
-    respond_to do |format|
-      format.turbo_stream
-    end
+    respond_to { |format| format.turbo_stream }
   end
 
   def save

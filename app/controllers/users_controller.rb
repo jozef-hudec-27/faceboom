@@ -5,25 +5,17 @@ class UsersController < ApplicationController
   def index
     query = params[:q]&.downcase || ''
     @users = []
-    User.where('LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?', '%' +  User.sanitize_sql_like(query) + '%', '%' +  User.sanitize_sql_like(query) + '%')
+    User.where('LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?', "%#{User.sanitize_sql_like(query)}%",
+               "%#{User.sanitize_sql_like(query)}%")
         .where.not(id: current_user.id).each do |user|
-      is_friend = current_user.friends_with?(user)
-      request_status = current_user.friend_request_status_with(user)
-      profile_action_data = {
-        url: is_friend ? nil : [friend_request_create_path, friend_request_cancel_path, friend_request_accept_path][request_status],
-        obj_id: is_friend ? nil : request_status.zero? ? user.id : current_user.pending_friend_request_with(user)&.id,
-        submit_text: is_friend ? nil : ['Send request', 'Cancel request', 'Accept request'][request_status]
-      }
-
-      @users << [user, request_status, is_friend, profile_action_data]
+      @users << data_for(user)
     end
   end
 
   def show
     @user = User.find_by id: params[:id]
-
     @is_self = @user == current_user
-    
+
     unless @is_self
       is_friend = current_user.friends_with? @user
       @friend_request_status = current_user.friend_request_status_with @user
@@ -31,10 +23,9 @@ class UsersController < ApplicationController
       url = is_friend ? unfriend_users_path : [friend_request_create_path, friend_request_cancel_path, friend_request_accept_path][@friend_request_status]
       obj_id = @friend_request_status.zero? ? @user.id : current_user.pending_friend_request_with(@user)&.id
       submit_text = is_friend ? 'Remove Friend' : ['Send request', 'Cancel request', 'Accept request'][@friend_request_status]
-      
-      @profile_action_data = { url: url, obj_id: obj_id, submit_text: submit_text }
-    end
 
+      @profile_action_data = { url:, obj_id:, submit_text: }
+    end
   end
 
   def unfriend
@@ -49,36 +40,51 @@ class UsersController < ApplicationController
   def mail_sent
     @mail_type = params[:mail_type]
 
-    unless ['confirmation', 'unlock', 'password_reset'].include? @mail_type
+    unless %w[confirmation unlock password_reset].include? @mail_type
       flash[:alert] = 'Invalid action.'
       return redirect_back fallback_location: new_user_session_path
     end
 
     @user = User.find_by id: params[:id]
 
-    if @mail_type == 'confirmation'
-      confirmation_string = @user&.confirmation_sent_at.to_s.split(' ').join('')
-    elsif @mail_type == 'unlock'
-      confirmation_string = @user&.locked_at.to_s.split(' ').join('')
-    elsif @mail_type == 'password_reset'
-      confirmation_string = @user&.reset_password_sent_at.to_s.split(' ').join('')
-    end
+    mail_type_hash = {
+      'confirmation' => @user&.confirmation_sent_at.to_s.split(' ').join(''),
+      'unlock' => @user&.locked_at.to_s.split(' ').join(''),
+      'password_reset' => @user&.reset_password_sent_at.to_s.split(' ').join('')
+    }
+    confirmation_string = mail_type_hash[@mail_type]
 
     if @user.nil? ||
        params[:confirmation_string] != confirmation_string ||
        (@mail_type == 'confirmation' && @user.confirmed?) ||
        (@mail_type == 'unlock' && !@user.access_locked?) ||
        (@mail_type == 'password_reset' && !@user.reset_password_period_valid?)
-      return redirect_to_sign_in_with_flash('Invalid action.')
+      redirect_to_sign_in_with_flash('Invalid action.')
     end
   end
 
   private
 
   def unauthenicate_user!
-    if user_signed_in?
-      flash[:alert] = 'You are already signed in.'
-      redirect_to root_path
-    end
+    return unless user_signed_in?
+
+    flash[:alert] = 'You are already signed in.'
+    redirect_to root_path
+  end
+
+  def data_for(user)
+    is_friend = current_user.friends_with?(user)
+    request_status = current_user.friend_request_status_with(user)
+    profile_action_data = {
+      url: is_friend ? nil : [friend_request_create_path, friend_request_cancel_path, friend_request_accept_path][request_status],
+      submit_text: is_friend ? nil : ['Send request', 'Cancel request', 'Accept request'][request_status],
+      obj_id: if is_friend
+                nil
+              else
+                request_status.zero? ? user.id : current_user.pending_friend_request_with(user)&.id
+              end
+    }
+
+    [user, request_status, is_friend, profile_action_data]
   end
 end

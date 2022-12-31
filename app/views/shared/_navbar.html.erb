@@ -1,4 +1,4 @@
-<% session_cookie = get_session_cookie %>
+<% session_cookie = faceboom_session %>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
@@ -28,7 +28,7 @@
     <div class="navbar-end">
         <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
             <%= link_to '<i class="fa-solid fa-message"></i>'.html_safe, message_notifications_see_all_path,
-                        id: 'message-notifications-btn', class: "navbar-link is-arrowless #{get_unseen_message_notifications.any? && 'has-text-danger'}",
+                        id: 'message-notifications-btn', class: "navbar-link is-arrowless #{unseen_message_notifications.any? && 'has-text-danger'}",
                         data: { action: 'dropdown#showDropdown', turbo_method: :put }
             %>
 
@@ -38,7 +38,7 @@
                         <h4 class="title is-4">Chats</h4>
                         
                         <div id="message-notifications-wrapper">
-                            <%= render(partial: 'message_notifications/noti', collection: get_message_notifications,
+                            <%= render(partial: 'message_notifications/noti', collection: message_notifications,
                                                                               locals: { session_cookie: session_cookie })
                             %>
                         </div>
@@ -48,15 +48,15 @@
         </div>
 
         <div class="navbar-item has-dropdown" data-controller="dropdown" data-dropdown-target="main">
-            <a id="notifications-btn" class="navbar-link is-arrowless <% if get_unread_notifications.any? %>has-text-danger<%end %>" data-action="dropdown#showDropdown">
+            <a id="notifications-btn" class="navbar-link is-arrowless <% if unread_notifications.any? %>has-text-danger<%end %>" data-action="dropdown#showDropdown">
                 <i class="fa-solid fa-bell"></i>
             </a>
 
             <div class="navbar-dropdown is-right">
                 <div class="dropdown-content">
                     <div class="dropdown-item" data-controller="tabs">
-                        <%= render 'notifications/notification_tabs', latest_notifications: get_latest_notifications.first(3),
-                                                                      unread_notifications: get_unread_notifications.first(3),
+                        <%= render 'notifications/notification_tabs', latest_notifications: latest_notifications.first(3),
+                                                                      unread_notifications: unread_notifications.first(3),
                                                                       is_all: false
                         %>
                     </div>

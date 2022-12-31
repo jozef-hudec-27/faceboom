@@ -6,7 +6,7 @@
     <div></div>
 
     <div>
-        <%= image_tag @post.image&.attached? ? @post.image : '', style: 'width: 100%;' %>
+        <%= image_tag(@post.image&.attached? ? @post.image : '', class: 'full-width') %>
     </div>
 
     <div></div>
