@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   include ActiveStorage::SetCurrent
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
+  before_action(only: :index) { redirect_to(new_user_session_path) unless user_signed_in? }
 
   def index
     @posts = Post.posts_for(current_user).page(params[:page] || 1).includes(:user)

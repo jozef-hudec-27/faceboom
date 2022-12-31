@@ -1,24 +1,42 @@
-# README
+# Faceboom
+Welcome to Faceboom, a Ruby on Rails Facebook-like app with features such as creating, liking, saving and commenting on posts, sending friend requests, messaging, and more.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Features
+- Create, like, save, and comment on posts
+- Send and accept friend requests
+- Real-time messaging with other users (ActionCable)
+- Search for and view profiles of other users
 
-Things you may want to cover:
+## Getting Started
+To get started with Faceboom, you'll need to have [Ruby](https://www.ruby-lang.org/) (3.1.2) and [Rails](https://rubyonrails.org/) (7.0.4) installed on your machine, as well as [Postgres](https://www.postgresql.org/) (14.5). Once you have these dependencies set up, follow these steps:
 
-* Ruby version
+1. Clone the repository to your local machine:
+```
+git clone https://github.com/jozef-hudec-27/faceboom.git
+```
 
-* System dependencies
+2. Navigate to the directory:
+```
+cd faceboom
+```
 
-* Configuration
+3. Install the necessary gem dependencies:
+```
+bundle install
+```
 
-* Database creation
+4. Set up the database:
+```
+rails db:create
+rails db:migrate
+```
 
-* Database initialization
+5. Start the server:
+```
+rails s
+```
 
-* How to run the test suite
+6. Visit the app at `http://localhost:3000` in your web browser.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Contributions
+We welcome contributions to Faceboom. If you have an idea for a new feature or have found a bug, please open an issue in the repository.
