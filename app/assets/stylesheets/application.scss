@@ -19,7 +19,6 @@
 @import "font-awesome";
 
 @import "partials/utilities";
-@import "partials/config";     
 
 @import "comments";
 @import "navbar";
@@ -59,25 +58,16 @@ body {
     transition-delay: 0.4s;
 }
 
-.tooltip-text-top {
-    top: -40px;
-    left: -50%;
+@mixin tooltip-text-position($position, $top, $left) {
+    .tooltip-text-#{$position} {
+        top: $top;
+        left: $left;
+    }
 }
 
-.tooltip-text-bottom {
-    top: 25px;
-    left: -50%;
-}
-
-.tooltip-text-left {
-    top: 0;
-    right: 105%;
-}
-
-.tooltip-text-right {
-    top: 0;
-    left: 105%;
-}
+@include tooltip-text-position("top", -40px, -50%);
+@include tooltip-text-position("bottom", 25px, -50%);
+@include tooltip-text-position("right", 0, 105%);
 
 .tooltip {
     position: relative;
@@ -119,14 +109,14 @@ body {
 
     &-btn-primary {
         color: white;
-        background-color: rgb(24, 119, 242);
+        background-color: $main-color;
 
         &:hover { background-color: rgb(14, 109, 232); }
         &:focus { background-color: rgb(4, 99, 222); }
     }
 
     &-btn-secondary {
-        color: rgb(24, 119, 242);
+        color: $main-color;
         background-color: white;
 
         &:focus, &:hover { background-color: $bg-color; }
@@ -145,7 +135,7 @@ body {
 }
 
 .faceboom-logo {
-    color: rgb(24, 119, 242);
+    color: $main-color;
     font-weight: 600;
     letter-spacing: -3px;
 }
@@ -162,8 +152,8 @@ body {
 }
 
 #notice, #alert { width: fit-content; }
-#notice { border: 1px solid #296fa8; }
-#alert { border: 1px solid #cc0f35; }
+#notice { border: 1px solid rgb(41, 111, 168); }
+#alert { border: 1px solid rgb(204, 15, 53); }
 
 .warning-msg {
     font-weight: 500;

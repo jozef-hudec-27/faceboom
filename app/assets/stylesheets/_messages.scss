@@ -1,4 +1,3 @@
-@import "partials/config";   
 @import "partials/utilities";
 
 .chat-tile {
@@ -18,7 +17,7 @@
             &:hover i { color: rgb(34, 129, 252); }
 
             i {
-                color: rgb(24, 119, 242);
+                color: $main-color;
                 font-size: 1.2em;
             }
         }

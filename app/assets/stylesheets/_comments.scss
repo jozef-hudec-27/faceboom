@@ -99,6 +99,7 @@ turbo-frame > .post-comment-form-wrapper { margin-left: 12px; }
 
     textarea {
         @extend %reset-appearance;
+        
         background-color: rgb(240, 242, 245);
         padding: 10px 12px;
         border-radius: 16px;

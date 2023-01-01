@@ -1,3 +1,5 @@
+@import "config";
+
 .flexbox { display: flex; }
 
 @for $i from 1 through 20 {
@@ -88,7 +90,7 @@
     @extend %btn;
 
     color: white;
-    background-color: rgb(24, 119, 242);
+    background-color: $main-color;
 
     &:hover { background-color: rgb(14, 109, 232); }
 }
@@ -103,7 +105,7 @@
 .light-blue-btn {
     @extend %btn;
 
-    color: rgb(24, 119, 242);
+    color: $main-color;
     background-color: rgb(231, 243, 255);
 
     &:hover { background-color: rgb(221, 233, 245); }

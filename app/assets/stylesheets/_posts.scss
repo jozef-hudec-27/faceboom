@@ -1,4 +1,3 @@
-@import "partials/config";     
 @import "partials/utilities";     
 
 .post {
@@ -234,7 +233,7 @@ nav.pagination {
         height: 30px;
         border-radius: 8px;
         background-color: rgb(231, 243, 255);
-        color: rgb(24, 119, 242);
+        color: $main-color;
         display: flex;
         align-items: center;
         justify-content: center;

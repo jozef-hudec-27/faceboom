@@ -6,6 +6,7 @@ Welcome to Faceboom, a Ruby on Rails Facebook-like app with features such as cre
 - Send and accept friend requests
 - Real-time messaging with other users (ActionCable)
 - Search for and view profiles of other users
+- Social login with Facebook
 
 ## Getting Started
 To get started with Faceboom, you'll need to have [Ruby](https://www.ruby-lang.org/) (3.1.2) and [Rails](https://rubyonrails.org/) (7.0.4) installed on your machine, as well as [Postgres](https://www.postgresql.org/) (14.5). Once you have these dependencies set up, follow these steps:
