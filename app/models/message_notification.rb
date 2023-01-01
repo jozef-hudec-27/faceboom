@@ -1,7 +1,7 @@
 class MessageNotification < ApplicationRecord
   belongs_to :message
   belongs_to :receiver, class_name: 'User'
-  has_one :sender, through: :message 
+  has_one :sender, through: :message
 
   scope :unseen, -> { where(seen: false) }
   scope :latest, -> { where('created_at > ?', Time.now - 7.days) }
@@ -22,14 +22,16 @@ class MessageNotification < ApplicationRecord
   end
 
   def remove_prev_noti_from_dom
-    prev_msg = message.chat.messages.where(sender: sender).where.not(id: message.id).last
-    UserChannel.broadcast_remove_to("user-#{receiver.id}", target: "msg-noti-#{prev_msg.notification.id}") if prev_msg&.notification
+    prev_msg = message.chat.messages.where(sender:).where.not(id: message.id).last
+    if prev_msg&.notification
+      UserChannel.broadcast_remove_to("user-#{receiver.id}",
+                                      target: "msg-noti-#{prev_msg.notification.id}")
+    end
   end
 
   def display_push_notification
     UserChannel.broadcast_prepend_later_to("user-#{receiver.id}", target: 'msg-noti-container',
-                                          partial: 'message_notifications/live_noti',
-                                          locals: { noti: self }
-    )
+                                                                  partial: 'message_notifications/live_noti',
+                                                                  locals: { noti: self })
   end
 end

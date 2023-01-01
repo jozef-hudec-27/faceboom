@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   paginates_per 3
-  
-  validates :body, presence: { message: "or image must be given." }, unless: ->(post) { post.image.present? }
-  validates :image, presence: { message: "or body must be given." }, unless: ->(post) { post.body.present? }
+
+  validates :body, presence: { message: 'or image must be given.' }, unless: ->(post) { post.image.present? }
+  validates :image, presence: { message: 'or body must be given.' }, unless: ->(post) { post.body.present? }
 
   belongs_to :user
   has_many :likes, as: :likeable, dependent: :destroy
@@ -17,11 +17,11 @@ class Post < ApplicationRecord
   end
 
   def liked_by?(user)
-    likes.where(user: user).exists?
+    likes.where(user:).exists?
   end
 
   def saved_by?(user)
-    !user.saved_posts.find_by(id: id).nil?
+    !user.saved_posts.find_by(id:).nil?
   end
 
   def all_comments_count(post_comments = nil)

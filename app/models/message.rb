@@ -20,12 +20,11 @@ class Message < ApplicationRecord
 
   def broadcast_message
     ChatChannel.broadcast_append_later_to("chat_#{chat.key}",
-      partial: 'messages/message',
-      locals: { message: self },
-      target: 'chat-messages'
-    )
+                                          partial: 'messages/message',
+                                          locals: { message: self },
+                                          target: 'chat-messages')
 
-    ChatChannel.broadcast_remove_to("chat_#{chat.key}", target: 'empty-chat-msg') 
+    ChatChannel.broadcast_remove_to("chat_#{chat.key}", target: 'empty-chat-msg')
   end
 
   def create_notification

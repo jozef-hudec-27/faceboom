@@ -13,13 +13,14 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id', dependent: :destroy
-  has_many :received_message_notifications, class_name: 'MessageNotification', foreign_key: 'receiver_id', dependent: :destroy
+  has_many :received_message_notifications, class_name: 'MessageNotification', foreign_key: 'receiver_id',
+                                            dependent: :destroy
   has_and_belongs_to_many :friends, class_name: 'User',
                                     join_table: :friendships,
                                     foreign_key: :user_id,
-                                    association_foreign_key: :friend_user_id 
+                                    association_foreign_key: :friend_user_id
   has_and_belongs_to_many :saved_posts, class_name: 'Post', join_table: :saved_posts
-                            
+
   has_one_attached :avatar
 
   before_create :attach_default_avatar
@@ -34,7 +35,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
       user.save!
-      DeviseMailer.with(user: user, provider: auth.provider).welcome.deliver_later
+      DeviseMailer.with(user:, provider: auth.provider).welcome.deliver_later
     end
   end
 
@@ -67,7 +68,11 @@ class User < ApplicationRecord
     # 1 - we sent them
     # 2 - they sent us
 
-    FriendRequest.find_by(sender: self, receiver: user) ? 1 : FriendRequest.find_by(sender: user, receiver: self) ? 2 : 0
+    if FriendRequest.find_by(sender: self, receiver: user)
+      1
+    else
+      FriendRequest.find_by(sender: user, receiver: self) ? 2 : 0
+    end
   end
 
   def unfriend(user)
@@ -87,8 +92,8 @@ class User < ApplicationRecord
   def confirm(args = {})
     pending_any_confirmation do
       if confirmation_period_expired?
-        self.errors.add(:email, :confirmation_period_expired,
-          period: Devise::TimeInflector.time_ago_in_words(self.class.confirm_within.ago))
+        errors.add(:email, :confirmation_period_expired,
+                   period: Devise::TimeInflector.time_ago_in_words(self.class.confirm_within.ago))
         return false
       end
 
@@ -97,14 +102,14 @@ class User < ApplicationRecord
       self.confirmed_at = Time.now.utc
 
       saved = if pending_reconfirmation?
-        skip_reconfirmation!
-        self.email = unconfirmed_email
-        self.unconfirmed_email = nil
+                skip_reconfirmation!
+                self.email = unconfirmed_email
+                self.unconfirmed_email = nil
 
-        save(validate: true)
-      else
-        save(validate: args[:ensure_valid] == true)
-      end
+                save(validate: true)
+              else
+                save(validate: args[:ensure_valid] == true)
+              end
 
       after_confirmation(unconfirmed_email_address) if saved
       saved
@@ -120,9 +125,8 @@ class User < ApplicationRecord
   private
 
   def attach_default_avatar
-    self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default-avatar.svg')),
-                       filename: 'default-avatar.svg',
-                       content_type: 'image/svg+xml'
-                      )
+    avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default-avatar.svg')),
+                  filename: 'default-avatar.svg',
+                  content_type: 'image/svg+xml')
   end
 end

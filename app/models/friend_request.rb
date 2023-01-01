@@ -10,7 +10,8 @@ class FriendRequest < ApplicationRecord
     sender.friends << receiver
     receiver.friends << sender
     destroy
-    Notification.create sender: receiver, receiver: sender, text: "#{receiver.full_name} accepted your friend request.", url: user_path(receiver) 
+    Notification.create sender: receiver, receiver: sender,
+                        text: "#{receiver.full_name} accepted your friend request.", url: user_path(receiver)
 
     if chat = Chat.between(sender, receiver)
       chat.update is_active: true
@@ -25,12 +26,11 @@ class FriendRequest < ApplicationRecord
   end
 
   private
-    
+
   def create_friend_request_notification
-    Notification.create(sender: sender,
-                        receiver: receiver,
+    Notification.create(sender:,
+                        receiver:,
                         text: "#{sender.full_name} sent you a friend request.",
-                        url: user_path(sender)
-                      )
+                        url: user_path(sender))
   end
 end

@@ -13,14 +13,14 @@ class Comment < ApplicationRecord
   default_scope { order('created_at desc') }
 
   def liked_by?(user)
-    likes.where(user: user).exists?
+    likes.where(user:).exists?
   end
 
   def root_post
     if commentable_type == 'Post'
-      return commentable
+      commentable
     else
-      return commentable.root_post
+      commentable.root_post
     end
   end
 
@@ -33,7 +33,6 @@ class Comment < ApplicationRecord
     Notification.create(sender: user,
                         receiver: notification_receiver,
                         text: "#{user.full_name} " + (commentable_type == 'Post' ? 'commented on your post.' : 'replied to your comment.'),
-                        url: post_path(commentable_type == 'Post' ? commentable : commentable.root_post)
-                      )
+                        url: post_path(commentable_type == 'Post' ? commentable : commentable.root_post))
   end
 end

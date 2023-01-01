@@ -15,7 +15,6 @@ class Like < ApplicationRecord
     Notification.create(sender: user,
                         receiver: notification_receiver,
                         text: "#{user.full_name} liked your #{likeable_type}.",
-                        url: post_path(likeable_type == 'Post' ? likeable : likeable.root_post)
-                      )
+                        url: post_path(likeable_type == 'Post' ? likeable : likeable.root_post))
   end
 end
