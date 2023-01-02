@@ -24,7 +24,9 @@
                 <% end %>
             </div>
 
-            <div id="chat-messages" class="chat-messages scrollable flexbox flex-column gap-6">
+            <div id="chat-messages" class="chat-messages scrollable flexbox flex-column gap-6" data-controller="messages" data-messages-target="messages"
+              data-other-user-id="<%= @other_user.id %>" data-action="scroll->messages#updateShouldScroll"
+            >
                 <%= render(partial: 'messages/message', collection: @messages) ||
                     '<i id="empty-chat-msg" style="text-align: center;">You are now connected on Faceboom.</i>'.html_safe
                 %>

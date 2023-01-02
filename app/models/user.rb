@@ -25,6 +25,8 @@ class User < ApplicationRecord
 
   before_create :attach_default_avatar
 
+  default_scope -> { order(:first_name) }
+
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |user|
       user.provider = auth.provider

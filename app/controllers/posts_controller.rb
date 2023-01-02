@@ -8,6 +8,7 @@ class PostsController < ApplicationController
     @posts = Post.posts_for(current_user).page(params[:page] || 1).includes(:user)
     @is_first_page = params[:page].nil? || params[:page] == '1'
     @is_turbo_frame_request = !params[:t].nil?
+    @contacts = current_user.friends.sort_by { |friend| friend.online? ? 0 : 1 }
   end
 
   def show
