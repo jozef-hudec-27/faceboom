@@ -4,6 +4,7 @@ class User < ApplicationRecord
          :confirmable, :lockable
   devise :omniauthable, omniauth_providers: %i[facebook]
   validates :first_name, :last_name, presence: true
+  validate :acceptable_avatar
 
   has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: 'sender_id', dependent: :destroy
   has_many :received_friend_requests, class_name: 'FriendRequest', foreign_key: 'receiver_id', dependent: :destroy
@@ -130,5 +131,18 @@ class User < ApplicationRecord
     avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default-avatar.svg')),
                   filename: 'default-avatar.svg',
                   content_type: 'image/svg+xml')
+  end
+
+  def acceptable_avatar
+    return unless avatar.attached?
+
+    unless avatar.byte_size <= 3.megabyte
+      errors.add :avatar, 'is too big'
+    end
+
+    acceptable_types = ['image/jpeg', 'image/png', 'image/svg+xml']
+    unless acceptable_types.include? avatar.content_type
+      errors.add :avatar, 'must be a JPEG or PNG'
+    end
   end
 end

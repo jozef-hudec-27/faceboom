@@ -31,7 +31,7 @@ class PostsController < ApplicationController
       if @post.save
         format.turbo_stream
       else
-        flash[:alert] = 'Post must have at least body or image!'
+        flash[:alert] = 'Post must have a body or an image (PNG/JPEG, max 5MB)!'
         format.html { redirect_to root_path }
       end
     end

@@ -3,6 +3,7 @@ class Post < ApplicationRecord
 
   validates :body, presence: { message: 'or image must be given.' }, unless: ->(post) { post.image.present? }
   validates :image, presence: { message: 'or body must be given.' }, unless: ->(post) { post.body.present? }
+  validate :acceptable_image
 
   belongs_to :user
   has_many :likes, as: :likeable, dependent: :destroy
@@ -35,5 +36,20 @@ class Post < ApplicationRecord
     end
 
     count
+  end
+
+  private
+
+  def acceptable_image
+    return unless image.attached?
+
+    unless image.byte_size <= 5.megabyte
+      errors.add :image, 'is too big'
+    end
+
+    acceptable_types = ['image/jpeg', 'image/png']
+    unless acceptable_types.include? image.content_type
+      errors.add :image, 'must be a JPEG or PNG'
+    end
   end
 end
