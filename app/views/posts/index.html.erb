@@ -21,7 +21,7 @@
         <div class="scrollable">
             <% @contacts.each do |user| %>
                 <a class="contact" href="<%= chat_user_path user %>?exit=_" data-turbo-frame="current-chat" 
-                   data-controller="chat" data-action="chat#readUnreadMessages chat#seeMsgNotifications"
+                    data-action="chat#readUnreadMessages chat#seeMsgNotifications"
                    data-chat-read-messages-link-value="<%= messages_read_url user %>.json" data-chat-session-cookie-value="<%= session_cookie %>"
                    data-chat-see-msg-notifications-link-value="<%= message_notifications_see_url user %>.json"
                 >

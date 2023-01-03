@@ -7,8 +7,8 @@ class Message < ApplicationRecord
 
   validates :body, presence: true
 
-  default_scope { order(:created_at) }
-
+  default_scope { order(created_at: :desc) }
+  
   after_create_commit do
     broadcast_message
     create_notification

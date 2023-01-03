@@ -10,7 +10,7 @@ class ChatsController < ApplicationController
 
     @show_close_btn = !params[:exit].nil?
 
-    @messages = @chat.messages.includes(:sender)
+    @messages = @chat.messages.includes(:sender).page(params[:page] || 1).reverse
     @message = @chat.messages.build
 
     if params[:exit].nil?
@@ -18,6 +18,11 @@ class ChatsController < ApplicationController
            'Cookie' => "_faceboom_session=#{faceboom_session}"].put messages_read_url(@other_user)
       HTTP['X-CSRF-Token' => form_authenticity_token,
            'Cookie' => "_faceboom_session=#{faceboom_session}"].put message_notifications_see_url(@other_user)
+    end
+
+    respond_to do |format|
+      format.html
+      format.json() { render json: @messages, include: :sender, methods: :time_since }
     end
   end
 end
