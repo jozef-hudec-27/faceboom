@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     get 'chat', on: :member, to: 'chats#show'
   end
 
+  get '/privacy_policy', to: 'users#privacy_policy'
+
   resources :messages, only: [:create, :destroy]
   put '/messages/:user_id/read_all', to: 'messages#read_all', as: :messages_read
 

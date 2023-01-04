@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:mail_sent]
+  before_action :authenticate_user!, except: [:mail_sent, :privacy_policy]
   before_action :unauthenicate_user!, only: [:mail_sent]
 
   def index
@@ -62,6 +62,8 @@ class UsersController < ApplicationController
       redirect_to_sign_in_with_flash('Invalid action.')
     end
   end
+
+  def privacy_policy; end
 
   private
 
