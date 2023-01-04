@@ -87,3 +87,5 @@ gem 'kaminari'
 gem 'http'
 
 gem 'redis'
+
+gem 'aws-sdk-s3', require: false
