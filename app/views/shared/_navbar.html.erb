@@ -6,11 +6,30 @@
       <h1 class="title is-4">faceboom</h1>
     </a>
 
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+    <div aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" class="navbar-burger dropdown is-hoverable is-right">
+        <div class="dropdown-trigger" style="margin: 5px 3px;">
+            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+                <a href="<%= user_path current_user %>" class="dropdown-item">
+                    My Account
+                </a>
+                <a href="<%= notifications_path %>" class="dropdown-item">
+                    Notifications
+                </a>
+                <a href="<%= users_path %>" class="dropdown-item">
+                    Explore
+                </a>
+                <a href="<%= destroy_user_session_path %>" class="dropdown-item" data-turbo-method="delete">
+                    Log out
+                </a>
+            </div>
+        </div>
+    </div>
   </div>
 
   <div class="navbar-menu">

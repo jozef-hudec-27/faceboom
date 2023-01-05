@@ -43,7 +43,6 @@
                     <%= f.file_field :image, hidden: true,
                         data: { post_create_modal_target: 'image', action: 'post-create-modal#changeFilePreview' }
                     %>
-                    <%= f.file_field :imageCopy, name: 'post[image]', hidden: true, data: { post_create_modal_target: 'imageCopy' } %>
                 <% end %>
             <% end %>
         </section>

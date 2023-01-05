@@ -27,8 +27,11 @@ export default class extends Controller {
     this.bodyCopyTarget.value = this.bodyTarget.value.slice();
     this.bodyTarget.value = '';
 
-    this.imageCopyTarget.value = this.imageTarget.value;
-    this.imageTarget.value = null;
+    document.getElementById('post_image_clone')?.remove();
+    let imageTargetClone = this.imageTarget.cloneNode();
+    this.imageTarget.value = '';
+    imageTargetClone.id = 'post_image_clone';
+    this.imageTarget.parentNode.appendChild(imageTargetClone);
   };
 
   copyBody() {

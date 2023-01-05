@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  paginates_per 3
+  paginates_per 15
 
   validates :body, presence: { message: 'or image must be given.' }, unless: ->(post) { post.image.present? }
   validates :image, presence: { message: 'or body must be given.' }, unless: ->(post) { post.body.present? }
