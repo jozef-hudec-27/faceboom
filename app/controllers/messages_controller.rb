@@ -38,7 +38,7 @@ class MessagesController < ApplicationController
     unread_messages = chat.messages.where(sender: user, is_read: false)
     unread_messages.each { |message| message.update(is_read: true) }
 
-    @last_message_notification = unread_messages.last&.notification
+    @last_message_notification = unread_messages.first&.notification
 
     respond_to do |format|
       format.turbo_stream

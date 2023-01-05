@@ -17,12 +17,12 @@ class MessageNotification < ApplicationRecord
   private
 
   def destroy_previous_notification
-    prev_msg = Message.where(chat_id: message.chat.id, sender_id: sender.id).last(2)[0]
+    prev_msg = message.chat.messages.where(sender:).where.not(id: message.id).first
     prev_msg&.notification&.destroy
   end
 
   def remove_prev_noti_from_dom
-    prev_msg = message.chat.messages.where(sender:).where.not(id: message.id).last
+    prev_msg = message.chat.messages.where(sender:).where.not(id: message.id).first
     if prev_msg&.notification
       UserChannel.broadcast_remove_to("user-#{receiver.id}",
                                       target: "msg-noti-#{prev_msg.notification.id}")

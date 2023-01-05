@@ -14,7 +14,7 @@ class MessageNotificationsController < ApplicationController
 
     return unless (chat = Chat.between(current_user, user))
 
-    message = chat.messages.where(sender: user).last
+    message = chat.messages.where(sender: user).first
 
     message&.notification&.update seen: true
 

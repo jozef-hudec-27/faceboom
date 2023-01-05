@@ -38,7 +38,7 @@
                 <%= render 'posts/post_create_card' if @user == current_user %>
 
                 <div id="posts">
-                    <%= render(partial: "posts/post", collection: @user.posts) || 'User has no posts.' %>
+                    <%= render(partial: "posts/post", collection: @user.posts) || (@user == current_user ? '' : '<i>User has no posts.</i>'.html_safe) %>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
                     <h2 class="ml-12 mt-12">Friends</h2>
 
                     <div class="user-friends-wrapper">
-                        <%= render(partial: 'friend', collection: @user.friends, locals: { is_self: @is_self }) || 'User has no friends.' %>
+                        <%= render(partial: 'friend', collection: @user.friends, locals: { is_self: @is_self }) || "<i>#{@user == current_user ? 'You have' : 'User has'} no friends.</i>".html_safe %>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                     <h2 class="ml-12 mt-12">Saved posts</h2>
 
                     <% if @user.saved_posts.empty? %>
-                        <p class="full-width">You have no saved posts.</p>
+                        <i class="full-width ml-12">You have no saved posts.</i>
                     <% else %>
                         <% @user.saved_posts.each do |post| %>
                             <div id="saved-post-<%= post.id %>" class="saved-post card full-width">
