@@ -1,9 +1,11 @@
-<%= turbo_stream.replace('message_body', "<input autofocus='autofocus'
+<%= turbo_stream.replace('message_body', "<input 
                                             required='required'
                                             autocomplete='body'
                                             class='input is-rounded'
                                             type='text'
                                             name='message[body]'
                                             id='message_body'
+                                            data-controller='message-body'
+                                            data-message-body-target='input'
                                          >")
 %>
