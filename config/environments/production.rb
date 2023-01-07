@@ -105,4 +105,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.hosts << 'faceboom.up.railway.app'
+  config.hosts << 'face-boom.online'
 end
