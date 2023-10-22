@@ -104,6 +104,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.hosts << 'faceboom.up.railway.app'
+  config.hosts << 'faceboom.onrender.com'
   config.hosts << 'face-boom.online'
 end
