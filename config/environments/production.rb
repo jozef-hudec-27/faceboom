@@ -15,7 +15,7 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.action_controller.default_url_options = { host: 'https://face-boom.online' }
+  config.action_controller.default_url_options = { host: 'https://faceboom.onrender.com' }
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
@@ -69,7 +69,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
       port:                 587,
-      domain:               'face-boom.online',
+      domain:               'faceboom.onrender.com',
       user_name:            Rails.application.credentials.dig(:gmail, :username),
       password:             Rails.application.credentials.dig(:gmail, :password),
       authentication:       'plain',
@@ -79,7 +79,7 @@ Rails.application.configure do
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'face-boom.online', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: 'faceboom.onrender.com', protocol: 'https' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -105,5 +105,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.hosts << 'faceboom.onrender.com'
-  config.hosts << 'face-boom.online'
+  # config.hosts << 'face-boom.online'
 end
